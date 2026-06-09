@@ -1,4 +1,4 @@
-export default function QuestionCard({ question: q, onClick }) {
+export default function QuestionCard({ question: q, onClick, isReviewed }) {
   const raw = q.question || ''
   const preview = raw
     ? raw.replace(/-------/g, '_____').substring(0, 50) + (raw.length > 50 ? '…' : '')
@@ -7,8 +7,10 @@ export default function QuestionCard({ question: q, onClick }) {
   const youLabel = q.your_answer ? `あなた: ${q.your_answer}` : '未解答'
 
   return (
-    <div className="q-card" onClick={onClick}>
-      <div className="q-num">{q.number}</div>
+    <div className={`q-card${isReviewed ? ' q-card-reviewed' : ''}`} onClick={onClick}>
+      <div className={`q-num${isReviewed ? ' q-num-reviewed' : ''}`}>
+        {isReviewed ? '✓' : q.number}
+      </div>
       <div className="q-card-body">
         <div className="q-preview">{preview}</div>
         <div className="q-meta">

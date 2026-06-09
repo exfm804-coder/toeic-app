@@ -5,9 +5,28 @@ import { loadQuestions } from './utils/dataLoader'
 
 const questions = loadQuestions()
 
+function loadReviewed() {
+  try {
+    const saved = localStorage.getItem('reviewed')
+    return saved ? new Set(JSON.parse(saved)) : new Set()
+  } catch {
+    return new Set()
+  }
+}
+
 export default function App() {
   const [view, setView] = useState('list')
   const [currentIdx, setCurrentIdx] = useState(0)
+  const [reviewed, setReviewed] = useState(loadReviewed)
+
+  function toggleReviewed(qNumber) {
+    setReviewed(prev => {
+      const next = new Set(prev)
+      next.has(qNumber) ? next.delete(qNumber) : next.add(qNumber)
+      localStorage.setItem('reviewed', JSON.stringify([...next]))
+      return next
+    })
+  }
 
   function showDetail(idx) {
     setCurrentIdx(idx)
@@ -29,7 +48,7 @@ export default function App() {
   return (
     <>
       {view === 'list' && (
-        <ListPage questions={questions} onSelect={showDetail} />
+        <ListPage questions={questions} onSelect={showDetail} reviewed={reviewed} />
       )}
       {view === 'detail' && (
         <DetailPage
@@ -37,6 +56,8 @@ export default function App() {
           currentIdx={currentIdx}
           onBack={showList}
           onNavigate={navigate}
+          reviewed={reviewed}
+          onToggleReviewed={toggleReviewed}
         />
       )}
     </>

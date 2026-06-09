@@ -3,8 +3,9 @@ import ExplanationBox from '../components/ExplanationBox'
 import PassageBlock from '../components/PassageBlock'
 import NavBar from '../components/NavBar'
 
-export default function DetailPage({ questions, currentIdx, onBack, onNavigate }) {
+export default function DetailPage({ questions, currentIdx, onBack, onNavigate, reviewed, onToggleReviewed }) {
   const q = questions[currentIdx]
+  const isReviewed = reviewed.has(q.number)
 
   const qHtml = q.question
     ? q.question.replace(/-------/g, '<span class="blank">___</span>')
@@ -73,6 +74,15 @@ export default function DetailPage({ questions, currentIdx, onBack, onNavigate }
         />
 
         {q.passage_text && <PassageBlock text={q.passage_text} />}
+      </div>
+
+      <div className="reviewed-bar">
+        <button
+          className={`reviewed-btn${isReviewed ? ' reviewed-btn-done' : ''}`}
+          onClick={() => onToggleReviewed(q.number)}
+        >
+          {isReviewed ? '✓ 復習済み' : '復習済みにする'}
+        </button>
       </div>
 
       <NavBar

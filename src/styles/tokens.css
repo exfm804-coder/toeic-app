@@ -1,0 +1,16 @@
+:root {
+  --navy:          #0a1a6b;
+  --navy-light:    #1a2e8a;
+  --blue-acc:      #2a6dd9;
+  --wrong:         #e07b2a;
+  --correct:       #1a7a3a;
+  --bg:            #f4f5f8;
+  --card:          #ffffff;
+  --border:        #dde1ea;
+  --text:          #1a1f2e;
+  --sub:           #5a6278;
+  --correct-bg:    #eaf7ed;
+  --wrong-bg:      #fff4e8;
+  --passage-bg:    #f8f9fc;
+  --passage-border:#c8d0e8;
+}

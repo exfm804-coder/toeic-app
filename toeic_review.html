@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>TOEIC 復習アプリ TEST 1</title>
+<style>
+  :root {
+    --navy: #0a1a6b;
+    --navy-light: #1a2e8a;
+    --blue-acc: #2a6dd9;
+    --wrong: #e07b2a;
+    --correct: #1a7a3a;
+    --bg: #f4f5f8;
+    --card: #ffffff;
+    --border: #dde1ea;
+    --text: #1a1f2e;
+    --sub: #5a6278;
+    --correct-bg: #eaf7ed;
+    --wrong-bg: #fff4e8;
+    --passage-bg: #f8f9fc;
+    --passage-border: #c8d0e8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ===== LIST VIEW ===== */
+  #list-view { display: block; }
+  #detail-view { display: none; }
+
+  .app-header {
+    background: var(--navy);
+    color: white;
+    padding: 0;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .app-header-inner {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+  }
+  .back-btn {
+    background: none; border: none; color: white;
+    font-size: 20px; cursor: pointer; padding: 4px 8px 4px 0;
+    display: flex; align-items: center; line-height:1;
+  }
+  .back-btn:active { opacity: 0.7; }
+  .header-title { font-size: 16px; font-weight: 700; letter-spacing: 0.02em; }
+  .header-sub { font-size: 11px; opacity: 0.7; margin-top: 1px; }
+
+  /* score bar */
+  .score-bar {
+    background: var(--navy-light);
+    padding: 12px 16px 14px;
+    display: flex; gap: 16px;
+  }
+  .score-item { text-align: center; flex: 1; }
+  .score-label { font-size: 10px; color: rgba(255,255,255,0.65); letter-spacing: 0.08em; text-transform: uppercase; }
+  .score-val { font-size: 22px; font-weight: 800; color: white; line-height: 1.1; margin-top: 2px; }
+  .score-denom { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.6); }
+  .score-divider { width: 1px; background: rgba(255,255,255,0.2); }
+
+  /* part sections */
+  .part-section { margin-bottom: 8px; }
+  .part-heading {
+    padding: 10px 16px 8px;
+    font-size: 11px; font-weight: 700;
+    color: var(--sub); letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .part-count { font-size: 11px; color: var(--wrong); font-weight: 600; }
+
+  /* question card */
+  .q-card {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; transition: background 0.12s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .q-card:active { background: #f0f2f8; }
+  .q-num {
+    min-width: 36px; height: 36px;
+    background: var(--wrong-bg);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: var(--wrong);
+  }
+  .q-card-body { flex: 1; min-width: 0; }
+  .q-preview {
+    font-size: 13px; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.4;
+  }
+  .q-meta { display: flex; gap: 8px; margin-top: 4px; align-items: center; }
+  .q-ans-badge {
+    font-size: 11px; font-weight: 700;
+    padding: 2px 7px; border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .badge-wrong { background: var(--wrong-bg); color: var(--wrong); }
+  .badge-correct { background: var(--correct-bg); color: var(--correct); }
+  .q-type-tag {
+    font-size: 10px; color: var(--sub);
+    background: var(--bg); border-radius: 3px;
+    padding: 2px 6px;
+  }
+  .q-arrow { color: #c0c8d8; font-size: 14px; flex-shrink: 0; }
+
+  /* ===== DETAIL VIEW ===== */
+  .detail-scroll { padding: 0 0 40px; }
+
+  /* question block — mimics book layout */
+  .detail-q-block {
+    background: var(--card);
+    border-bottom: 3px solid var(--navy);
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .detail-q-header {
+    background: var(--navy);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .detail-q-num {
+    font-size: 20px; font-weight: 900; color: white;
+  }
+  .detail-part-badge {
+    font-size: 11px; font-weight: 700;
+    background: rgba(255,255,255,0.2); color: white;
+    padding: 2px 8px; border-radius: 10px;
+  }
+  .detail-passage-type {
+    font-size: 10px; color: rgba(255,255,255,0.6);
+    margin-left: auto; font-style: italic;
+  }
+
+  .detail-q-text {
+    padding: 14px 16px 10px;
+    font-size: 14px; line-height: 1.7;
+    font-weight: 600; color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  .blank { color: var(--blue-acc); font-weight: 800; }
+
+  .choices-block { padding: 8px 16px 14px; }
+  .choice-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 10px; border-radius: 8px;
+    margin-bottom: 4px;
+    border: 1.5px solid transparent;
+    transition: all 0.15s;
+  }
+  .choice-letter {
+    min-width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .choice-text { font-size: 13px; line-height: 1.5; padding-top: 2px; }
+
+  .choice-row.is-correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+  }
+  .choice-row.is-correct .choice-letter { background: var(--correct); color: white; }
+  .choice-row.is-correct .choice-text { color: var(--correct); font-weight: 700; }
+
+  .choice-row.is-wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+  }
+  .choice-row.is-wrong .choice-letter { background: var(--wrong); color: white; }
+  .choice-row.is-wrong .choice-text { color: var(--wrong); font-weight: 700; }
+
+  .choice-row.is-other { background: #f8f9fc; }
+  .choice-row.is-other .choice-letter { background: #e0e4ef; color: var(--sub); }
+  .choice-row.is-other .choice-text { color: var(--sub); }
+
+  .answer-summary {
+    display: flex; gap: 12px;
+    padding: 8px 16px 14px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+  }
+  .ans-pill {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 12px; border-radius: 20px;
+  }
+  .ans-pill-you { background: var(--wrong-bg); color: var(--wrong); }
+  .ans-pill-correct { background: var(--correct-bg); color: var(--correct); }
+  .ans-pill-unanswered { background: #f0f2f8; color: var(--sub); }
+
+  /* explanation block — mimics 正解 box in book */
+  .exp-block {
+    background: var(--card);
+    margin-bottom: 12px;
+  }
+  .exp-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .seikai-badge {
+    background: var(--navy); color: white;
+    font-size: 11px; font-weight: 800;
+    padding: 3px 9px; border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .seikai-ans {
+    font-size: 16px; font-weight: 900;
+    color: var(--correct);
+  }
+  .exp-text {
+    padding: 12px 16px 16px;
+    font-size: 13px; line-height: 1.85;
+    color: var(--text);
+  }
+  .keywords-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+  .kw-chip {
+    font-size: 11px; font-weight: 600;
+    background: #e8edf8; color: var(--navy);
+    padding: 3px 9px; border-radius: 10px;
+  }
+
+  /* passage block */
+  .passage-block {
+    background: var(--card);
+    margin-bottom: 12px;
+  }
+  .passage-header {
+    padding: 10px 16px 8px;
+    font-size: 11px; font-weight: 700;
+    color: var(--sub); letter-spacing: 0.1em; text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .passage-inner {
+    background: var(--passage-bg);
+    border: 1px solid var(--passage-border);
+    margin: 12px;
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 12px; line-height: 1.85;
+    color: #2a3050;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* nav between questions */
+  .detail-nav {
+    display: flex; gap: 8px;
+    padding: 12px 16px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    position: sticky; bottom: 0; z-index: 50;
+  }
+  .nav-btn {
+    flex: 1; padding: 12px;
+    border: 1.5px solid var(--navy);
+    border-radius: 8px; background: white;
+    color: var(--navy); font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: all 0.1s;
+  }
+  .nav-btn:active { background: var(--navy); color: white; }
+  .nav-btn:disabled { border-color: var(--border); color: #c0c8d8; cursor: default; }
+  .nav-btn.primary { background: var(--navy); color: white; }
+  .nav-btn.primary:active { background: var(--navy-light); }
+
+  .detail-position {
+    text-align: center; padding: 8px;
+    font-size: 11px; color: var(--sub);
+  }
+
+  /* unanswered note */
+  .unanswered-note {
+    margin: 0 16px 12px;
+    padding: 10px 12px;
+    background: #f0f2f8; border-radius: 6px;
+    font-size: 12px; color: var(--sub);
+    border-left: 3px solid #9aa4c8;
+  }
+</style>
+</head>
+<body>
+
+<!-- LIST VIEW -->
+<div id="list-view">
+  <div class="app-header">
+    <div class="app-header-inner">
+      <div>
+        <div class="header-title">TEST 1 復習リスト</div>
+        <div class="header-sub">Reading · 間違い・未解答</div>
+      </div>
+    </div>
+    <div class="score-bar" id="score-bar"></div>
+  </div>
+  <div id="list-body"></div>
+</div>
+
+<!-- DETAIL VIEW -->
+<div id="detail-view">
+  <div class="app-header">
+    <div class="app-header-inner">
+      <button class="back-btn" onclick="showList()">‹</button>
+      <div>
+        <div class="header-title" id="detail-title">Q000</div>
+        <div class="header-sub" id="detail-sub">Part 0</div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-position" id="detail-pos"></div>
+  <div class="detail-scroll" id="detail-body"></div>
+  <div class="detail-nav">
+    <button class="nav-btn" id="nav-prev" onclick="navigate(-1)">‹ 前の問題</button>
+    <button class="nav-btn primary" id="nav-next" onclick="navigate(1)">次の問題 ›</button>
+  </div>
+</div>
+
+<script>
+const DATA = [{"number":111,"part":5,"your_answer":"C","correct_answer":"D","question":"Incoming CEO Brian Ng ------- one-on-one meetings with all department executives to discuss their future staffing needs.","choices":{"A":"schedule","B":"to schedule","C":"have scheduled","D":"will schedule"},"explanation_ja":"動詞schedule「～を予定に入れる」の適切な形を選ぶ。この文には述語動詞がないので、Incoming CEO Brian Ng「新任の最高経営責任者Brian Ng」という三人称単数の主語に合うものを入れる。選択肢の中では、(D) will schedule「～を予定に入れるだろう」が意味も通り適切。incoming「新任の」、CEO(chief executive officer)「最高経営責任者」、one-on-one「一対一の」、department「部門」、executive「幹部、役員」、staffing「人員配置」。(A)原形または現在形。三人称単数の主語と一致しない、(B) to不定詞。単独で述語動詞にならない、(C)現在完了形。助動詞haveが、三人称単数の主語と一致しない。","keywords":["will schedule","executive","staffing"]},{"number":113,"part":5,"your_answer":"D","correct_answer":"C","question":"Please ask the VPs whether they would like to make any ------- at next month's staff meeting.","choices":{"A":"remarked","B":"remarkable","C":"remarks","D":"remarking"},"explanation_ja":"選択肢はremark〈動詞〉「～と述べる」、〈名詞〉「言及」の変化形や派生語。askの目的語は、the VPsとwhether節。whether節は「彼らは来月の職員会議で-------をしたいかどうか」という意味。空所にはanyで修飾されて、makeの目的語となる名詞の(C) remarks「発言」が適切。make any remarksで「何か発言する」となって、意味が通る。VP(＝Vice President)「部長、副社長」、make a remark「意見を述べる」。(A)動詞の過去形または過去分詞、(B)形容詞、(D)現在分詞または動名詞。動名詞だとしても「発言」ではなく「～と述べること」を表すため不適切。","keywords":["remarks","VP","make a remark"]},{"number":116,"part":5,"your_answer":"D","correct_answer":"C","question":"Please have Ms. Haywood ------- the amount of thread needed to complete Ms. Hartigan's dress.","choices":{"A":"agree","B":"wonder","C":"calculate","D":"elevate"},"explanation_ja":"選択肢は全て動詞の原形。have ～ doは「～(人)に…してもらう」という使役の意味で、空所の動詞がHaywoodさんにしてもらうことを表す。(C) calculate「～を計算する」を入れると、空所以下が「Hartiganさんのドレスを完成させるのに必要な糸の量を計算する」となって、意味が通る。amount「量」、thread「糸」、complete「～を完成させる」。","keywords":["calculate","thread","complete"]},{"number":117,"part":5,"your_answer":"A","correct_answer":"D","question":"Customers of Right Choice Storage can rest assured their belongings are ------- at our facility.","choices":{"A":"securing","B":"secures","C":"securities","D":"secure"},"explanation_ja":"選択肢は動詞secure「～を守る」の変化形や派生語。主語はCustomers of Right Choice Storageで、述語動詞はcan rest。rest assuredで「(保証されているので)安心する」という意味。後半の節の主語はtheir belongings「彼らの所有品」で動詞がareなので、形容詞の(D) secure「安全な、厳重に保管された」を入れると意味が通る。(A)現在分詞。be動詞に続けられるが、能動態になり不適切、(B)三人称単数現在形。be動詞に続けられない、(C)名詞の複数形。「警備部、有価証券」の意味で不適切。","keywords":["secure","rest assured","belongings"]},{"number":118,"part":5,"your_answer":"C","correct_answer":"A","question":"The Marvon Resort has a number of ------- that can be reserved for special events.","choices":{"A":"venues","B":"tasks","C":"ideas","D":"charges"},"explanation_ja":"空所の名詞を関係代名詞のthat以下が修飾している。「特別なイベントのために予約できる-------が多数ある」という意味。予約できるものとしてふさわしいのは(A) venues「会場」。resort「保養地」、a number of ～「多数の～」、reserve「～を予約する」。","keywords":["venues","resort","reserve"]},{"number":124,"part":5,"your_answer":"B","correct_answer":"A","question":"A subscription includes ------- versions of best-selling novels for those who lack the time to read the whole book.","choices":{"A":"condensed","B":"previous","C":"specified","D":"conflicting"},"explanation_ja":"「本全体を読む時間がない人向け」という後半のfor以降がヒント。空所に(A) condensed「簡約化された」を入れると「時間のない人向けの簡約版を含む」となって意味が通る。subscription「定期購読」、best-selling「ベストセラーの」、those who ～「～する人々」、lack「～を欠いている」。","keywords":["condensed","subscription","best-selling"]},{"number":125,"part":5,"your_answer":"D","correct_answer":"C","question":"Restore Fix engineers had promised that the new payroll software ------- a week ago.","choices":{"A":"install","B":"installed","C":"would be installed","D":"have been installed"},"explanation_ja":"主節が過去完了had promised → that節は過去の時点での未来を表す(C) would be installed「インストールされる予定だ」が適切。主語the new payroll softwareなので受動態にする必要もある。a week agoは約束時点から見て未来の一時点。(D)現在完了の受動態。過去の一時点を表すa week agoがあるので現在完了形は不適切。","keywords":["would be installed","payroll","promised"]},{"number":134,"part":6,"your_answer":"B","correct_answer":"A","question":"","choices":{"A":"by","B":"in","C":"owing to","D":"due to"},"explanation_ja":"空所直前には名詞candyを修飾する過去分詞madeがあり、後ろには人を表すWatertown residentsが続いている。動作主を表す(A) byを入れると「ウォータータウンの住民たちによって作られた菓子」となり文脈に合う。(B) made in ～で「～(場所)で作られる」の意味だが、Watertownという地名が直後に続いていることから選ばないよう注意。このWatertownは後ろのresidents「住民たち」を修飾している。","keywords":["by","made by"],"passage_type":"article","passage_text":"WATERTOWN (January 10)—Watertown's riverside location and rich history have made it one of the most popular travel destinations in the region. Tourism continues to grow as visitors discover our city's increasingly wide [131] of sights and attractions. As a result, Watertown's transportation office has announced that a new visitor center will be constructed on Tenth Avenue [132] the growing number of tourists. [133]. The center's gift shop will sell many unique souvenirs. These will include candy made [134] Watertown residents as well as other locally crafted products, such as apparel and artwork."},{"number":138,"part":6,"your_answer":"D","correct_answer":"C","question":"","choices":{"A":"often","B":"yet","C":"then","D":"still"},"explanation_ja":"空所直前で、スタンディングデスクの設置作業が3月1日に1階から開始されることが示されているため、(C) then「その後」を入れると、1階で行った後に2階へと進み3月5日までに完了する、という流れを説明する内容になり適切。(A)(B)(D)いずれも文脈に合わない。","keywords":["then"],"passage_type":"e-mail","passage_text":"To: All staff / From: Cara Rothwell, CEO / Date: February 17 / Subject: Standing desks. We are happy to announce that we [135] to provide all our employees with standing desks. Research has demonstrated that these desks enable users to move more, boost concentration, and increase overall productivity. [136]. [137] of the desks will begin in first-floor offices on March 1. We will [138] proceed to the second floor. The work is scheduled to be completed by March 5."},{"number":141,"part":6,"your_answer":"A","correct_answer":"D","question":"","choices":{"A":"Fresh ingredients are important.","B":"I will review other apps in the future.","C":"You will find the directions on the label.","D":"Every popular brand is included."},"explanation_ja":"空所直前の文では地域で販売されている大部分の食品を調べられるというアプリの特長が説明され、後ろでも各商品を扱うスーパーを表示する機能が述べられている。(D)を入れると、あらゆる一般的な銘柄をアプリで調べられると紹介する流れになって文脈に合う。(A)「新鮮な食材が大事」は唐突。(B)別のアプリについて述べる文は不自然で、後続でitが単数で受けているのとも合わない。(C)レビューされているのはアプリであり、the labelが何を指すか不明。","keywords":["brand","popular"],"passage_type":"review","passage_text":"Review of Healthy Basket App by Lidia Barrios. I recently discovered a new app to assist anyone with a [139] schedule who wants to eat well. The Healthy Basket app provides complete nutritional information [140] a host of food products. You can easily check a product's salt or carbohydrate content or see if it contains potential allergens. The app allows you to look up most food products sold in the region. [141]. It even indicates all the nearby supermarkets that carry each item. I highly recommend using it the next time you go [142]."},{"number":143,"part":6,"your_answer":"A","correct_answer":"B","question":"","choices":{"A":"cleanliness","B":"clean","C":"cleaner","D":"cleaning"},"explanation_ja":"空所直前に冠詞theがあり、後ろにはandに続けてminimalist look (we seek)と続く。lookは名詞でminimalistという形容詞が修飾している。空所にはminimalistと並列になる形容詞が入るので(B) cleanを入れると「すっきりとした、ミニマルな見た目」となり文脈に合う。(A)名詞「清潔さ」で文房具の特徴として不自然。(C)比較級だが比較対象がない。(D)名詞「清掃」または動名詞で文意に合わない。","keywords":["clean","minimalist look"],"passage_type":"e-mail","passage_text":"To: Avani Mittal / From: Camille Richard, Brightly Bound Stationery / Subject: Scheduling a photo shoot. Brightly Bound Stationery is launching a line of notebooks, cards, and calendars in November. We want to hire a photographer who can capture the [143] and minimalist look we seek. [144]. We would like to hold a photo shoot sometime in September. Can you provide us with your [145] for a half-day photo shoot? We prefer to start as early in the day as possible. [146], please include a cost estimate for your services."},{"number":159,"part":7,"your_answer":"B","correct_answer":"C","question":"What is the purpose of the Creekview Road closure?","choices":{"A":"To protect local wildlife","B":"To allow for needed repairs","C":"To encourage walking and cycling","D":"To prepare for an upcoming sports event"},"explanation_ja":"段落2の1～2行目で、この条例は「地域社会の健康増進のための取り組み」であること、同4～6行目で、これによりジョギング、サイクリング、ハイキング愛好家などが道路全体を安全に利用できるようになることが述べられている。クリークビュー道路を閉鎖する目的は地域の人々の健康を促進することで、walking and cyclingを挙げて表した(C)が正解。(A) protected parklandなどの語句から連想され得る点に注意。(B)修繕については言及されていない。(D)スポーツイベントは話題に上っていない。","keywords":["walking and cycling","wellness"],"passage_type":"notice","passage_text":"NOTICE. Per a new local ordinance, Creekview Road will be closed to motor vehicle transit between Poplar and Cherry Streets from 6 A.M. to 9 P.M. on Saturdays and Sundays starting next month. The two-mile stretch of road will remain open to pedestrians and nonmotorized vehicles. The policy goes into effect on April 4 and will continue indefinitely. This ordinance comes from the Fairview local council, headed by Ellis Birmingham, and represents efforts by the council to promote community wellness. Creekview Road runs alongside the protected parkland of the Fairview Creek Gorge, which is known for its impressive views of Grand Valley. The forthcoming change will allow park visitors, including joggers, cyclists, and hikers, to spread out beyond the park's trails and safely utilize the full roadway during the weekends."},{"number":160,"part":7,"your_answer":null,"correct_answer":"D","question":"What is indicated about Fairview Creek Gorge?","choices":{"A":"It will open to the public on April 4.","B":"It holds events on the weekends.","C":"It was named by Mr. Birmingham.","D":"It overlooks Grand Valley."},"explanation_ja":"フェアビュー川峡谷については、段落2の2～4行目に、グランド渓谷の見事な眺めで知られる保全緑地公園だと書かれている。overlook「～を見渡せる」を用いて表した(D)が正解。(A) 4月4日にモーター付きの乗り物の通行禁止政策が施行されるとあるのみで、峡谷の解放日には言及がない。(B)週末に言及があるがイベントが開かれるとは述べられていない。(C) Birminghamさんはフェアビュー地方議会の長だが、峡谷を名付けたという記述はない。","keywords":["overlooks","Grand Valley"],"passage_type":"notice","passage_text":"NOTICE. Per a new local ordinance, Creekview Road will be closed to motor vehicle transit between Poplar and Cherry Streets from 6 A.M. to 9 P.M. on Saturdays and Sundays starting next month. The two-mile stretch of road will remain open to pedestrians and nonmotorized vehicles. The policy goes into effect on April 4 and will continue indefinitely. This ordinance comes from the Fairview local council, headed by Ellis Birmingham, and represents efforts by the council to promote community wellness. Creekview Road runs alongside the protected parkland of the Fairview Creek Gorge, which is known for its impressive views of Grand Valley. The forthcoming change will allow park visitors, including joggers, cyclists, and hikers, to spread out beyond the park's trails and safely utilize the full roadway during the weekends."},{"number":161,"part":7,"your_answer":"B","correct_answer":"C","question":"What has Lunch Hut recently done?","choices":{"A":"It has opened new locations.","B":"It has begun producing kitchen appliances.","C":"It has purchased Mr. Boone's company.","D":"It has removed dishes from the menu."},"explanation_ja":"記事のタイトルに「サンドイッチのフランチャイズがテクノロジー企業を買収」とあり、Lunch Hut社がMy Handy Chef社を買収したことが書かれている。My Handy Chef社の共同設立者としてRyan Booneの名前が出ている。acquiredをpurchasedと、My Handy Chef社を「Booneさんの会社」と言い換えた(C)が正解。(A)新しいlocationについての記述はない。(B) My Handy Chef社がロボット製品を製造する企業とあるのみ。appliance「家庭用電化製品」。(D)看板料理への言及はあるがメニューから削除したという記述はない。","keywords":["purchased","acquired","Boone's company"],"passage_type":"article","passage_text":"[記事：サンドイッチのフランチャイズがテクノロジー企業を買収]\nフランチャイズのLunch Hut社がテクノロジー企業のMy Handy Chef社を買収した。My Handy Chef社の共同設立者としてRyan Booneの名前が出ている。My Handy Chef社は基本的な調理作業をこなすロボット製品類を製造するテクノロジー企業。ロボットはソースやスプレッドの材料を混ぜることに長けている。野菜を皮むきしたり細かく切ったりする。Lunch Hut社の上層部が買収で看板料理の自動製造に向けた進展に心を躍らせている。Lunch HutのCEO Eva Griffinは「テクノロジーが最善の効果を発揮した場合に、より円滑な人的交流を促進する。この発展は顧客のニーズへの対応(attending to)に役立つと信じている」と語った。"},{"number":163,"part":7,"your_answer":"B","correct_answer":"A","question":"The phrase \"attending to\" in paragraph 4, line 4, is closest in meaning to","choices":{"A":"addressing","B":"accompanying","C":"being present at","D":"taking part in"},"explanation_ja":"CEO Eva Griffinの発言は「テクノロジーが最善の効果を発揮した場合に、より円滑な人的交流を促進する、そして、この発展は当社が顧客のニーズ-------に際してより良い仕事をするのに役立つと信じている」という意味。テクノロジーの発展によりスタッフに余裕が生まれ顧客ニーズへのより丁寧な対応が可能になるということ。(A) addressing「～に対処すること」が正解。","keywords":["addressing","attending to"],"passage_type":"article","passage_text":"[記事：サンドイッチのフランチャイズがテクノロジー企業を買収]\nフランチャイズのLunch Hut社がテクノロジー企業のMy Handy Chef社を買収した。My Handy Chef社の共同設立者としてRyan Booneの名前が出ている。My Handy Chef社は基本的な調理作業をこなすロボット製品類を製造するテクノロジー企業。ロボットはソースやスプレッドの材料を混ぜることに長けている。野菜を皮むきしたり細かく切ったりする。Lunch Hut社の上層部が買収で看板料理の自動製造に向けた進展に心を躍らせている。Lunch HutのCEO Eva Griffinは「テクノロジーが最善の効果を発揮した場合に、より円滑な人的交流を促進する。この発展は顧客のニーズへの対応(attending to)に役立つと信じている」と語った。"},{"number":164,"part":7,"your_answer":"D","correct_answer":"C","question":"What does the schedule indicate about the event?","choices":{"A":"It offers sessions at various locations.","B":"It includes lunch.","C":"It will take place every year.","D":"It includes a book sale."},"explanation_ja":"段落1の1～2行目に「Southern文化連盟は、初の年次語り聞かせイベントを開催することを誇りに思う」と書かれている。annual「年次の」をtake place every year「毎年開催される」と言い表した(C)が正解。(A)さまざまな場所で開催されるとは述べられていない。(B)(D)昼食や本の販売は話題に上っていない。","keywords":["every year","annual"],"passage_type":"schedule","passage_text":"Welcome! The Southern Cultural League is proud to present our first annual storytelling event, hosted by the Sydney Public Library. Cassie Gates, our director, has booked four speakers who are sure to inspire you with innovative ways to incorporate storytelling into your lives and classrooms.\n\n8:00-9:45 A.M. Introduction: The Power of Story\nLocal storyteller Rarriwuy Henry sets a shining example as she spins a delightful tale that demonstrates how we, as storytellers, can spread the joy of this ancient tradition.\n\n10:00-11:45 A.M. Collecting and Sharing Family Stories\nLiam Murphy, a storyteller from Melbourne, shares tips for turning precious memories into tales that can be passed down through generations.\n\n1:00-2:45 P.M. Verse and Versatility\nPoet Janna Gibson explains how we can incorporate elements of verse into our stories to make them more memorable.\n\n3:00-4:45 P.M. From Books to Oral Tales\nAuthor Ann Sparks shares her secrets for telling written stories in captivating ways."},{"number":169,"part":7,"your_answer":"D","correct_answer":"A","question":"At 11:14 A.M., what does Ms. Hewitt most likely mean when she writes, \"There's been an update\"?","choices":{"A":"A deadline has changed.","B":"A link has been replaced.","C":"A price has increased.","D":"A report can no longer be revised."},"explanation_ja":"Hewittさんが「更新があった」と発言した後、請負業者の要望で報告書の提出が早まり、期日変更を知らせるEメールが届いたと述べている。Hewittさんの発言は提出の最終期限の変更を伝えていると判断できるので(A)が正解。(B)段落1で安全なリンクを受け取ったとあるのみ。(C) Longoriaさんが費用の見積もりについて言及しているのみ。(D)報告書の修正については話題に上っていない。","keywords":["deadline changed","update","due date"],"passage_type":"online chat discussion","passage_text":"Melissa Hewitt [11:11 A.M.]: Hi. Did either of you have trouble submitting your project reports this morning on the construction of the Wiley Tower Apartment Building? I received the secure link to upload mine, but I can't get it to work.\n\nCarmen Longoria [11:12 A.M.]: I'm still writing my report, so I have not tried it yet. We have until the end of the day tomorrow to submit, though, right?\n\nMelissa Hewitt [11:14 A.M.]: There's been an update. One of the contractors requested the reports sooner, so we need to submit them today. My manager e-mailed us about the change in the due date last week.\n\nCarmen Longoria [11:15 A.M.]: I didn't see that e-mail from Mr. Wood. I still need to finalize cost estimates for the construction materials. And we have the meeting about Wiley Tower this afternoon.\n\nDevin Mayer [11:16 A.M.]: Yes. And Mr. Wood requested that we provide a summary at the meeting."},{"number":171,"part":7,"your_answer":"B","correct_answer":"C","question":"What is Ms. Longoria concerned about?","choices":{"A":"She is unable to attend a meeting.","B":"She deleted an e-mail by mistake.","C":"She has not finished some estimates.","D":"She is unsure about the materials she chose."},"explanation_ja":"Longoriaさんは段落4で、提出期限前倒しのEメールは見ていなかったと述べ、まだ建設資材の費用の見積もりをまとめる必要があるため報告書は提出できない旨を発言している。has not finished「～を仕上げていない」を用いた(C)が正解。(A)会議があると発言しているのみ。(B) Eメールを見ていないと発言しているが削除したとは述べていない。(D)資材の見積もりが未完了だと述べているだけ。","keywords":["has not finished","estimates"],"passage_type":"online chat discussion","passage_text":"Melissa Hewitt [11:11 A.M.]: Hi. Did either of you have trouble submitting your project reports this morning on the construction of the Wiley Tower Apartment Building? I received the secure link to upload mine, but I can't get it to work.\n\nCarmen Longoria [11:12 A.M.]: I'm still writing my report, so I have not tried it yet. We have until the end of the day tomorrow to submit, though, right?\n\nMelissa Hewitt [11:14 A.M.]: There's been an update. One of the contractors requested the reports sooner, so we need to submit them today. My manager e-mailed us about the change in the due date last week.\n\nCarmen Longoria [11:15 A.M.]: I didn't see that e-mail from Mr. Wood. I still need to finalize cost estimates for the construction materials. And we have the meeting about Wiley Tower this afternoon.\n\nDevin Mayer [11:16 A.M.]: Yes. And Mr. Wood requested that we provide a summary at the meeting."},{"number":173,"part":7,"your_answer":"B","correct_answer":"A","question":"What does the report suggest about the South Quarry pit?","choices":{"A":"It will be profitable for several more years.","B":"It should be mined faster.","C":"It should be tested further.","D":"It could pose a risk to a processing plant nearby."},"explanation_ja":"段落3の3～7行目で、南採掘坑であと3年間は採掘事業を維持でき、操業コストが上昇しても利益を上げ続けるだろうと述べている。for another three yearsをfor several more years「あと数年間」と表した(A)が正解。(B)より速く採掘するべきだという記述はない。(C)(D)さらなる検証や処理工場に及ぼす危険については言及されていない。","keywords":["profitable","several more years"],"passage_type":"report","passage_text":"KIMBERLEY CONSULTING GEOENGINEERS — Resource Assessment\nClient: Springbok Concrete Suppliers LLC\nProperty: Bhule Gravel Quarry\nPurpose: To determine how long Springbok can continue mining for gravel\nDates: 15-19 July\n\nSummary: — [1] —. We examined availability of high-quality gravel in and around the two main quarry pits. First, we took samples from several locations around the North Quarry pit. After analyzing samples, we determined that there is very little mineable gravel left in or around the North Quarry pit. — [2] —. Therefore, we recommend ending this operation within the next year. It is not cost-effective to mine gravel at the North Quarry pit.\n\nIn contrast, there are extensive amounts of gravel still to be mined in the South Quarry pit. The samples retrieved by drilling indicate mineable gravel deposits extend 800 metres south and to a depth of 15 metres. If gravel continues at the current rate, we estimate the mining operation can be sustained for another three years. — [3] —. The cost will gradually increase because it will be necessary to dig deeper. Nevertheless, we believe the operation will remain profitable. — [4] —.\n\nAssessment prepared by: Gertruida Botha and Moeketsi Mosala"},{"number":175,"part":7,"your_answer":"C","correct_answer":"B","question":"In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"The gravel that remains is of low quality.\"","choices":{"A":"[1]","B":"[2]","C":"[3]","D":"[4]"},"explanation_ja":"挿入文では残っている砂利の質が述べられているので砂利の採掘に関する記述に注目する。段落2の4～5行目で、北採掘坑の内部とその周辺には採掘できる砂利がごくわずかしか残っていないことが分かった、と述べられている。この直後の[2]に挿入文を入れると、採掘できる砂利がごくわずかしか残っていない上その残りの砂利も低品質である、ともう一つマイナス点を挙げることになり流れとして適切。また直後のtherefore「従って」から始まる文の、来年には操業を終えることを勧める内容とも自然につながる。","keywords":["low quality","remains"],"passage_type":"report","passage_text":"KIMBERLEY CONSULTING GEOENGINEERS — Resource Assessment\nClient: Springbok Concrete Suppliers LLC\nProperty: Bhule Gravel Quarry\nPurpose: To determine how long Springbok can continue mining for gravel\nDates: 15-19 July\n\nSummary: — [1] —. We examined availability of high-quality gravel in and around the two main quarry pits. First, we took samples from several locations around the North Quarry pit. After analyzing samples, we determined that there is very little mineable gravel left in or around the North Quarry pit. — [2] —. Therefore, we recommend ending this operation within the next year. It is not cost-effective to mine gravel at the North Quarry pit.\n\nIn contrast, there are extensive amounts of gravel still to be mined in the South Quarry pit. The samples retrieved by drilling indicate mineable gravel deposits extend 800 metres south and to a depth of 15 metres. If gravel continues at the current rate, we estimate the mining operation can be sustained for another three years. — [3] —. The cost will gradually increase because it will be necessary to dig deeper. Nevertheless, we believe the operation will remain profitable. — [4] —.\n\nAssessment prepared by: Gertruida Botha and Moeketsi Mosala"},{"number":177,"part":7,"your_answer":"C","correct_answer":"D","question":"In the e-mail, the word \"accommodate\" in paragraph 1, line 1, is closest in meaning to","choices":{"A":"host","B":"simplify","C":"adjust","D":"fulfill"},"explanation_ja":"Eメールの送信者はGreencoveケータリング社オーナーTheo Andrews。「当社は間違いなくお客さまのニーズ-------できる」という文で、続くHowever「しかしながら」から始まる文で食べ物の選択を考えると1時間早い開始を勧めると述べている。間違いなくニーズに応えることができると前置きをした上で顧客に提案しているので(D) fulfill「～を満たす」が正解。","keywords":["fulfill","accommodate"],"passage_type":"order form and e-mail","passage_text":"[文書1：注文書] Greencove Catering Reservation Request\nEvent: Wilkerson Retirement Reception / Date: October 25\nEvent time: 5:00 P.M. to 7:00 P.M.\nEvent location: Lobby, Bonavista Municipal Building, Mira Monte\nGuest count: 80 / Payment: Abel Law Firm\nContact: Ophelia Hesper\nFood/beverages needed: Assortment of appetizers, desserts, and beverages\n\n[文書2：Eメール]\nTo: ohesper@abellawfirm.com\nFrom: tandrews@greencovecatering.com\nDate: October 10 / Subject: Your reservation request\n\nDear Ms. Hesper,\nWe have received your reservation request. We can certainly accommodate your needs. However, given the food options you request, we would like to suggest starting one hour earlier so that guests are less likely to expect a full dinner.\n\nOur food options and pricing can be found on our Web site. We recommend serving at least one cheese dish, one vegetable platter, and a limited amount of bread. We also suggest including at least one heavy appetizer, such as shrimp cocktail or crab cakes, and a selection of sauces and dips. Please call us at (805) 555-0101 so we can help you with these decisions.\n\nOnce you confirm your final choices, we will send an estimate, including charges for equipment rental. Since the event location is over 25 miles from us in Santa Barbara, we will add a flat delivery fee of $30. We require a deposit of $50 by October 18.\n\nTheo Andrews, Owner, Greencove Catering"},{"number":179,"part":7,"your_answer":"B","correct_answer":"A","question":"What does the e-mail indicate about Greencove Catering?","choices":{"A":"It charges a fee for renting equipment.","B":"It requires full payment a day before an event.","C":"It recently added items to its menu.","D":"It has previously catered events for Ms. Hesper."},"explanation_ja":"段落3の1～2行目で「御社が最終的な選択を確認したら、用具レンタルの料金を含めた見積もりを送る」と述べている。同社は用具の賃貸に料金を請求すると分かるので(A)が正解。(B)段落3の3～4行目に、事前に手付金が必要なことと残金を配達時に支払うことが書かれている（全額前払いではない）。(C)食べ物の選択案が述べられているがメニューへの品目追加は話題に上っていない。(D) Hesperさんの過去のイベントについての記述はない。","keywords":["charges a fee","equipment rental"],"passage_type":"order form and e-mail","passage_text":"[文書1：注文書] Greencove Catering Reservation Request\nEvent: Wilkerson Retirement Reception / Date: October 25\nEvent time: 5:00 P.M. to 7:00 P.M.\nEvent location: Lobby, Bonavista Municipal Building, Mira Monte\nGuest count: 80 / Payment: Abel Law Firm\nContact: Ophelia Hesper\nFood/beverages needed: Assortment of appetizers, desserts, and beverages\n\n[文書2：Eメール]\nTo: ohesper@abellawfirm.com\nFrom: tandrews@greencovecatering.com\nDate: October 10 / Subject: Your reservation request\n\nDear Ms. Hesper,\nWe have received your reservation request. We can certainly accommodate your needs. However, given the food options you request, we would like to suggest starting one hour earlier so that guests are less likely to expect a full dinner.\n\nOur food options and pricing can be found on our Web site. We recommend serving at least one cheese dish, one vegetable platter, and a limited amount of bread. We also suggest including at least one heavy appetizer, such as shrimp cocktail or crab cakes, and a selection of sauces and dips. Please call us at (805) 555-0101 so we can help you with these decisions.\n\nOnce you confirm your final choices, we will send an estimate, including charges for equipment rental. Since the event location is over 25 miles from us in Santa Barbara, we will add a flat delivery fee of $30. We require a deposit of $50 by October 18.\n\nTheo Andrews, Owner, Greencove Catering"},{"number":181,"part":7,"your_answer":"A","correct_answer":"D","question":"What does the article suggest about SEA?","choices":{"A":"It has been running trips since January.","B":"Its ships were built in Canada.","C":"It offers tours to many destinations.","D":"It operates in Quebec City."},"explanation_ja":"SEAとはSaguenay Eco-Adventure「Saguenayエコアドベンチャー社」の略であり、新しい地元企業。冒頭部分より、ニュースの発信地は「ケベックシティー」と分かる。SEAはケベックシティーで営業していると判断できるので(D)が正解。(A)7月からツアーを催行する予定だとあるが1月から旅行を催しているといった記述はない。(B) SEAの船が造られた場所には言及がない。(C)このツアー以外のツアーに関する言及はない。","keywords":["operates","Quebec City"],"passage_type":"article and review","passage_text":"[記事] A Better Way to Watch Whales\nQUEBEC CITY (30 May)—A new local firm, Saguenay Eco-Adventure (SEA), will offer whale-watching tours in the St. Lawrence River beginning in July. Tour participants will travel in comfortable charter buses from Quebec City to the boat's departure point. The bus trip is a scenic drive of just under three hours and includes a stop at Montmorency Falls, a popular tourist site. Half-day cruises are available on either a large boat with a spacious deck or a small boat offering a more intimate experience. Although whales are the main focus, many different types of marine mammals and birds are also likely to be seen. Knowledgeable tour guides will provide expert commentary. One feature sets these tours apart. SEA is one of the few whale-watching tour companies that rely on renewable energy sources. SEA's buses and boats are powered by biodiesel, and the larger boats are equipped with solar panels.\n\n[レビュー] Review by Otto Pfeiffer\n10 July—I recently took an excursion with SEA. Although it was foggy and rainy when we boarded our boat, the fog cleared after an hour, and the visibility was excellent the rest of the day. We saw numerous whales, seals, and other wildlife. The boat was big and roomy, and our tour guide, Pierre, was excellent. My only disappointment was the bus ride to the boat launch site. The bus driver was instructed not to stop at Montmorency Falls because there was unusually heavy traffic in the area, and SEA did not want us to miss our boat departure."},{"number":182,"part":7,"your_answer":"A","correct_answer":"C","question":"According to the article, how is SEA different from most whale-watching tour companies?","choices":{"A":"It installs solar panels on its buses.","B":"It teaches tourists about environmental issues.","C":"It uses renewable fuels to power its boats.","D":"It donates its profits to an environmental organization."},"explanation_ja":"SEAが再生可能エネルギー源を用いている数少ないホエールウォッチング・ツアー会社の一つであること、バスと船はバイオディーゼルを動力源とし、大型船にはソーラーパネルが装備されていることが述べられている。(C)が正解。(A)ソーラーパネルが装備されているのは大型船。バスではない。(B)ガイドが専門的な解説をすると書かれているだけ。(D) environmental organizationへの言及はない。","keywords":["renewable fuels","biodiesel"],"passage_type":"article and review","passage_text":"[記事] A Better Way to Watch Whales\nQUEBEC CITY (30 May)—A new local firm, Saguenay Eco-Adventure (SEA), will offer whale-watching tours in the St. Lawrence River beginning in July. Tour participants will travel in comfortable charter buses from Quebec City to the boat's departure point. The bus trip is a scenic drive of just under three hours and includes a stop at Montmorency Falls, a popular tourist site. Half-day cruises are available on either a large boat with a spacious deck or a small boat offering a more intimate experience. Although whales are the main focus, many different types of marine mammals and birds are also likely to be seen. Knowledgeable tour guides will provide expert commentary. One feature sets these tours apart. SEA is one of the few whale-watching tour companies that rely on renewable energy sources. SEA's buses and boats are powered by biodiesel, and the larger boats are equipped with solar panels.\n\n[レビュー] Review by Otto Pfeiffer\n10 July—I recently took an excursion with SEA. Although it was foggy and rainy when we boarded our boat, the fog cleared after an hour, and the visibility was excellent the rest of the day. We saw numerous whales, seals, and other wildlife. The boat was big and roomy, and our tour guide, Pierre, was excellent. My only disappointment was the bus ride to the boat launch site. The bus driver was instructed not to stop at Montmorency Falls because there was unusually heavy traffic in the area, and SEA did not want us to miss our boat departure."},{"number":183,"part":7,"your_answer":"A","correct_answer":"B","question":"In the article, the phrase \"rely on\" in paragraph 6, line 3, is closest in meaning to","choices":{"A":"comment","B":"use","C":"obtain","D":"trust"},"explanation_ja":"「SEAは再生可能エネルギー源-------数少ないホエールウォッチング・ツアー会社の一つである」という意味。続いてバスと船はバイオディーゼルを動力源とし大型船にはソーラーパネルが装備されているという説明があるので、SEAが再生可能エネルギー源を「利用する」会社であることを述べていると考えられる。(B) use「～を使用する」が正解。(D) trustは真実性や能力を信じることを意味する。rely on「～を頼りにする」の日本語の語義との類似性に注意。","keywords":["use","rely on"],"passage_type":"article and review","passage_text":"[記事] A Better Way to Watch Whales\nQUEBEC CITY (30 May)—A new local firm, Saguenay Eco-Adventure (SEA), will offer whale-watching tours in the St. Lawrence River beginning in July. Tour participants will travel in comfortable charter buses from Quebec City to the boat's departure point. The bus trip is a scenic drive of just under three hours and includes a stop at Montmorency Falls, a popular tourist site. Half-day cruises are available on either a large boat with a spacious deck or a small boat offering a more intimate experience. Although whales are the main focus, many different types of marine mammals and birds are also likely to be seen. Knowledgeable tour guides will provide expert commentary. One feature sets these tours apart. SEA is one of the few whale-watching tour companies that rely on renewable energy sources. SEA's buses and boats are powered by biodiesel, and the larger boats are equipped with solar panels.\n\n[レビュー] Review by Otto Pfeiffer\n10 July—I recently took an excursion with SEA. Although it was foggy and rainy when we boarded our boat, the fog cleared after an hour, and the visibility was excellent the rest of the day. We saw numerous whales, seals, and other wildlife. The boat was big and roomy, and our tour guide, Pierre, was excellent. My only disappointment was the bus ride to the boat launch site. The bus driver was instructed not to stop at Montmorency Falls because there was unusually heavy traffic in the area, and SEA did not want us to miss our boat departure."},{"number":185,"part":7,"your_answer":"A","correct_answer":"D","question":"What aspect of the trip disappointed Mr. Pfeiffer?","choices":{"A":"The size of the boat","B":"The weather conditions","C":"The number of whales he saw","D":"The inability to visit a tourist site"},"explanation_ja":"Pfeifferさんは唯一残念だったのはモンモランシー滝に立ち寄らずにバスが船の出発地まで行ったことだと書いている。モンモランシー滝とは本来であればバスが立ち寄るはずの人気観光地。inability to do「～することができないこと」を用いた(D)が正解。(A)船は大きくてゆったりしていたと述べており不満は述べていない。(B)乗船1時間後に霧は晴れその後は視界良好だった。(C)たくさんのクジラを見たと述べている。","keywords":["inability to visit a tourist site","Montmorency Falls"],"passage_type":"article and review","passage_text":"[記事] A Better Way to Watch Whales\nQUEBEC CITY (30 May)—A new local firm, Saguenay Eco-Adventure (SEA), will offer whale-watching tours in the St. Lawrence River beginning in July. Tour participants will travel in comfortable charter buses from Quebec City to the boat's departure point. The bus trip is a scenic drive of just under three hours and includes a stop at Montmorency Falls, a popular tourist site. Half-day cruises are available on either a large boat with a spacious deck or a small boat offering a more intimate experience. Although whales are the main focus, many different types of marine mammals and birds are also likely to be seen. Knowledgeable tour guides will provide expert commentary. One feature sets these tours apart. SEA is one of the few whale-watching tour companies that rely on renewable energy sources. SEA's buses and boats are powered by biodiesel, and the larger boats are equipped with solar panels.\n\n[レビュー] Review by Otto Pfeiffer\n10 July—I recently took an excursion with SEA. Although it was foggy and rainy when we boarded our boat, the fog cleared after an hour, and the visibility was excellent the rest of the day. We saw numerous whales, seals, and other wildlife. The boat was big and roomy, and our tour guide, Pierre, was excellent. My only disappointment was the bus ride to the boat launch site. The bus driver was instructed not to stop at Montmorency Falls because there was unusually heavy traffic in the area, and SEA did not want us to miss our boat departure."},{"number":186,"part":7,"your_answer":"A","correct_answer":"B","question":"What band performed last at the Peach Harvest Festival?","choices":{"A":"Valley Lizard","B":"Squash the Stagecoach","C":"Graceful Basses","D":"Manor Mercury"},"explanation_ja":"看板役を務めるバンドのValley LizardとSquash the Stagecoachが、それぞれ午後7時半と午後9時に演奏でイベントを締めくくると書かれている。最後の演奏者は後者のSquash the Stagecoachなので(B)が正解。(A)午後7時半に演奏するバンド。(C)午後2時に出演する地元の歌唱グループ。(D)午後の出演者。","keywords":["Squash the Stagecoach","9:00 P.M."],"passage_type":"Web page, schedule, and e-mail","passage_text":"[ウェブページ] Fun for All at Peach Harvest Festival (By Dean Keller)\nAugust 14—Saturday is Brookdale Farm's fifteenth annual Peach Harvest Festival. This year the festival will feature headlining bands Valley Lizard and Squash the Stagecoach, which will close the event with performances at 7:30 and 9:00 P.M., respectively. The festival starts at noon, and main-stage performances begin at 2:00 P.M. with local singing group Graceful Basses. Other afternoon acts include Cherry Heights and Manor Mercury. QYTV News contributors Adriana Ochoa and Kieran Allison will report live from the festival grounds.\n\n[予定表] QYTV News\n1) Good Morning, Silver City, 6:00-10:00 A.M., Mon-Fri — Reporters: Dean Keller, Anais Padilla / Meteorologist: Leroy Hartley\n2) Evening News, 5:00-9:00 P.M., Mon-Fri — Anchor: Norman Charles / Meteorologist: Myah Windsor\n3) Weekend Wind Down, 10:00 A.M.-2:00 P.M., Sat-Sun — Reporter: Adriana Ochoa / Meteorologist: Douglas Ro\n4) Weekend Edition Nightly News, 5:00-9:00 P.M., Sat-Sun — Anchor: Aimee Bullock / Meteorologist: Doris Adkin / Reporter: Kieran Allison\n\n[Eメール]\nTo: contact@qytvnews.com / From: tcrane@mailcurrent.com / Date: August 20\nSubject: Peach Harvest Festival\nMy family attended the Peach Harvest Festival on Saturday. On the evening news the day before the festival, the meteorologist discussed the likelihood of rain on Saturday, including the specific times when rain was expected. This information was incredibly helpful. Thank you so much for the thorough, accurate weather forecasting.\n—Tessa Crane"},{"number":188,"part":7,"your_answer":"A","correct_answer":"D","question":"What program does Aimee Bullock report for?","choices":{"A":"Good Morning, Silver City","B":"Evening News","C":"Weekend Wind Down","D":"Weekend Edition Nightly News"},"explanation_ja":"Aimee Bullockという名前は、予定表の4の「司会者」欄に見つけることができる。段落4の番組名はWeekend Edition Nightly Newsなので(D)が正解。(A)(B)(C)それぞれ予定表の1、2、3の番組名だが、いずれにもAimee Bullockという名前は記されていない。","keywords":["Weekend Edition Nightly News","Aimee Bullock"],"passage_type":"Web page, schedule, and e-mail","passage_text":"[ウェブページ] Fun for All at Peach Harvest Festival (By Dean Keller)\nAugust 14—Saturday is Brookdale Farm's fifteenth annual Peach Harvest Festival. This year the festival will feature headlining bands Valley Lizard and Squash the Stagecoach, which will close the event with performances at 7:30 and 9:00 P.M., respectively. The festival starts at noon, and main-stage performances begin at 2:00 P.M. with local singing group Graceful Basses. Other afternoon acts include Cherry Heights and Manor Mercury. QYTV News contributors Adriana Ochoa and Kieran Allison will report live from the festival grounds.\n\n[予定表] QYTV News\n1) Good Morning, Silver City, 6:00-10:00 A.M., Mon-Fri — Reporters: Dean Keller, Anais Padilla / Meteorologist: Leroy Hartley\n2) Evening News, 5:00-9:00 P.M., Mon-Fri — Anchor: Norman Charles / Meteorologist: Myah Windsor\n3) Weekend Wind Down, 10:00 A.M.-2:00 P.M., Sat-Sun — Reporter: Adriana Ochoa / Meteorologist: Douglas Ro\n4) Weekend Edition Nightly News, 5:00-9:00 P.M., Sat-Sun — Anchor: Aimee Bullock / Meteorologist: Doris Adkin / Reporter: Kieran Allison\n\n[Eメール]\nTo: contact@qytvnews.com / From: tcrane@mailcurrent.com / Date: August 20\nSubject: Peach Harvest Festival\nMy family attended the Peach Harvest Festival on Saturday. On the evening news the day before the festival, the meteorologist discussed the likelihood of rain on Saturday, including the specific times when rain was expected. This information was incredibly helpful. Thank you so much for the thorough, accurate weather forecasting.\n—Tessa Crane"},{"number":189,"part":7,"your_answer":"A","correct_answer":"B","question":"What is the purpose of the e-mail?","choices":{"A":"To offer suggestions","B":"To show appreciation","C":"To request information","D":"To extend an invitation"},"explanation_ja":"送信者Tessa Craneは、祭り前日の夕方のニュースで気象予報士が土曜日の雨の可能性について話したことを述べ、その情報のおかげでポンチョやレインブーツが役に立ったと述べ、「綿密で正確な天気予報をありがとうございました」と締めくくっている。謝意を表すためにEメールを書いたと判断できるので(B)が正解。(A) Craneさんはメール内で提案はしていない。(C)情報を求めるような記載はない。(D)招待はしていない。","keywords":["show appreciation","thank you"],"passage_type":"Web page, schedule, and e-mail","passage_text":"[ウェブページ] Fun for All at Peach Harvest Festival (By Dean Keller)\nAugust 14—Saturday is Brookdale Farm's fifteenth annual Peach Harvest Festival. This year the festival will feature headlining bands Valley Lizard and Squash the Stagecoach, which will close the event with performances at 7:30 and 9:00 P.M., respectively. The festival starts at noon, and main-stage performances begin at 2:00 P.M. with local singing group Graceful Basses. Other afternoon acts include Cherry Heights and Manor Mercury. QYTV News contributors Adriana Ochoa and Kieran Allison will report live from the festival grounds.\n\n[予定表] QYTV News\n1) Good Morning, Silver City, 6:00-10:00 A.M., Mon-Fri — Reporters: Dean Keller, Anais Padilla / Meteorologist: Leroy Hartley\n2) Evening News, 5:00-9:00 P.M., Mon-Fri — Anchor: Norman Charles / Meteorologist: Myah Windsor\n3) Weekend Wind Down, 10:00 A.M.-2:00 P.M., Sat-Sun — Reporter: Adriana Ochoa / Meteorologist: Douglas Ro\n4) Weekend Edition Nightly News, 5:00-9:00 P.M., Sat-Sun — Anchor: Aimee Bullock / Meteorologist: Doris Adkin / Reporter: Kieran Allison\n\n[Eメール]\nTo: contact@qytvnews.com / From: tcrane@mailcurrent.com / Date: August 20\nSubject: Peach Harvest Festival\nMy family attended the Peach Harvest Festival on Saturday. On the evening news the day before the festival, the meteorologist discussed the likelihood of rain on Saturday, including the specific times when rain was expected. This information was incredibly helpful. Thank you so much for the thorough, accurate weather forecasting.\n—Tessa Crane"},{"number":190,"part":7,"your_answer":"A","correct_answer":"B","question":"Whose weather report did Ms. Crane most likely watch?","choices":{"A":"Mr. Hartley's","B":"Ms. Windsor's","C":"Mr. Ro's","D":"Ms. Adkin's"},"explanation_ja":"Craneさんは「祭り前日の夕方のニュース」で気象予報士が土曜日の天気について話したと書いている。祭りは土曜日（ウェブページより）なので前日は金曜日の夕方のニュース。予定表から金曜日の夕方に放送されたのは「Evening News」で、その「気象予報士」欄にはMyah Windsorとある。(B)が正解。(A)「Good Morning, Silver City」の気象予報士。午前中の放送。(C)「Weekend Wind Down」の気象予報士。週末のみの放送。(D)「Weekend Edition Nightly News」の気象予報士。週末のみの放送。","keywords":["Windsor","Evening News","Friday"],"passage_type":"Web page, schedule, and e-mail","passage_text":"[ウェブページ] Fun for All at Peach Harvest Festival (By Dean Keller)\nAugust 14—Saturday is Brookdale Farm's fifteenth annual Peach Harvest Festival. This year the festival will feature headlining bands Valley Lizard and Squash the Stagecoach, which will close the event with performances at 7:30 and 9:00 P.M., respectively. The festival starts at noon, and main-stage performances begin at 2:00 P.M. with local singing group Graceful Basses. Other afternoon acts include Cherry Heights and Manor Mercury. QYTV News contributors Adriana Ochoa and Kieran Allison will report live from the festival grounds.\n\n[予定表] QYTV News\n1) Good Morning, Silver City, 6:00-10:00 A.M., Mon-Fri — Reporters: Dean Keller, Anais Padilla / Meteorologist: Leroy Hartley\n2) Evening News, 5:00-9:00 P.M., Mon-Fri — Anchor: Norman Charles / Meteorologist: Myah Windsor\n3) Weekend Wind Down, 10:00 A.M.-2:00 P.M., Sat-Sun — Reporter: Adriana Ochoa / Meteorologist: Douglas Ro\n4) Weekend Edition Nightly News, 5:00-9:00 P.M., Sat-Sun — Anchor: Aimee Bullock / Meteorologist: Doris Adkin / Reporter: Kieran Allison\n\n[Eメール]\nTo: contact@qytvnews.com / From: tcrane@mailcurrent.com / Date: August 20\nSubject: Peach Harvest Festival\nMy family attended the Peach Harvest Festival on Saturday. On the evening news the day before the festival, the meteorologist discussed the likelihood of rain on Saturday, including the specific times when rain was expected. This information was incredibly helpful. Thank you so much for the thorough, accurate weather forecasting.\n—Tessa Crane"},{"number":191,"part":7,"your_answer":"A","correct_answer":"D","question":"According to the Web page, what prize will the winners receive?","choices":{"A":"A trophy","B":"Money","C":"A public speaking opportunity","D":"An appointment with a literary agent"},"explanation_ja":"受賞者はウェブサイト上で表彰され、新進作家の代理業務をしたいと考えている著作権エージェントと会うことになると書かれている。賞品は自分のエージェントを得る機会。appointment「面会、約束」を用いた(D)が正解。(A)(B)トロフィーや賞金への言及はない。(C)ウェブサイト上で表彰されるとあり、public speaking「演説」の機会については述べられていない。","keywords":["appointment with a literary agent","meet with"],"passage_type":"Web page, form, and e-mail","passage_text":"[ウェブページ] The Golden Star Book Awards — Open for Submissions May 12 to July 16\nEvery August, the Wilbury Writers League honors four members with a Golden Star Book Award. These awards represent literary excellence in an unpublished fiction manuscript not yet submitted to an agent. Winners will be recognized on our Web site and will meet with a literary agent currently seeking to represent new and upcoming authors.\nEntry Fee per Category: $60\nEntry Categories / Requirements:\n・Contemporary — Character-driven novel with a strong female protagonist\n・Historical — Set in the nineteenth century or earlier\n・Mystery and Detective — Plot-driven novel told from a first-person perspective\n・Children and Young Adult — Realistic fiction with human protagonists\n\n[提出フォーム]\nDate: June 10 / Author: Jenna Nwadike\nTitle: The Shipbuilder's Secret / Genre: Historical Fiction\nSynopsis: Free-spirited Aisha spends much of her time combing the beach looking for shells until a box washes ashore with secrets from the past. Upon opening the box, Aisha is whisked back to the shipbuilding world of her great-great-grandfather.\n\n[Eメール] To: GSBA entrants / From: Glenda Ochebe / Date: August 12\nSubject: Winners of the Golden Star Book Awards\nCongratulations to our winners: Ava Dione (Contemporary), Gregory Levine (Mystery and Detective), Layla Ahmad (Historical), and Perry Oliver (Children and Young Adult). Excerpts of the award-winning titles can be found on the Wilbury Writers League Web site."},{"number":192,"part":7,"your_answer":"A","correct_answer":"C","question":"What are authors NOT allowed to submit to the contest?","choices":{"A":"Multiple manuscripts","B":"Stories set in the past","C":"Previously published work","D":"Realistic fiction"},"explanation_ja":"ゴールデンスター図書賞はunpublished fiction manuscript「未発表の小説原稿」を対象にしているとある。著者が提出することを認められていないものは以前に発表された作品。(C)が正解。(A)複数の部門に原稿を提出することが可能だと書かれている。(B)「歴史」の部門の要件に「19世紀またはそれ以前を舞台とするもの」とある。(D)「子どもとヤングアダルト」の部門の要件に「人間を主人公にした現実的な小説」とある。","keywords":["previously published work","unpublished"],"passage_type":"Web page, form, and e-mail","passage_text":"[ウェブページ] The Golden Star Book Awards — Open for Submissions May 12 to July 16\nEvery August, the Wilbury Writers League honors four members with a Golden Star Book Award. These awards represent literary excellence in an unpublished fiction manuscript not yet submitted to an agent. Winners will be recognized on our Web site and will meet with a literary agent currently seeking to represent new and upcoming authors.\nEntry Fee per Category: $60\nEntry Categories / Requirements:\n・Contemporary — Character-driven novel with a strong female protagonist\n・Historical — Set in the nineteenth century or earlier\n・Mystery and Detective — Plot-driven novel told from a first-person perspective\n・Children and Young Adult — Realistic fiction with human protagonists\n\n[提出フォーム]\nDate: June 10 / Author: Jenna Nwadike\nTitle: The Shipbuilder's Secret / Genre: Historical Fiction\nSynopsis: Free-spirited Aisha spends much of her time combing the beach looking for shells until a box washes ashore with secrets from the past. Upon opening the box, Aisha is whisked back to the shipbuilding world of her great-great-grandfather.\n\n[Eメール] To: GSBA entrants / From: Glenda Ochebe / Date: August 12\nSubject: Winners of the Golden Star Book Awards\nCongratulations to our winners: Ava Dione (Contemporary), Gregory Levine (Mystery and Detective), Layla Ahmad (Historical), and Perry Oliver (Children and Young Adult). Excerpts of the award-winning titles can be found on the Wilbury Writers League Web site."},{"number":194,"part":7,"your_answer":"A","correct_answer":"D","question":"What is suggested about Ms. Nwadike?","choices":{"A":"She is a friend of Ms. Ochebe's.","B":"Her work can be found on the Wilbury Writers League Web site.","C":"She plans to participate in the contest next year.","D":"She competed in the same category as Ms. Ahmad."},"explanation_ja":"NwadikeさんはThe Shipbuilder's Secretという歴史小説を提出した人物。Eメールには「歴史」部門の受賞者としてLayla Ahmadという名前がある。NwadikeさんはAhmadさんと同じ「歴史」の部門で競ったと分かるので(D)が正解。(A) OchebeさんはEメールの送信者でWilbury作家連盟の特別イベント調整役。友人という記述はない。(B)受賞作の抜粋がウェブサイトで見られるとあるが、Nwadikeさんは受賞者ではない。(C)今年の参加者に来年も提出することを勧めているのみ。","keywords":["same category as Ahmad","Historical"],"passage_type":"Web page, form, and e-mail","passage_text":"[ウェブページ] The Golden Star Book Awards — Open for Submissions May 12 to July 16\nEvery August, the Wilbury Writers League honors four members with a Golden Star Book Award. These awards represent literary excellence in an unpublished fiction manuscript not yet submitted to an agent. Winners will be recognized on our Web site and will meet with a literary agent currently seeking to represent new and upcoming authors.\nEntry Fee per Category: $60\nEntry Categories / Requirements:\n・Contemporary — Character-driven novel with a strong female protagonist\n・Historical — Set in the nineteenth century or earlier\n・Mystery and Detective — Plot-driven novel told from a first-person perspective\n・Children and Young Adult — Realistic fiction with human protagonists\n\n[提出フォーム]\nDate: June 10 / Author: Jenna Nwadike\nTitle: The Shipbuilder's Secret / Genre: Historical Fiction\nSynopsis: Free-spirited Aisha spends much of her time combing the beach looking for shells until a box washes ashore with secrets from the past. Upon opening the box, Aisha is whisked back to the shipbuilding world of her great-great-grandfather.\n\n[Eメール] To: GSBA entrants / From: Glenda Ochebe / Date: August 12\nSubject: Winners of the Golden Star Book Awards\nCongratulations to our winners: Ava Dione (Contemporary), Gregory Levine (Mystery and Detective), Layla Ahmad (Historical), and Perry Oliver (Children and Young Adult). Excerpts of the award-winning titles can be found on the Wilbury Writers League Web site."},{"number":196,"part":7,"your_answer":"A","correct_answer":"D","question":"What does the schedule indicate about the lectures?","choices":{"A":"They cost $10 for museum members.","B":"They take place in several locations.","C":"They require preregistration.","D":"They are held in the evening."},"explanation_ja":"「全ての講義は午後8時に始まり、LCAM講堂で開催される」とある。開催される時間帯についてin the eveningを用いた(D)が正解。(A)参加料はLCAM会員は無料で一般の人は1講義につき10ドル。会員は無料。(B)全ての講義はLCAM講堂で開催される。(C)早めの登録を勧めているが、座席があれば予約なしの参加も可能。","keywords":["held in the evening","8:00 P.M."],"passage_type":"schedule and e-mails","passage_text":"[予定表] Lewis Contemporary Art Museum (LCAM) Lecture Series\nLCAM is hosting a lecture series in June to celebrate its tenth anniversary. Admission is free for LCAM members and $10 per lecture for the general public. Space is limited, so register early. Walk-ins are allowed if space permits. All lectures begin at 8:00 P.M. and are held in the LCAM auditorium.\n\nJune 3—Looking at Plebani: Dr. Juan Rodriguez explores the textile works of Smithtown's most prolific artist, Marcia Plebani.\nJune 10—Jerry Wadley's Turning Points: LCAM artistic director Hyejeong Kim will examine how Jerry Wadley's style evolved over his 70-year career.\nJune 17—Our Views: Dr. Ayano Goto discusses a selection of landscape paintings by Ara Na.\nJune 24—The Photographs of Lily Losaru: LCAM associate curator Emilio Loria will delve into Lily Losaru's photography.\n\n[Eメール1: Goto→Platt, May 20]\nI have just been asked to give the keynote address at a conference next month. Unfortunately, the date of the conference conflicts with my lecture at LCAM. I have taken the liberty of communicating with Dr. Emilio Loria, and he has graciously agreed to swap lecture dates with me if needed. Alternatively, I could give my lecture in July.\n—Ayano Goto, Professor, Rampel University\n\n[Eメール2: Platt→Goto, May 21]\nThank you for letting us know about your scheduling conflict. We believe the swapping option is better. We avoid hosting events in July—our museum tends to be low on staff throughout the month. By the way, we are currently designing the lecture series program and would like to include an image of one of the artworks you will discuss. Do you have a preference?\n—Ron Platt, LCAM Programming"},{"number":197,"part":7,"your_answer":"A","correct_answer":"C","question":"What is suggested about Mr. Wadley?","choices":{"A":"He created a sculpture of Dr. Kim.","B":"He made paintings of people.","C":"He had a long career as an artist.","D":"He created artworks outdoors."},"explanation_ja":"「Jerry Wadleyの手法が70年のキャリアの中でどのように進化したか」と書かれており、Wadleyさんは芸術家として長いキャリアを持っていたことが分かるので(C)が正解。(A) Kim博士が講義でWadleyさんの彫像に焦点を当てると書かれているのみ。(B) Wadleyさんは彫像作家で絵を描いたとは書かれていない。(D)屋外で作品を作ったという記述はない。","keywords":["long career as an artist","70-year career"],"passage_type":"schedule and e-mails","passage_text":"[予定表] Lewis Contemporary Art Museum (LCAM) Lecture Series\nLCAM is hosting a lecture series in June to celebrate its tenth anniversary. Admission is free for LCAM members and $10 per lecture for the general public. Space is limited, so register early. Walk-ins are allowed if space permits. All lectures begin at 8:00 P.M. and are held in the LCAM auditorium.\n\nJune 3—Looking at Plebani: Dr. Juan Rodriguez explores the textile works of Smithtown's most prolific artist, Marcia Plebani.\nJune 10—Jerry Wadley's Turning Points: LCAM artistic director Hyejeong Kim will examine how Jerry Wadley's style evolved over his 70-year career.\nJune 17—Our Views: Dr. Ayano Goto discusses a selection of landscape paintings by Ara Na.\nJune 24—The Photographs of Lily Losaru: LCAM associate curator Emilio Loria will delve into Lily Losaru's photography.\n\n[Eメール1: Goto→Platt, May 20]\nI have just been asked to give the keynote address at a conference next month. Unfortunately, the date of the conference conflicts with my lecture at LCAM. I have taken the liberty of communicating with Dr. Emilio Loria, and he has graciously agreed to swap lecture dates with me if needed. Alternatively, I could give my lecture in July.\n—Ayano Goto, Professor, Rampel University\n\n[Eメール2: Platt→Goto, May 21]\nThank you for letting us know about your scheduling conflict. We believe the swapping option is better. We avoid hosting events in July—our museum tends to be low on staff throughout the month. By the way, we are currently designing the lecture series program and would like to include an image of one of the artworks you will discuss. Do you have a preference?\n—Ron Platt, LCAM Programming"},{"number":198,"part":7,"your_answer":"A","correct_answer":"C","question":"On what date will Dr. Goto most likely give her conference keynote address?","choices":{"A":"June 3","B":"June 10","C":"June 17","D":"June 24"},"explanation_ja":"Goto博士は6月17日の講義を行う予定のRampel大学の教授。協議会の日程がLCAMでの講義の予定日と重なっているため、Loria博士との交換または7月への延期を提案。Plattさんは交換する選択肢を希望すると述べている。Goto博士はLCAMの6月17日の講義日を6月24日と交換して、6月17日に協議会での基調講演を行うと考えられる。(C)が正解。(A) Rodriguez博士による講義の予定日。(B) Kim芸術監督による講義の予定日。(D)交換後、この日はGoto博士がLCAMで講義をすることになる。","keywords":["June 17","swap","keynote address"],"passage_type":"schedule and e-mails","passage_text":"[予定表] Lewis Contemporary Art Museum (LCAM) Lecture Series\nLCAM is hosting a lecture series in June to celebrate its tenth anniversary. Admission is free for LCAM members and $10 per lecture for the general public. Space is limited, so register early. Walk-ins are allowed if space permits. All lectures begin at 8:00 P.M. and are held in the LCAM auditorium.\n\nJune 3—Looking at Plebani: Dr. Juan Rodriguez explores the textile works of Smithtown's most prolific artist, Marcia Plebani.\nJune 10—Jerry Wadley's Turning Points: LCAM artistic director Hyejeong Kim will examine how Jerry Wadley's style evolved over his 70-year career.\nJune 17—Our Views: Dr. Ayano Goto discusses a selection of landscape paintings by Ara Na.\nJune 24—The Photographs of Lily Losaru: LCAM associate curator Emilio Loria will delve into Lily Losaru's photography.\n\n[Eメール1: Goto→Platt, May 20]\nI have just been asked to give the keynote address at a conference next month. Unfortunately, the date of the conference conflicts with my lecture at LCAM. I have taken the liberty of communicating with Dr. Emilio Loria, and he has graciously agreed to swap lecture dates with me if needed. Alternatively, I could give my lecture in July.\n—Ayano Goto, Professor, Rampel University\n\n[Eメール2: Platt→Goto, May 21]\nThank you for letting us know about your scheduling conflict. We believe the swapping option is better. We avoid hosting events in July—our museum tends to be low on staff throughout the month. By the way, we are currently designing the lecture series program and would like to include an image of one of the artworks you will discuss. Do you have a preference?\n—Ron Platt, LCAM Programming"},{"number":199,"part":7,"your_answer":"A","correct_answer":"D","question":"Why does Mr. Platt prefer to avoid scheduling events in July?","choices":{"A":"He takes his vacation in July.","B":"He believes attendance would be low in July.","C":"The July schedule is already too busy.","D":"The museum has limited staff in July."},"explanation_ja":"Plattさんは交換する選択肢の方が良いと回答し、7月のイベント主催を避ける理由として「7月はスタッフが少ない傾向がある」と書いている。(D)が正解。(A)(B)自分の休暇やattendance「出席者数」については言及していない。(C)スタッフ不足のため7月のイベント実施を避けているとあるが美術館の7月の繁忙度合いについては書かれていない。","keywords":["limited staff","low on staff"],"passage_type":"schedule and e-mails","passage_text":"[予定表] Lewis Contemporary Art Museum (LCAM) Lecture Series\nLCAM is hosting a lecture series in June to celebrate its tenth anniversary. Admission is free for LCAM members and $10 per lecture for the general public. Space is limited, so register early. Walk-ins are allowed if space permits. All lectures begin at 8:00 P.M. and are held in the LCAM auditorium.\n\nJune 3—Looking at Plebani: Dr. Juan Rodriguez explores the textile works of Smithtown's most prolific artist, Marcia Plebani.\nJune 10—Jerry Wadley's Turning Points: LCAM artistic director Hyejeong Kim will examine how Jerry Wadley's style evolved over his 70-year career.\nJune 17—Our Views: Dr. Ayano Goto discusses a selection of landscape paintings by Ara Na.\nJune 24—The Photographs of Lily Losaru: LCAM associate curator Emilio Loria will delve into Lily Losaru's photography.\n\n[Eメール1: Goto→Platt, May 20]\nI have just been asked to give the keynote address at a conference next month. Unfortunately, the date of the conference conflicts with my lecture at LCAM. I have taken the liberty of communicating with Dr. Emilio Loria, and he has graciously agreed to swap lecture dates with me if needed. Alternatively, I could give my lecture in July.\n—Ayano Goto, Professor, Rampel University\n\n[Eメール2: Platt→Goto, May 21]\nThank you for letting us know about your scheduling conflict. We believe the swapping option is better. We avoid hosting events in July—our museum tends to be low on staff throughout the month. By the way, we are currently designing the lecture series program and would like to include an image of one of the artworks you will discuss. Do you have a preference?\n—Ron Platt, LCAM Programming"},{"number":200,"part":7,"your_answer":"A","correct_answer":"C","question":"What kind of artwork does Mr. Platt say he would like to feature in the program?","choices":{"A":"A textile work","B":"A sculpture","C":"A painting","D":"A photograph"},"explanation_ja":"Plattさんは講義シリーズのパンフレットにGoto博士が講義で扱う芸術作品の画像を1点掲載したいと述べ希望があるか尋ねている。Goto博士の講義については「選りすぐったAra Naの風景画作品について論じる」とある。Plattさんがプログラムで取り上げたいのは風景画（絵画）。(C)が正解。(A)織物作品を扱うのはRodriguez博士の講義。(B)彫像を扱うのはKim芸術監督の講義。(D)写真を扱うのはLoria準学芸員の講義。","keywords":["painting","landscape paintings","Goto"],"passage_type":"schedule and e-mails","passage_text":"[予定表] Lewis Contemporary Art Museum (LCAM) Lecture Series\nLCAM is hosting a lecture series in June to celebrate its tenth anniversary. Admission is free for LCAM members and $10 per lecture for the general public. Space is limited, so register early. Walk-ins are allowed if space permits. All lectures begin at 8:00 P.M. and are held in the LCAM auditorium.\n\nJune 3—Looking at Plebani: Dr. Juan Rodriguez explores the textile works of Smithtown's most prolific artist, Marcia Plebani.\nJune 10—Jerry Wadley's Turning Points: LCAM artistic director Hyejeong Kim will examine how Jerry Wadley's style evolved over his 70-year career.\nJune 17—Our Views: Dr. Ayano Goto discusses a selection of landscape paintings by Ara Na.\nJune 24—The Photographs of Lily Losaru: LCAM associate curator Emilio Loria will delve into Lily Losaru's photography.\n\n[Eメール1: Goto→Platt, May 20]\nI have just been asked to give the keynote address at a conference next month. Unfortunately, the date of the conference conflicts with my lecture at LCAM. I have taken the liberty of communicating with Dr. Emilio Loria, and he has graciously agreed to swap lecture dates with me if needed. Alternatively, I could give my lecture in July.\n—Ayano Goto, Professor, Rampel University\n\n[Eメール2: Platt→Goto, May 21]\nThank you for letting us know about your scheduling conflict. We believe the swapping option is better. We avoid hosting events in July—our museum tends to be low on staff throughout the month. By the way, we are currently designing the lecture series program and would like to include an image of one of the artworks you will discuss. Do you have a preference?\n—Ron Platt, LCAM Programming"}];
+
+let currentIdx = 0;
+
+// ---- SCORE BAR ----
+function buildScoreBar() {
+  const byPart = {5:{w:0,t:0},6:{w:0,t:0},7:{w:0,t:0}};
+  DATA.forEach(q => { byPart[q.part].w++; });
+  // total per part from reading (30/16/54)
+  byPart[5].t=30; byPart[6].t=16; byPart[7].t=54;
+  const total = DATA.length;
+  document.getElementById('score-bar').innerHTML = `
+    <div class="score-item"><div class="score-label">間違い</div><div class="score-val">${total}<span class="score-denom"> 問</span></div></div>
+    <div class="score-divider"></div>
+    <div class="score-item"><div class="score-label">Part 5</div><div class="score-val">${byPart[5].w}<span class="score-denom">/${byPart[5].t}</span></div></div>
+    <div class="score-divider"></div>
+    <div class="score-item"><div class="score-label">Part 6</div><div class="score-val">${byPart[6].w}<span class="score-denom">/${byPart[6].t}</span></div></div>
+    <div class="score-divider"></div>
+    <div class="score-item"><div class="score-label">Part 7</div><div class="score-val">${byPart[7].w}<span class="score-denom">/${byPart[7].t}</span></div></div>
+  `;
+}
+
+// ---- LIST VIEW ----
+function buildList() {
+  buildScoreBar();
+  const parts = [5,6,7];
+  let html = '';
+  parts.forEach(p => {
+    const items = DATA.map((q,i)=>({q,i})).filter(({q})=>q.part===p);
+    if (!items.length) return;
+    html += `<div class="part-section">
+      <div class="part-heading"><span>Part ${p}</span><span class="part-count">${items.length} 問</span></div>`;
+    items.forEach(({q,i}) => {
+      const preview = q.question
+        ? q.question.replace(/-------/g,'_____').substring(0,50) + (q.question.length>50?'…':'')
+        : `選択肢: (A)${q.choices.A}  (B)${q.choices.B}  (C)${q.choices.C}  (D)${q.choices.D}`.substring(0,50)+'…';
+      const typeTag = q.passage_type ? `<span class="q-type-tag">${q.passage_type}</span>` : '';
+      const youLabel = q.your_answer ? `あなた: ${q.your_answer}` : '未解答';
+      html += `<div class="q-card" onclick="showDetail(${i})">
+        <div class="q-num">${q.number}</div>
+        <div class="q-card-body">
+          <div class="q-preview">${preview}</div>
+          <div class="q-meta">
+            <span class="q-ans-badge badge-wrong">${youLabel}</span>
+            <span class="q-ans-badge badge-correct">正解: ${q.correct_answer}</span>
+            ${typeTag}
+          </div>
+        </div>
+        <div class="q-arrow">›</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  document.getElementById('list-body').innerHTML = html;
+}
+
+// ---- DETAIL VIEW ----
+function showDetail(idx) {
+  currentIdx = idx;
+  renderDetail();
+  document.getElementById('list-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  document.getElementById('detail-view').scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+function showList() {
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('list-view').style.display = 'block';
+}
+
+function navigate(dir) {
+  const newIdx = currentIdx + dir;
+  if (newIdx < 0 || newIdx >= DATA.length) return;
+  currentIdx = newIdx;
+  renderDetail();
+  document.getElementById('detail-view').scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+function renderDetail() {
+  const q = DATA[currentIdx];
+  document.getElementById('detail-title').textContent = `Q${q.number}`;
+  document.getElementById('detail-sub').textContent = `Part ${q.part}${q.passage_type ? ' · ' + q.passage_type : ''}`;
+  document.getElementById('detail-pos').textContent = `${currentIdx+1} / ${DATA.length}`;
+
+  // nav buttons
+  document.getElementById('nav-prev').disabled = currentIdx === 0;
+  document.getElementById('nav-next').disabled = currentIdx === DATA.length - 1;
+
+  let html = '';
+
+  // ---- question block ----
+  const qText = q.question
+    ? q.question.replace(/-------/g, '<span class="blank">___</span>')
+    : '<span style="color:var(--sub);font-size:13px;">（長文の空所穴埋め問題）</span>';
+
+  html += `<div class="detail-q-block">
+    <div class="detail-q-header">
+      <span class="detail-q-num">${q.number}</span>
+      <span class="detail-part-badge">Part ${q.part}</span>
+      ${q.passage_type ? `<span class="detail-passage-type">${q.passage_type}</span>` : ''}
+    </div>
+    <div class="detail-q-text">${qText}</div>
+    <div class="choices-block">`;
+
+  ['A','B','C','D'].forEach(letter => {
+    let cls = 'is-other';
+    if (letter === q.correct_answer) cls = 'is-correct';
+    else if (letter === q.your_answer) cls = 'is-wrong';
+    html += `<div class="choice-row ${cls}">
+      <div class="choice-letter">${letter}</div>
+      <div class="choice-text">${q.choices[letter]}</div>
+    </div>`;
+  });
+
+  html += `</div>`;
+
+  // answer summary
+  const youPill = q.your_answer
+    ? `<span class="ans-pill ans-pill-you">あなたの解答：${q.your_answer}</span>`
+    : `<span class="ans-pill ans-pill-unanswered">未解答</span>`;
+  html += `<div class="answer-summary">${youPill}<span class="ans-pill ans-pill-correct">正解：${q.correct_answer}</span></div>`;
+  html += `</div>`;
+
+  // ---- explanation block ----
+  html += `<div class="exp-block">
+    <div class="exp-header">
+      <span class="seikai-badge">正解</span>
+      <span class="seikai-ans">${q.correct_answer}</span>
+    </div>
+    <div class="exp-text">${q.explanation_ja.replace(/\n/g,'<br>')}</div>`;
+
+  if (q.keywords && q.keywords.length) {
+    html += `<div class="keywords-row">${q.keywords.map(k=>`<span class="kw-chip">${k}</span>`).join('')}</div>`;
+  }
+  html += `</div>`;
+
+  // ---- passage block ----
+  if (q.passage_text) {
+    html += `<div class="passage-block">
+      <div class="passage-header">📄 本文 / 文書</div>
+      <div class="passage-inner">${q.passage_text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+    </div>`;
+  }
+
+  document.getElementById('detail-body').innerHTML = html;
+}
+
+// init
+buildList();
+</script>
+</body>
+</html>

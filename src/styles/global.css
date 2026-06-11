@@ -332,20 +332,26 @@ body {
 }
 
 /* ===== FILTER ===== */
-.filter-btn {
-  margin-left: auto;
-  padding: 6px 12px;
-  border: 1.5px solid rgba(255,255,255,0.5);
+.filter-row {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px 10px;
+  background: var(--navy);
+}
+.filter-chip {
+  padding: 5px 12px;
+  border: 1.5px solid rgba(255,255,255,0.45);
   border-radius: 20px;
   background: transparent;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.75);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.1s;
+  font-family: inherit;
 }
-.filter-btn-active {
+.filter-chip-active {
   background: white;
   color: var(--navy);
   border-color: white;
@@ -356,6 +362,19 @@ body {
   color: var(--sub);
   font-size: 14px;
 }
+
+/* ===== SKIP BUTTON ===== */
+.skip-btn {
+  background: none;
+  border: none;
+  color: var(--sub);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  font-family: inherit;
+}
+.skip-btn:active { opacity: 0.6; }
 
 /* ===== REVIEWED ===== */
 .q-card-reviewed { background: #f0faf4; }

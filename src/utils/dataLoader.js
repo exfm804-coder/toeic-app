@@ -64,8 +64,9 @@ export function loadQuestions(datasetId) {
     const saved = localStorage.getItem(`quiz_answers_${datasetId}`)
     if (saved) {
       const quizAnswers = JSON.parse(saved)
+      const answeredNums = new Set(Object.keys(quizAnswers).map(Number))
       return questions
-        .filter(q => quizAnswers[String(q.number)] !== q.correct_answer)
+        .filter(q => answeredNums.has(q.number))
         .map(q => ({ ...q, your_answer: quizAnswers[String(q.number)] ?? null }))
     }
   } catch {}

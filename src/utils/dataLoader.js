@@ -36,6 +36,11 @@ function extractQuestions(rawData) {
   return out
 }
 
+export function loadAllQuestions(datasetId) {
+  const rawData = getRawData(datasetId)
+  return extractQuestions(rawData)
+}
+
 export function saveQuizAnswers(datasetId, answers) {
   localStorage.setItem(`quiz_answers_${datasetId}`, JSON.stringify(answers))
 }

@@ -3,7 +3,7 @@ import HomePage from './pages/HomePage'
 import ListPage from './pages/ListPage'
 import DetailPage from './pages/DetailPage'
 import QuizPage from './pages/QuizPage'
-import { loadQuestions, loadPassageUnits } from './utils/dataLoader'
+import { loadQuestions, loadAllQuestions } from './utils/dataLoader'
 
 function loadReviewed(datasetId) {
   try {
@@ -22,7 +22,7 @@ export default function App() {
   const [view, setView] = useState('home')
   const [activeDataset, setActiveDataset] = useState(null)
   const [questions, setQuestions] = useState([])
-  const [units, setUnits] = useState([])
+  const [quizQuestions, setQuizQuestions] = useState([])
   const [currentIdx, setCurrentIdx] = useState(0)
   const [reviewed, setReviewed] = useState(new Set())
 
@@ -35,7 +35,7 @@ export default function App() {
 
   function goToQuiz(datasetId) {
     setActiveDataset(datasetId)
-    setUnits(loadPassageUnits(datasetId))
+    setQuizQuestions(loadAllQuestions(datasetId))
     setView('quiz')
   }
 
@@ -101,7 +101,7 @@ export default function App() {
       {view === 'quiz' && (
         <QuizPage
           datasetId={activeDataset}
-          units={units}
+          questions={quizQuestions}
           onBack={goHome}
           onGoToReview={() => goToList(activeDataset)}
         />

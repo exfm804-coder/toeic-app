@@ -49,7 +49,7 @@ export function hasQuizAnswers(datasetId) {
   return !!localStorage.getItem(`quiz_answers_${datasetId}`)
 }
 
-export function loadQuestions(datasetId) {
+export function loadQuestions(datasetId, externalAnswers = null) {
   const rawData = getRawData(datasetId)
   const questions = extractQuestions(rawData)
 
@@ -60,16 +60,21 @@ export function loadQuestions(datasetId) {
       .map(q => ({ ...q, your_answer: userAnswers[String(q.number)] ?? null }))
   }
 
-  try {
-    const saved = localStorage.getItem(`quiz_answers_${datasetId}`)
-    if (saved) {
-      const quizAnswers = JSON.parse(saved)
-      const answeredNums = new Set(Object.keys(quizAnswers).map(Number))
-      return questions
-        .filter(q => answeredNums.has(q.number))
-        .map(q => ({ ...q, your_answer: quizAnswers[String(q.number)] ?? null }))
-    }
-  } catch {}
+  // externalAnswers はSupabaseから取得したMap、なければlocalStorageにフォールバック
+  let answersMap = externalAnswers
+  if (!answersMap) {
+    try {
+      const saved = localStorage.getItem(`quiz_answers_${datasetId}`)
+      answersMap = saved ? JSON.parse(saved) : null
+    } catch {}
+  }
+
+  if (answersMap && Object.keys(answersMap).length > 0) {
+    const answeredNums = new Set(Object.keys(answersMap).map(Number))
+    return questions
+      .filter(q => answeredNums.has(q.number))
+      .map(q => ({ ...q, your_answer: answersMap[String(q.number)] ?? null }))
+  }
 
   return questions
 }

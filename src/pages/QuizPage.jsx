@@ -139,7 +139,7 @@ function QuestionView({ question: q, currentIdx, total, selectedAnswer, onSelect
 }
 
 // ---- Answer Sheet Screen ----
-function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBack, onGoToReview }) {
+function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch }) {
   const savedProgress = loadProgress(datasetId, partKey)
   const [showResumeDialog, setShowResumeDialog] = useState(!!savedProgress)
   const [showBackDialog, setShowBackDialog] = useState(false)
@@ -182,6 +182,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
     saveProgress(datasetId, partKey, updated, getElapsed(), nextIdx < questions.length ? nextIdx : currentIdx)
     const existing = JSON.parse(localStorage.getItem(`quiz_answers_${datasetId}`) || '{}')
     saveQuizAnswers(datasetId, { ...existing, [q.number]: letter })
+    onSaveAnswer?.(datasetId, q.number, letter)
     setAnswers(updated)
     if (nextIdx < questions.length) {
       setCurrentIdx(nextIdx)
@@ -202,6 +203,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
     setGraded(true)
     const existing = JSON.parse(localStorage.getItem(`quiz_answers_${datasetId}`) || '{}')
     saveQuizAnswers(datasetId, { ...existing, ...answers })
+    onSaveAnswersBatch?.(datasetId, answers)
   }
 
   function handleBack() {
@@ -322,7 +324,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
 }
 
 // ---- Main ----
-export default function QuizPage({ datasetId, questions, onBack, onGoToReview }) {
+export default function QuizPage({ datasetId, questions, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch }) {
   const [view, setView] = useState('select')
   const [partKey, setPartKey] = useState(null)
   const [partLabel, setPartLabel] = useState('')
@@ -362,6 +364,8 @@ export default function QuizPage({ datasetId, questions, onBack, onGoToReview })
       datasetId={datasetId}
       onBack={() => setView('select')}
       onGoToReview={onGoToReview}
+      onSaveAnswer={onSaveAnswer}
+      onSaveAnswersBatch={onSaveAnswersBatch}
     />
   )
 }

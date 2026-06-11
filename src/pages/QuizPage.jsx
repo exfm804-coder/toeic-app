@@ -14,10 +14,10 @@ function formatTime(ms) {
   return `${String(h).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 }
 
-function saveProgress(datasetId, partKey, answers, elapsedMs) {
+function saveProgress(datasetId, partKey, answers, elapsedMs, currentIdx = 0) {
   localStorage.setItem(
     `quiz_progress_${datasetId}_${partKey}`,
-    JSON.stringify({ answers, elapsedMs })
+    JSON.stringify({ answers, elapsedMs, currentIdx })
   )
 }
 
@@ -89,12 +89,56 @@ function SelectScreen({ questions, datasetId, label, onStart, onBack }) {
   )
 }
 
+// ---- Single Question View ----
+function QuestionView({ question: q, currentIdx, total, selectedAnswer, onSelect }) {
+  if (!q) return null
+  const qHtml = q.question?.replace(/-------/g, '<span class="blank">___</span>') ?? null
+
+  return (
+    <div style={{ paddingBottom: '20px' }}>
+      <div className="quiz-progress">{currentIdx + 1} / {total}</div>
+      <div className="quiz-q-block">
+        <div className="quiz-q-header">
+          <span className="detail-q-num">{q.number}</span>
+          <span className="detail-part-badge">Part {q.part}</span>
+          {q.passage_type && <span className="detail-passage-type">{q.passage_type}</span>}
+        </div>
+        <div className="detail-q-text">
+          {qHtml
+            ? <span dangerouslySetInnerHTML={{ __html: qHtml }} />
+            : <span style={{ color: 'var(--sub)', fontSize: '13px' }}>（長文の設問）</span>
+          }
+        </div>
+        <div className="quiz-choices-block">
+          {['A', 'B', 'C', 'D'].map(letter => (
+            <button
+              key={letter}
+              className={`quiz-choice-btn${selectedAnswer === letter ? ' is-selected' : ''}`}
+              onClick={() => onSelect(letter)}
+            >
+              <div className="quiz-choice-letter">{letter}</div>
+              <div className="quiz-choice-text">{q.choices[letter]}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+      {q.passage_text && (
+        <div className="passage-block">
+          <div className="passage-header">PASSAGE</div>
+          <div className="passage-inner">{q.passage_text}</div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ---- Answer Sheet Screen ----
 function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBack, onGoToReview }) {
   const savedProgress = loadProgress(datasetId, partKey)
   const [showResumeDialog, setShowResumeDialog] = useState(!!savedProgress)
   const [showBackDialog, setShowBackDialog] = useState(false)
   const [answers, setAnswers] = useState({})
+  const [currentIdx, setCurrentIdx] = useState(0)
   const [elapsedMs, setElapsedMs] = useState(0)
   const [graded, setGraded] = useState(false)
   const startTimeRef = useRef(null)
@@ -115,6 +159,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
   function handleResume(resume) {
     if (resume && savedProgress) {
       setAnswers(savedProgress.answers ?? {})
+      setCurrentIdx(savedProgress.currentIdx ?? 0)
       initialElapsedRef.current = savedProgress.elapsedMs ?? 0
     } else {
       clearProgress(datasetId, partKey)
@@ -123,16 +168,19 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
     setShowResumeDialog(false)
   }
 
-  function handleSelect(qNumber, letter) {
+  function handleSelect(letter) {
     if (graded) return
-    setAnswers(prev => {
-      const updated = { ...prev, [qNumber]: letter }
-      saveProgress(datasetId, partKey, updated, getElapsed())
-      // マージして復習モード用に随時保存
-      const existing = JSON.parse(localStorage.getItem(`quiz_answers_${datasetId}`) || '{}')
-      saveQuizAnswers(datasetId, { ...existing, [qNumber]: letter })
-      return updated
-    })
+    const q = questions[currentIdx]
+    const updated = { ...answers, [q.number]: letter }
+    const nextIdx = currentIdx + 1
+    saveProgress(datasetId, partKey, updated, getElapsed(), nextIdx < questions.length ? nextIdx : currentIdx)
+    const existing = JSON.parse(localStorage.getItem(`quiz_answers_${datasetId}`) || '{}')
+    saveQuizAnswers(datasetId, { ...existing, [q.number]: letter })
+    setAnswers(updated)
+    if (nextIdx < questions.length) {
+      setCurrentIdx(nextIdx)
+      window.scrollTo(0, 0)
+    }
   }
 
   function handleGrade() {
@@ -148,13 +196,13 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
   }
 
   function handleConfirmBack() {
-    saveProgress(datasetId, partKey, answers, getElapsed())
+    saveProgress(datasetId, partKey, answers, getElapsed(), currentIdx)
     setShowBackDialog(false)
     onBack()
   }
 
-  const answeredCount = Object.keys(answers).length
   const totalCount = questions.length
+  const answeredCount = Object.keys(answers).length
 
   let correctCount = 0
   if (graded) {
@@ -212,27 +260,13 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
           </button>
         </div>
       ) : (
-        <div style={{ paddingBottom: '20px' }}>
-          <div className="answer-sheet-progress">
-            {answeredCount} / {totalCount} 回答済み
-          </div>
-          {questions.map(q => (
-            <div key={q.number} className="answer-row">
-              <div className="answer-row-num">{q.number}</div>
-              <div className="answer-row-choices">
-                {['A', 'B', 'C', 'D'].map(letter => (
-                  <button
-                    key={letter}
-                    className={`answer-circle${answers[q.number] === letter ? ' answer-circle-selected' : ''}`}
-                    onClick={() => handleSelect(q.number, letter)}
-                  >
-                    {letter}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        <QuestionView
+          question={questions[currentIdx]}
+          currentIdx={currentIdx}
+          total={totalCount}
+          selectedAnswer={answers[questions[currentIdx]?.number]}
+          onSelect={handleSelect}
+        />
       )}
 
       {showResumeDialog && (

@@ -1,4 +1,4 @@
-import { isDataAvailable } from '../utils/dataLoader'
+import { isDataAvailable, hasQuizAnswers } from '../utils/dataLoader'
 
 const BOOKS = [
   {
@@ -9,15 +9,15 @@ const BOOKS = [
       {
         label: 'TEST 1',
         modes: [
-          { mode: 'quiz', label: '一問一答モード', datasetId: 'book12-test1', productReady: false },
-          { mode: 'list', label: '復習モード',     datasetId: 'book12-test1', productReady: true  },
+          { mode: 'quiz', label: '一問一答モード', datasetId: 'book12-test1', productReady: false, requiresQuiz: false },
+          { mode: 'list', label: '復習モード',     datasetId: 'book12-test1', productReady: true,  requiresQuiz: false },
         ],
       },
       {
         label: 'TEST 2',
         modes: [
-          { mode: 'quiz', label: '一問一答モード', datasetId: 'book12-test2', productReady: false },
-          { mode: 'list', label: '復習モード',     datasetId: 'book12-test2', productReady: false },
+          { mode: 'quiz', label: '一問一答モード', datasetId: 'book12-test2', productReady: false, requiresQuiz: false },
+          { mode: 'list', label: '復習モード',     datasetId: 'book12-test2', productReady: false, requiresQuiz: false },
         ],
       },
     ],
@@ -30,15 +30,15 @@ const BOOKS = [
       {
         label: 'TEST 1',
         modes: [
-          { mode: 'quiz', label: '一問一答モード', datasetId: 'book11-test1', productReady: true },
-          { mode: 'list', label: '復習モード',     datasetId: 'book11-test1', productReady: true },
+          { mode: 'quiz', label: '一問一答モード', datasetId: 'book11-test1', productReady: true, requiresQuiz: false },
+          { mode: 'list', label: '復習モード',     datasetId: 'book11-test1', productReady: true, requiresQuiz: true  },
         ],
       },
       {
         label: 'TEST 2',
         modes: [
-          { mode: 'quiz', label: '一問一答モード', datasetId: 'book11-test2', productReady: true },
-          { mode: 'list', label: '復習モード',     datasetId: 'book11-test2', productReady: true },
+          { mode: 'quiz', label: '一問一答モード', datasetId: 'book11-test2', productReady: true, requiresQuiz: false },
+          { mode: 'list', label: '復習モード',     datasetId: 'book11-test2', productReady: true, requiresQuiz: true  },
         ],
       },
     ],
@@ -70,11 +70,13 @@ export default function HomePage({ onSelectMode }) {
                 <div className="home-test-heading">{test.label}</div>
                 {test.modes.map(item => {
                   const dataReady = item.productReady && isDataAvailable(item.datasetId)
-                  const enabled = dataReady
+                  const quizDone = !item.requiresQuiz || hasQuizAnswers(item.datasetId)
+                  const enabled = dataReady && quizDone
 
                   let badge = null
                   if (!item.productReady) badge = <span className="home-badge-coming">準備中</span>
                   else if (!dataReady) badge = <span className="home-badge-coming">データ準備中</span>
+                  else if (!quizDone) badge = <span className="home-badge-coming">一問一答を先に</span>
 
                   return (
                     <button

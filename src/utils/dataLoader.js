@@ -36,6 +36,14 @@ function extractQuestions(rawData) {
   return out
 }
 
+export function saveQuizAnswers(datasetId, answers) {
+  localStorage.setItem(`quiz_answers_${datasetId}`, JSON.stringify(answers))
+}
+
+export function hasQuizAnswers(datasetId) {
+  return !!localStorage.getItem(`quiz_answers_${datasetId}`)
+}
+
 export function loadQuestions(datasetId) {
   const rawData = getRawData(datasetId)
   const questions = extractQuestions(rawData)
@@ -46,6 +54,16 @@ export function loadQuestions(datasetId) {
       .filter(q => wrongNumbers.has(q.number))
       .map(q => ({ ...q, your_answer: userAnswers[String(q.number)] ?? null }))
   }
+
+  try {
+    const saved = localStorage.getItem(`quiz_answers_${datasetId}`)
+    if (saved) {
+      const quizAnswers = JSON.parse(saved)
+      return questions
+        .filter(q => quizAnswers[String(q.number)] !== q.correct_answer)
+        .map(q => ({ ...q, your_answer: quizAnswers[String(q.number)] ?? null }))
+    }
+  } catch {}
 
   return questions
 }

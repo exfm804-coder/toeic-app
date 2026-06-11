@@ -103,6 +103,7 @@ export default function App() {
           datasetId={activeDataset}
           units={units}
           onBack={goHome}
+          onGoToReview={() => goToList(activeDataset)}
         />
       )}
     </>

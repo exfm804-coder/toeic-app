@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ExplanationBox from '../components/ExplanationBox'
 import PassageBlock from '../components/PassageBlock'
+import { saveQuizAnswers } from '../utils/dataLoader'
 
 const DATASET_LABELS = {
   'book12-test1': { title: '一問一答', sub: '問題集12 · TEST1 · Reading' },
@@ -64,7 +65,7 @@ function QuestionBlock({ q, phase, allAnswers, onChoice, showPassageType }) {
   )
 }
 
-function DoneScreen({ units, allAnswers, onBack, label }) {
+function DoneScreen({ units, allAnswers, onBack, onGoToReview, label }) {
   let totalCorrect = 0
   let totalQuestions = 0
 
@@ -80,6 +81,7 @@ function DoneScreen({ units, allAnswers, onBack, label }) {
     }
   })
 
+  const wrongCount = totalQuestions - totalCorrect
   const pct = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0
 
   return (
@@ -100,13 +102,24 @@ function DoneScreen({ units, allAnswers, onBack, label }) {
           <div className="quiz-score-denom">/ {totalQuestions}</div>
         </div>
         <div className="quiz-score-label">{pct}% 正解</div>
-        <button className="quiz-back-btn" onClick={onBack}>ホームに戻る</button>
+        {onGoToReview && wrongCount > 0 && (
+          <button className="quiz-back-btn" onClick={onGoToReview}>
+            復習モードへ（{wrongCount}問）
+          </button>
+        )}
+        <button
+          className="quiz-back-btn"
+          style={onGoToReview && wrongCount > 0 ? { background: 'white', color: 'var(--navy)', border: '1.5px solid var(--navy)' } : undefined}
+          onClick={onBack}
+        >
+          ホームに戻る
+        </button>
       </div>
     </div>
   )
 }
 
-export default function QuizPage({ datasetId, units, onBack }) {
+export default function QuizPage({ datasetId, units, onBack, onGoToReview }) {
   const [unitIdx, setUnitIdx] = useState(0)
   const [phase, setPhase] = useState('answering')
   const [allAnswers, setAllAnswers] = useState({})
@@ -114,7 +127,15 @@ export default function QuizPage({ datasetId, units, onBack }) {
   const label = DATASET_LABELS[datasetId] ?? { title: '一問一答', sub: 'Reading' }
 
   if (phase === 'done' || units.length === 0) {
-    return <DoneScreen units={units} allAnswers={allAnswers} onBack={onBack} label={label} />
+    return (
+      <DoneScreen
+        units={units}
+        allAnswers={allAnswers}
+        onBack={onBack}
+        onGoToReview={onGoToReview}
+        label={label}
+      />
+    )
   }
 
   const unit = units[unitIdx]
@@ -134,6 +155,7 @@ export default function QuizPage({ datasetId, units, onBack }) {
 
   function handleNext() {
     if (isLastUnit) {
+      saveQuizAnswers(datasetId, allAnswers)
       setPhase('done')
     } else {
       setUnitIdx(prev => prev + 1)

@@ -4,7 +4,7 @@ export default function QuestionCard({ question: q, onClick, isReviewed }) {
     ? raw.replace(/-------/g, '_____').substring(0, 50) + (raw.length > 50 ? '…' : '')
     : `選択肢: (A)${q.choices.A}  (B)${q.choices.B}  (C)${q.choices.C}  (D)${q.choices.D}`.substring(0, 50) + '…'
 
-  const youLabel = q.your_answer ? `あなた: ${q.your_answer}` : '未解答'
+  const hasYourAnswer = q.your_answer !== undefined && q.your_answer !== null
 
   return (
     <div className={`q-card${isReviewed ? ' q-card-reviewed' : ''}`} onClick={onClick}>
@@ -14,7 +14,11 @@ export default function QuestionCard({ question: q, onClick, isReviewed }) {
       <div className="q-card-body">
         <div className="q-preview">{preview}</div>
         <div className="q-meta">
-          <span className="q-ans-badge badge-wrong">{youLabel}</span>
+          {hasYourAnswer && (
+            <span className="q-ans-badge badge-wrong">
+              {q.your_answer ? `あなた: ${q.your_answer}` : '未解答'}
+            </span>
+          )}
           <span className="q-ans-badge badge-correct">正解: {q.correct_answer}</span>
           {q.passage_type && <span className="q-type-tag">{q.passage_type}</span>}
         </div>

@@ -2,9 +2,17 @@ import { useState } from 'react'
 import ScoreBar from '../components/ScoreBar'
 import QuestionCard from '../components/QuestionCard'
 
-export default function ListPage({ questions, onSelect, reviewed }) {
+const DATASET_LABELS = {
+  'book12-test1': { title: 'TEST 1 復習リスト', sub: '問題集12 · Reading · 間違い・未解答' },
+  'book11-test1': { title: 'TEST 1 復習リスト', sub: '問題集11 · Reading' },
+  'book11-test2': { title: 'TEST 2 復習リスト', sub: '問題集11 · Reading' },
+}
+
+export default function ListPage({ datasetId, questions, onSelect, reviewed, onBack }) {
   const [filterUnreviewed, setFilterUnreviewed] = useState(false)
   const [activePart, setActivePart] = useState(null)
+
+  const { title, sub } = DATASET_LABELS[datasetId] ?? { title: '復習リスト', sub: 'Reading' }
 
   function handlePartClick(part) {
     setActivePart(prev => prev === part ? null : part)
@@ -18,9 +26,10 @@ export default function ListPage({ questions, onSelect, reviewed }) {
     <div>
       <div className="app-header">
         <div className="app-header-inner">
+          <button className="back-btn" onClick={onBack}>‹</button>
           <div>
-            <div className="header-title">TEST 1 復習リスト</div>
-            <div className="header-sub">Reading · 間違い・未解答</div>
+            <div className="header-title">{title}</div>
+            <div className="header-sub">{sub}</div>
           </div>
           <button
             className={`filter-btn${filterUnreviewed ? ' filter-btn-active' : ''}`}
@@ -43,7 +52,12 @@ export default function ListPage({ questions, onSelect, reviewed }) {
                 <span className="part-count">{items.length} 問</span>
               </div>
               {items.map(({ q, i }) => (
-                <QuestionCard key={q.number} question={q} onClick={() => onSelect(i)} isReviewed={reviewed.has(q.number)} />
+                <QuestionCard
+                  key={q.number}
+                  question={q}
+                  onClick={() => onSelect(i)}
+                  isReviewed={reviewed.has(q.number)}
+                />
               ))}
             </div>
           )

@@ -59,10 +59,11 @@ export default function DetailPage({ questions, currentIdx, onBack, onNavigate, 
           </div>
 
           <div className="answer-summary">
-            {q.your_answer
-              ? <span className="ans-pill ans-pill-you">あなたの解答：{q.your_answer}</span>
-              : <span className="ans-pill ans-pill-unanswered">未解答</span>
-            }
+            {q.your_answer !== undefined && (
+              q.your_answer
+                ? <span className="ans-pill ans-pill-you">あなたの解答：{q.your_answer}</span>
+                : <span className="ans-pill ans-pill-unanswered">未解答</span>
+            )}
             <span className="ans-pill ans-pill-correct">正解：{q.correct_answer}</span>
           </div>
         </div>

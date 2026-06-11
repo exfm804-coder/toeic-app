@@ -1,34 +1,79 @@
-import rawData from '../../toeic_test1_reading_all.json'
 import userAnswers from '../data/user_answers.json'
 
-export function loadQuestions() {
-  const allQuestions = []
+const jsonModules = import.meta.glob('/toeic*.json', { eager: true })
 
-  rawData.parts.forEach(part => {
+const FILE_MAP = {
+  'book12-test1': '/toeic_test1_reading_all.json',
+  'book11-test1': '/toeic11_test1_reading_questions.json',
+  'book11-test2': '/toeic11_test2_reading_questions.json',
+}
+
+function getRawData(datasetId) {
+  const filename = FILE_MAP[datasetId]
+  if (!filename) return null
+  const mod = jsonModules[filename]
+  return mod?.default ?? mod ?? null
+}
+
+function extractQuestions(rawData) {
+  if (!rawData) return []
+  const out = []
+  rawData.parts?.forEach(part => {
     if (part.format === 'questions') {
-      part.questions.forEach(q => {
-        allQuestions.push({ ...q, part: part.part })
-      })
+      part.questions.forEach(q => out.push({ ...q, part: part.part }))
     } else if (part.format === 'passages') {
       part.passages.forEach(passage => {
-        passage.questions.forEach(q => {
-          allQuestions.push({
-            ...q,
-            part: part.part,
-            passage_type: passage.type,
-            passage_text: passage.passage_text,
-          })
-        })
+        passage.questions.forEach(q => out.push({
+          ...q,
+          part: part.part,
+          passage_id: passage.passage_id,
+          passage_type: passage.type,
+          passage_text: passage.passage_text,
+        }))
       })
     }
   })
+  return out
+}
 
-  const wrongNumbers = new Set(Object.keys(userAnswers).map(Number))
+export function loadQuestions(datasetId) {
+  const rawData = getRawData(datasetId)
+  const questions = extractQuestions(rawData)
 
-  return allQuestions
-    .filter(q => wrongNumbers.has(q.number))
-    .map(q => ({
-      ...q,
-      your_answer: userAnswers[String(q.number)] ?? null,
-    }))
+  if (datasetId === 'book12-test1') {
+    const wrongNumbers = new Set(Object.keys(userAnswers).map(Number))
+    return questions
+      .filter(q => wrongNumbers.has(q.number))
+      .map(q => ({ ...q, your_answer: userAnswers[String(q.number)] ?? null }))
+  }
+
+  return questions
+}
+
+export function loadPassageUnits(datasetId) {
+  const rawData = getRawData(datasetId)
+  if (!rawData) return []
+
+  const units = []
+  rawData.parts?.forEach(part => {
+    if (part.format === 'questions') {
+      part.questions.forEach(q => units.push({
+        type: 'single',
+        question: { ...q, part: part.part },
+      }))
+    } else if (part.format === 'passages') {
+      part.passages.forEach(passage => units.push({
+        type: 'passage',
+        passage_id: passage.passage_id,
+        passage_type: passage.type,
+        passage_text: passage.passage_text,
+        questions: passage.questions.map(q => ({ ...q, part: part.part })),
+      }))
+    }
+  })
+  return units
+}
+
+export function isDataAvailable(datasetId) {
+  return !!getRawData(datasetId)
 }

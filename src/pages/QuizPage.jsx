@@ -144,6 +144,7 @@ export default function QuizPage({ datasetId, units, onBack, onGoToReview }) {
   function handleChoice(qNumber, letter) {
     const updated = { ...allAnswers, [qNumber]: letter }
     setAllAnswers(updated)
+    saveQuizAnswers(datasetId, updated)
     if (unit.type === 'single') {
       setPhase('reviewing')
     }
@@ -155,7 +156,6 @@ export default function QuizPage({ datasetId, units, onBack, onGoToReview }) {
 
   function handleNext() {
     if (isLastUnit) {
-      saveQuizAnswers(datasetId, allAnswers)
       setPhase('done')
     } else {
       setUnitIdx(prev => prev + 1)

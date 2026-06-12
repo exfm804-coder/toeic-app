@@ -1,0 +1,1462 @@
+{
+  "test": "TEST 2",
+  "book": "公式TOEIC Listening & Reading 問題集11",
+  "section": "Reading",
+  "total_questions": 100,
+  "parts": [
+    {
+      "part": 5,
+      "format": "questions",
+      "description": "短文穴埋め問題",
+      "questions": [
+        {
+          "number": 101,
+          "part": 5,
+          "question": "The new microwave for the office kitchen should arrive ------- the week.",
+          "choices": {
+            "A": "on",
+            "B": "along",
+            "C": "by",
+            "D": "within"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "選択肢は全て前置詞の働きをする語。文頭からarriveまでは、「事務所のキッチン用の新しい電子レンジは到着するはずだ」という意味。空所に(D) withinを入れると、within the weekが「今週中に」となり、意味が通る。microwave (microwave oven) 「電子レンジ」。(A) 特定の日付や曜日などが続く場合は可。(C) 期限を表すので、具体的な日付などが続く場合は可。"
+        },
+        {
+          "number": 102,
+          "part": 5,
+          "question": "Mr. Samudio thanked the hotel staff for making ------- stay a comfortable one.",
+          "choices": {
+            "A": "he",
+            "B": "his",
+            "C": "him",
+            "D": "himself"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は全て人称代名詞。thank ~ for doingは「···してくれたことを〜に感謝する」という意味なので、making以下は、ホテルのスタッフがしてくれたことを表す。make A Bは「AをBにする」という意味で、Aにstay、Bにa comfortable oneが当てはまると考えられる。よって、名詞stayを修飾する所有格の(B) his 「彼の」が適切。oneはstayを表し、making以下は「彼の滞在を快適なものにしたこと」という意味になる。(A)主格。(C)目的格。(D)再帰代名詞。"
+        },
+        {
+          "number": 103,
+          "part": 5,
+          "question": "The sales associates have been pleased with the new dress code ------- it was implemented last September.",
+          "choices": {
+            "A": "here",
+            "B": "first",
+            "C": "since",
+            "D": "best"
+          },
+          "correct_answer": "C",
+          "explanation_ja": "空所の前後が共に〈主語+動詞〉の形を含む節。文頭からdress codeまでの節は継続を表す現在完了形で、「営業部員たちはその新しい服装規定に（ずっと）満足している」という意味。it was以下の節は、「それはこの前の9月に施行された」という意味。これらの節をつなぐために、空所には接続詞が入ると考えられる。接続詞の (C) since 「~以来」が適切。itはthe new dress codeを指す。sales associate「営業部員、販売員」、be pleased with ~ 「~が気に入る、~に満足している」、dress code 「服装規定」、implement 「~を実施する」。(A)副詞。(B) (D) 形容詞または副詞。"
+        },
+        {
+          "number": 104,
+          "part": 5,
+          "question": "At the beginning of the class, your instructor will inform you ------- additional materials are needed.",
+          "choices": {
+            "A": "yet",
+            "B": "if",
+            "C": "however",
+            "D": "although"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "この文の主語はyour instructor、述語動詞はwill inform。〈inform ~ +名詞節〉で「~に···を知らせる」という意味。名詞節を導く接続詞の (B) if「~かどうか」を入れると、空所以下が「追加の教材が必要かどうか」という意味になって、文が成立する。additional 「追加の」、material (=learning material)「教材」。(A) (C) 副詞または接続詞。名詞節を導かない。(D)接続詞。名詞節を導かない。"
+        },
+        {
+          "number": 105,
+          "part": 5,
+          "question": "Poole and Whitney Supply sells premier products for do-it-yourself home improvement -------.",
+          "choices": {
+            "A": "projects",
+            "B": "projection",
+            "C": "projecting",
+            "D": "projectors"
+          },
+          "correct_answer": "A",
+          "explanation_ja": "選択肢は全て名詞の働きを持つ語。この文の主語はPoole and Whitney Supply、sellsが述語動詞。premier以下は述語動詞sellsの目的語で、「DIYで行う家のリフォーム用の最高級製品」という意味。(A) projects 「プロジェクト、工事」を入れると、この会社がDIYで家のリフォーム工事をするのに必要な物品を販売している、ということになって意味が通る。premier「最高級の」、do-it-yourself 「DIYの、日曜大工の」、home improvement 「家のリフォーム」。"
+        },
+        {
+          "number": 106,
+          "part": 5,
+          "question": "Mouse pads ------- our redesigned company logo will be distributed after the workshop.",
+          "choices": {
+            "A": "must display",
+            "B": "to be displayed",
+            "C": "displaying",
+            "D": "being displayed"
+          },
+          "correct_answer": "C",
+          "explanation_ja": "動詞display「~を表示する」の適切な形を選ぶ。この文の述語動詞はwill be distributed 「配布される予定だ」であり、その主語に当たるのが文頭のMouse pads 「マウスパッド」で、空所からlogoまでがMouse pads を修飾していると考えられる。現在分詞の (C) displaying 「~を表示している」を入れると、displaying our redesigned company logoがMouse padsを修飾する形容詞句になり、会社の新しいロゴ入りのマウスパッドが講習会の参加者に配布される、となって意味が通る。redesign 「~をデザインし直す」、logo 「ロゴマーク」、distribute 「~を配布する」、workshop「講習会」。(A) 述語動詞はwill be distributed なので述語動詞になり得る語句は不適切。(B) (D) displayは受動態にした場合、後ろに目的語を続けない。"
+        },
+        {
+          "number": 107,
+          "part": 5,
+          "question": "Employees who work part-time are not ------- for the company's profit-sharing plan.",
+          "choices": {
+            "A": "famous",
+            "B": "admired",
+            "C": "reasonable",
+            "D": "eligible"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "文頭からpart-timeまでが主語で、「パートタイムで働く従業員たち」の意味。the company's以下は前置詞forの目的語で、「その会社の利益分配制度」の意味。空所に(D) eligible を入れるとbe eligible for ~ 「~の資格がある」の形になり、パートタイムの従業員にはその会社の利益分配制度に加入する資格がない、となって意味が通る。work part-time 「パートタイムで働く」、profit-sharing plan 「利益分配制度」。(A) be famous for〜で「~で有名である」という意味。"
+        },
+        {
+          "number": 108,
+          "part": 5,
+          "question": "Brady Music Academy pairs students with qualified instructors ------- are professional wind and brass instrument players.",
+          "choices": {
+            "A": "who",
+            "B": "when",
+            "C": "where",
+            "D": "whose"
+          },
+          "correct_answer": "A",
+          "explanation_ja": "選択肢は全て関係詞。主語はBrady Music Academy、述語動詞はpairs。pair A with Bで「AをBと組ませる」という意味であり、Aにstudents、Bにqualified instructorsが当てはまるので、文頭からinstructorsまでは「Brady音楽学校は、生徒たちを有資格の講師と組ませる」という意味になる。空所には動詞の働きをするareが続いており、are以下は「プロの木管・金管楽器奏者である」という意味だが、主語がないので、空所にはこの部分の主語に相当して前の部分とつながる語が必要。主格の関係代名詞(A) whoを入れると、以下の関係代名詞節がqualified instructorsを修飾する働きをして、意味が通る。academy「(専門)学校」、qualified 「資格のある」、wind instrument 「吹奏楽器(ここではwoodwind instrument 木管楽器を指すと考えられる)」、brass instrument 「金管楽器」。(B)(C) 関係副詞。主語の働きをしない。(D) 所有格の関係代名詞。単独で主語の働きをしない。"
+        },
+        {
+          "number": 109,
+          "part": 5,
+          "question": "Residents of Millier Street ------- city council members to approve the installation of a traffic light.",
+          "choices": {
+            "A": "encouraged",
+            "B": "suggested",
+            "C": "argued",
+            "D": "reported"
+          },
+          "correct_answer": "A",
+          "explanation_ja": "選択肢は全て動詞の過去形。Residents of Millier Streetが主語、city council membersが空所に入る動詞の目的語となる。その後にto不定詞が続く形になっているので、空所には、目的語の後にto不定詞を続けて意味を成す動詞が入る。encourage ~ to doで「~に···するよう促す」という意味なので、(A) encouragedを入れると、市議会議員に信号機設置の認可を促したとなって意味が通る。council「議会、評議会」、approve 「~を認可する、~を承認する」、installation 「設置」。(B) (C) (D) 〈動詞+人+to do〉という形にならない。"
+        },
+        {
+          "number": 110,
+          "part": 5,
+          "question": "At the meeting tomorrow, Jing Huang, vice president of sales, will discuss the company's ------- to achieve its sales goals.",
+          "choices": {
+            "A": "effortless",
+            "B": "efforts",
+            "C": "effortful",
+            "D": "effortlessly"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は名詞effort 「努力、取り組み」の変化形と派生語。空所の直前に所有格のcompany'sがあり、the company's が他動詞discuss 「~について話し合う、~を話題として取り扱う」の目的語になると考えられるので、空所には名詞が入る。名詞の(B) efforts 「取り組み」が適切。vice president of sales 「営業担当本部長」、achieve 「~を達成する」、sales goal 「売り上げ目標」。(A) (C)形容詞。(D) 副詞。"
+        },
+        {
+          "number": 111,
+          "part": 5,
+          "question": "Chef Ferguson ------- mixed the spices during her cooking demonstration.",
+          "choices": {
+            "A": "extremely",
+            "B": "expertly",
+            "C": "tightly",
+            "D": "finely"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は全て副詞。空所に入る副詞は直後の述語動詞mixedを修飾すると考えられる。(B) expertly 「巧みに、専門家の手腕で」を入れると、プロの料理人が調理実演で巧みな技術を見せたということになって、意味が通る。demonstration「実演、実地講習会」。(D) finelyは「上品に、繊細に」といった意味もあるが、動詞mixedを修飾する語として合わない。"
+        },
+        {
+          "number": 112,
+          "part": 5,
+          "question": "To receive a parking pass, you must submit a ------- request to your supervisor.",
+          "choices": {
+            "A": "formalize",
+            "B": "formally",
+            "C": "formality",
+            "D": "formal"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "選択肢は形容詞formal 「正式な」と派生語。主語はyou、述語動詞はmust submit で a requestがその目的語になると考えられる。名詞request 「依頼(書)」を修飾する形容詞の(D) formal 「正式な」が適切。parking pass 「駐車許可証」、supervisor「上司」。(A) 動詞の原形または現在形。(B) 副詞。名詞を修飾しない。(C) 名詞。形容詞的に使われることもあるが、意味が通らない。"
+        },
+        {
+          "number": 113,
+          "part": 5,
+          "question": "The customer survey results show that there are ------- issues that need to be addressed.",
+          "choices": {
+            "A": "faithful",
+            "B": "numerous",
+            "C": "classical",
+            "D": "rapid"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は全て形容詞の働きをする語。主語はThe customer survey resultsで、述語動詞はshow。showに続く thatが導く節はshowの目的語であり、「対応される必要がある···問題があること」という意味。空所の語は続く名詞issues を修飾している。(B) numerous 「非常に多くの」を入れると、顧客調査の結果は、対応を必要とする非常に多くの問題があることを示す、ということになって意味が通る。customer survey「顧客調査、顧客アンケート」、issue「問題(点)」、address 「~に対応する、~に取り組む」。"
+        },
+        {
+          "number": 114,
+          "part": 5,
+          "question": "Ms. Liu requested that her mail be ------- to the New York office during the month of June.",
+          "choices": {
+            "A": "forward",
+            "B": "forwards",
+            "C": "forwarded",
+            "D": "forwarding"
+          },
+          "correct_answer": "C",
+          "explanation_ja": "動詞forward 「~を転送する」の適切な形を選ぶ。request that (should) doで、「~が···するように要請する」という意味。that節内の主語は her mail 「彼女宛ての郵便物」なので、「郵便物が転送される」と受動態にする必要がある。よって、過去分詞の (C) forwarded が適切。(A)原形または現在形。(B)三人称単数現在形。(D) 現在分詞または動名詞。be動詞に続けられるが、能動態になるので意味が通らない。"
+        },
+        {
+          "number": 115,
+          "part": 5,
+          "question": "Supeck Legal is closed while the sprinkler system is being replaced ------- the building.",
+          "choices": {
+            "A": "into",
+            "B": "to",
+            "C": "throughout",
+            "D": "among"
+          },
+          "correct_answer": "C",
+          "explanation_ja": "選択肢は全て前置詞の働きをする語。文頭からclosedまでが主節。while以下が従属節であり、「建物------スプリンクラーシステムが交換されている間」という意味。(C) throughout 「~の全体にわたって、~の隅から隅まで」を入れると、建物全体のスプリンクラーシステムの交換工事が行われる間は休業する、ということになって意味が通る。legal 「法律の」、sprinkler system 「スプリンクラーシステム、自動消火装置」、replace「~を交換する」。(A) 「~の中へ」という動作を示すため不適切。in 「~の中で」なら可。(D) amongの後には複数形の名詞か集合名詞が続く。"
+        },
+        {
+          "number": 116,
+          "part": 5,
+          "question": "Gabary Ltd. decided to expand its marketing staff, so salaries for newly hired employees are ------- high.",
+          "choices": {
+            "A": "reasonably",
+            "B": "reasonable",
+            "C": "reasons",
+            "D": "reasoned"
+          },
+          "correct_answer": "A",
+          "explanation_ja": "salaries 以下は「新規採用の従業員の給料は―――高い」という意味で、空所に何も入れなくても文として成り立つので、空所には修飾語が入る。直後の形容詞highを修飾する、副詞の(A) reasonably 「道理にかなって、もっともなことに」が適切。expand 「~を拡張する、~を増強する」、hire 「~を雇う、~を採用する」。(B) 形容詞。be動詞に続いて補語の役割を果たすことはあるが、空所の後ろにも形容詞があるため不適切。(C) 名詞の複数形、または動詞 「~を推論する」の三人称単数現在形。(D)形容詞、もしくは動詞の過去形または過去分詞。"
+        },
+        {
+          "number": 117,
+          "part": 5,
+          "question": "Ms. Baek needs to sign the standard ------- to start working as an operations consultant.",
+          "choices": {
+            "A": "reference",
+            "B": "advice",
+            "C": "format",
+            "D": "agreement"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "選択肢は全て名詞の働きを持つ語。文頭からsignまでは「Baekさんは署名する必要がある」という意味で、the standardが動詞signの目的語になると考えられる。to以下は、「オペレーション・コンサルタントとして働き始めるために」という意味。(D) agreement 「契約書、合意」を入れると、その仕事を始めるために契約書に署名しなければならないとなって、意味が通る。standard「標準的な、基本の」、operations consultant 「オペレーション [業務、運営] コンサルタント」。(A) 働き始める際に署名する書類としてreferenceは不自然。(C) formatは書類などの判型や体裁を意味するのでsignの目的語として不適切。"
+        },
+        {
+          "number": 118,
+          "part": 5,
+          "question": "Companies relocating ------- headquarters to Burton County must submit a proposed timeline for the move.",
+          "choices": {
+            "A": "them",
+            "B": "their",
+            "C": "themselves",
+            "D": "theirs"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は全て人称代名詞。文頭からCountyまでがこの文の主語で、relocating headquarters to Burton County が名詞 Companies を後ろから修飾している。 headquarters が現在分詞relocatingの目的語と考えられるので、名詞headquarters 「本社」にかかる所有格の(B) their 「それらの」が適切。relocate 「~を移転させる」、county 「郡」、proposed 「提案されている」、timeline 「スケジュール表」。(A) 目的格。(C)再帰代名詞。(D) 所有代名詞。"
+        },
+        {
+          "number": 119,
+          "part": 5,
+          "question": "Although a date has not been -------, the Culvert Silver Line is expected to resume operations next year.",
+          "choices": {
+            "A": "positioned",
+            "B": "perfected",
+            "C": "specified",
+            "D": "amplified"
+          },
+          "correct_answer": "C",
+          "explanation_ja": "選択肢は全て過去分詞。空所はhas not beenに続くので、現在完了形の受動態になる。カンマの後がこの文の主節で、「Culvert Silver線は、来年、運行を再開する見込みだ」という意味。空所に(C) specified 「明示されて、指定されて」を入れると、文頭からカンマまでが「日付は明示されていないが」となって、意味が通る。line「鉄道の路線」、be expected to do「~する見込みである」、resume「~を再開する」、operation「運行、営業」。(A) 物の位置を表す語なので、日付の設定には用いられない。"
+        },
+        {
+          "number": 120,
+          "part": 5,
+          "question": "Operating at a ------- of 100 sheets per minute, the Nobia XLR is one of the fastest photocopiers on the market.",
+          "choices": {
+            "A": "period",
+            "B": "rate",
+            "C": "distance",
+            "D": "page"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は全て名詞の働きをする語。カンマの後は、「Nobia XLRは市場で最も高速のコピー機の一つだ」という意味。文頭からカンマまでは現在分詞Operatingに導かれる分詞構文で、(B) rate 「速度、進度」を入れると、「(Nobia XLRは)1分間に100枚の速度で作動して」となって、意味が通る。operate 「(機械などが)作動する」、photocopier 「コピー機」、on the market 「市場に出ている、販売されている」。"
+        },
+        {
+          "number": 121,
+          "part": 5,
+          "question": "Dr. Cheon is ------- reluctant to accept new patients at this time given his current caseload.",
+          "choices": {
+            "A": "understandably",
+            "B": "understandable",
+            "C": "understanding",
+            "D": "understood"
+          },
+          "correct_answer": "A",
+          "explanation_ja": "選択肢は動詞understand 「~を理解する」の変化形や派生語。given his current caseloadは 「現在の患者受け入れ件数を考慮すると」という意味。空所に何も入れなくても文として成り立つので、空所には修飾語が入る。空所の直後の形容詞reluctant 「乗り気でない」を修飾する副詞の(A) understandably 「理解できるほど、当然ながら」が適切。Dr. Cheon is understandably reluctantで、「Cheon医師は当然ながら消極的だ」という意味になる。be reluctant to do 「~することに気が進まない」、accept「~を受け入れる」、given「~を考慮すると」、caseload 「(病院・裁判所などの)受け入れ[取り扱い]件数」。(B) 形容詞、(C) 現在分詞または動名詞、もしくは名詞、(D)過去形または過去分詞。いずれの選択肢もbe動詞に続く可能性はあるが、後ろに形容詞を続けて意味を成さない。"
+        },
+        {
+          "number": 122,
+          "part": 5,
+          "question": "------- customer will receive a free gift with any purchase at Trayton Tools on its opening day.",
+          "choices": {
+            "A": "Certain",
+            "B": "All",
+            "C": "Few",
+            "D": "Each"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "選択肢は全て形容詞の働きを持つ語。直後にある名詞のcustomer 「顧客」を適切に修飾するものを選ぶ。customer が単数形なので、単数名詞を修飾できる(D) Each 「それぞれの」が適切。with any purchaseは「何らかの購入で」という意味。tool 「工具」、opening day 「開店初日」。(A) 可算名詞の単数形を修飾する場合は、a certain ~のようになる。(B) 可算名詞の場合は複数形を修飾するので、All customersなら可。(C) 単数形の名詞は修飾しない。"
+        },
+        {
+          "number": 123,
+          "part": 5,
+          "question": "The Elevpro jacket features an adjustable hood for extra ------- against cold weather.",
+          "choices": {
+            "A": "protect",
+            "B": "protection",
+            "C": "protector",
+            "D": "protected"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は動詞protect 「~を守る」と変化形や派生語。主語は The Elevpro jacket、述語動詞はfeaturesでan adjustable hoodがその目的語。for以下は「寒い天候に対する特別の のための」という意味であり、直前の名詞句an adjustable hood 「調節可能なフード」を修飾する。前置詞forの目的語となり、形容詞extra 「追加の、特別の」に修飾される名詞の(B) protection 「防護」が適切。特別に防寒性を高めるための調節可能なフードという特徴を説明する内容となる。feature 「~を特徴とする」。(A) 原形または現在形。(C) 名詞だが、意味が通らない。(D) 過去形または過去分詞。"
+        },
+        {
+          "number": 124,
+          "part": 5,
+          "question": "The reforestation plan is proceeding smoothly, although the organizers ------- some minor issues in the early stages.",
+          "choices": {
+            "A": "concluded",
+            "B": "accomplished",
+            "C": "earned",
+            "D": "encountered"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "選択肢は全て動詞の過去形。文頭からカンマまでが主節で、「森林再生計画は順調に進んでいる」という意味。従属節は「主催者たちは初期段階において幾つかの小さな問題 」という意味で反意を表す接続詞although 「~ではあるが」に導かれているので、初期に都合の悪いことが起きたと考えられる。(D) encountered 「~に遭遇した」を入れると、意味が通る。reforestation 「森林の再生」、proceed 「進む」、smoothly「円滑に、順調に」、organizer 「主催者、実行委員」、minor 「小さな、重大ではない」、issue 「問題(点)」。"
+        },
+        {
+          "number": 125,
+          "part": 5,
+          "question": "The institute's directors have decided to reinvest the budget surplus ------- spending the extra money.",
+          "choices": {
+            "A": "instead of",
+            "B": "paid for",
+            "C": "apart from",
+            "D": "offers to"
+          },
+          "correct_answer": "A",
+          "explanation_ja": "文頭からsurplusまでは「協会の理事たちはその予算剰余を再投資することを決定した」という意味。ここまでで文として成り立つので、空所以下は修飾語句となる。空所に続く spending 以下は「その余分な金を使うこと」という名詞句なので、前置詞の働きを持つ (A) instead of 「~でなく、~の代わりに」を入れると意味も通る。the extra money は the budget surplusの言い換えと考えられる。institute「協会、専門学校」、director 「理事、管理者」、reinvest「~を再投資する」、budget 「予算」、surplus 「余剰金、余り」、extra 「余分の」。(B) 動詞の過去形[過去分詞]+前置詞。過去分詞で名詞を形容詞的に修飾すると考えても意味が通らない。(C) 前置詞の働きを持つ語句だが、意味が通らない。(D) 動詞+前置詞、または名詞+前置詞。"
+        },
+        {
+          "number": 126,
+          "part": 5,
+          "question": "The clients could not agree on contract wording, and unfortunately, ------- could the lawyers.",
+          "choices": {
+            "A": "perhaps",
+            "B": "meanwhile",
+            "C": "neither",
+            "D": "rather"
+          },
+          "correct_answer": "C",
+          "explanation_ja": "文頭からwordingまでは「依頼人たちは契約書の文言について合意することができなかった」という意味。この否定の節に続けて、「~もまた(···)ない」の意味になる (C) neitherを入れると、依頼人たちが合意できなかった上に、弁護士たちも合意できなかったことになり、and unfortunately 「そして残念なことに」とも意味的につながる。neither could the lawyersの部分は倒置の形になっている。client 「依頼人、顧客」、agree on ~ 「~について合意する」、contract 「契約書」、wording 「文言、言い回し」。"
+        },
+        {
+          "number": 127,
+          "part": 5,
+          "question": "References must be ------- by a human resources specialist before a job candidate arrives for an interview.",
+          "choices": {
+            "A": "verifying",
+            "B": "verifies",
+            "C": "verified",
+            "D": "verification"
+          },
+          "correct_answer": "C",
+          "explanation_ja": "選択肢は動詞 verify 「~が正しいことを確認する」の変化形や派生語。空所の前にはbeがあり、後にはby a human resources specialist 「人事部の専門家によって」と続いている。過去分詞の (C) verifiedを入れて受動態にすると、文頭からspecialistまでが「照会先は、人事部の専門家によって確認されなければならない」となって、意味が通る。reference 「照会先、身元保証人」、human resources 「人事部」、candidate「応募者、候補者」。(A) 現在分詞または動名詞。be動詞に続いて進行形を作るが、空所に続く要素と合わず、また意味も通らない。(B) 三人称単数現在形。(D) 名詞。be動詞に続いて補語の役割を果たすが、ここでは意味が通らない。"
+        },
+        {
+          "number": 128,
+          "part": 5,
+          "question": "Mr. Lee ended the department meeting ------- in order to greet a prominent client.",
+          "choices": {
+            "A": "hardly",
+            "B": "widly",
+            "C": "immensely",
+            "D": "abruptly"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "選択肢は全て副詞。in order to以下は、「重要な顧客を出迎えるために」という目的を表す。(D) abruptly 「突然、唐突に」を入れると、Leeさんがその目的のためにいきなり会議を打ち切ったことになり、意味が通る。end 「~を終わらせる」、department 「部、課」、greet 「~にあいさつをする、~を出迎える」、prominent 「重要な、著名な」。"
+        },
+        {
+          "number": 129,
+          "part": 5,
+          "question": "The accounting software has been developed in an ------- fashion over the past two years.",
+          "choices": {
+            "A": "increment",
+            "B": "incrementally",
+            "C": "increments",
+            "D": "incremental"
+          },
+          "correct_answer": "D",
+          "explanation_ja": "選択肢は名詞increment 「増大、増加」と変化形や派生語。空所の直前に不定冠詞anがあり、直後に名詞fashion 「やり方」があるので、名詞を修飾する形容詞の(D) incremental 「少しずつ増大する」が適切。in an incremental fashionで、副詞のincrementally 「少しずつ増大して」と同様の意味になる。accounting 「会計」、develop「~を開発する、~を発展させる」。(A) 名詞。(B)副詞。(C)名詞。"
+        },
+        {
+          "number": 130,
+          "part": 5,
+          "question": "The document outlines possible ------- of building without a permit in the municipality.",
+          "choices": {
+            "A": "adjustments",
+            "B": "consequences",
+            "C": "alignments",
+            "D": "designs"
+          },
+          "correct_answer": "B",
+          "explanation_ja": "選択肢は全て名詞。主語は The document、述語動詞は outlinesでpossible がその目的語と考えられる。文頭から空所までは「その文書は起こり得るを概説している」という意味。空所に続くof以下は「その自治体において許可なしに建築することの」という意味で、空所の名詞を後ろから修飾している。(B) consequences 「(必然的に生じる)結果」を入れると、その文書は無許可で建築をしたらどんなことが起こり得るかを述べている、ということになり意味が通る。outline 「~を概説する」、permit「許可証」、municipality「地方自治体」。"
+        }
+      ]
+    },
+    {
+      "part": 6,
+      "format": "passages",
+      "description": "長文穴埋め問題",
+      "passages": [
+        {
+          "passage_id": "P6-131-134",
+          "type": "instructions",
+          "passage_text": "Before replacing a cracked screen on a customer's mobile phone, always examine the phone thoroughly to identify additional issues, cosmetic or otherwise. This ------- [131] will ensure that we will not be held responsible for a feature that was already flawed. If you detect evidence of corrosion or moisture, make a note of it. ------- [132]. Also, make sure to check the key components. ------- [133] include the headphone jack, the microphone, the flashlight, the camera, and the volume controls. A checklist is available to guide you ------- [134] the process.",
+          "questions": [
+            {
+              "number": 131,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "device",
+                "B": "individual",
+                "C": "inspection",
+                "D": "skill"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "選択肢は全て名詞の働きを持つ語。空所を含む文は、「この は、すでに損傷を受けていた部分に関して当社が責任を問われることがないようにするためのものだ」という意味。直前の文では、ひび割れた携帯電話の画面を交換する前に、他の問題がないかどうか携帯電話を徹底的に調べるように指示されている。空所に(C) inspection 「検査」を入れると、This inspection 「この検査」が直前の文で述べられている徹底的な検査を表していることになり、文脈に合う。(A) (B) (D) いずれも文脈に合わない。"
+            },
+            {
+              "number": 132,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "We will contact the customer soon.",
+                "B": "This is likely a sign of water damage.",
+                "C": "Hold the button down for five seconds.",
+                "D": "The two pieces may not be missing."
+              },
+              "correct_answer": "B",
+              "explanation_ja": "空所の直前の文に、「腐食や湿り気の形跡を発見した場合は、それを記録してください」という指示がある。(B)を入れると、Thisが前文のevidence of corrosion or moisture 「腐食や湿り気の形跡」を指し、それが何かを説明する文となるので適切。a sign of ~ 「~の跡」、water damage「水による損傷」。(A) 検査手順の概要を説明する流れの中では、特定の顧客と連絡を取るという内容は、唐突で文脈に合わない。(C) 具体的な手順の一つを説明する内容だが、the buttonが指すものが不明で、続く文ともつながらない。(D) The two pieces が指すものが不明。"
+            },
+            {
+              "number": 133,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "Others",
+                "B": "Whichever",
+                "C": "Many",
+                "D": "These"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "空所を含む文は、「 は、ヘッドホン差し込み口、マイク、ライト、カメラ、音量調節ボタンを含む」という意味で、空所に入る話がこの文の主語になる。直前の文でチェックするようにと述べられているthe key components 「主要部品」を受ける、(D) These 「これら」が適切。(A) (B) (C) いずれも文脈に合わない。"
+            },
+            {
+              "number": 134,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "onto",
+                "B": "under",
+                "C": "beyond",
+                "D": "through"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "選択肢は全て前置詞の働きを持つ語。空所を含む文の前までに、ひび割れた画面の交換前に必ず、携帯電話を徹底的に検査すること、ヘッドホン差し込み口やマイクなどの主要部品をチェックすることなどが指示されている。(D) through 「~を通して、~の最初から最後まで」を入れると、空所を含む文が「あなたをその手順を通して案内する(手順全体を案内する)ために、チェックリストが用意されている」という意味になり、適切。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P6-135-138",
+          "type": "press release",
+          "passage_text": "SEOUL (19 August)—Korean carmaker Hwan Automotive has announced the release of its first all-electric vehicle in North America. The Nalgae electric vehicle ------- [135] available in Hwan Automotive showrooms in the United States and Canada beginning in May of next year. The Nalgae has been on the market in Asia for more than two years. ------- [136] will continue to be manufactured in Seoul while a new assembly plant is built in Calgary. A dedicated battery manufacturing complex is also slated for construction near the plant. ------- [137]. Residents are looking forward to this development.\n\n\"This is our biggest ------- [138] ever outside of Asia,\" stated Hwan Automotive CEO Do-Yun Park. \"We are very excited about introducing the Nalgae to the North American market.\"",
+          "questions": [
+            {
+              "number": 135,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "will be",
+                "B": "can be",
+                "C": "was going to be",
+                "D": "would have been"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "動詞beの適切な形を選ぶ。空所を含む文は、「その Nalgae電気自動車は、アメリカとカナダにあるHwan 自動車社のショールームで、来年5月から購入可能 」という意味。来年5月からのことなので、未来を表す(A) will be が適切。(B) 「購入できる可能性がある」といった意味になる。これから大々的に販売していくことを説明する公式発表において「購入できる可能性がある」と不確定な表現をするのは不自然。(C) 過去における予定、(D) 過去に対する推量を表す。いずれも、来年5月のことを表すのに不適切。"
+            },
+            {
+              "number": 136,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "It",
+                "B": "Both",
+                "C": "Either",
+                "D": "Those"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "空所を含む文は、「 は引き続きソウルで製造される予定だが、その一方でカルガリーに新たな組立工場が建設される」という意味。空所には、直前の文のThe Nalgaeを受ける代名詞の(A) It「それ」が適切。(D) 製造される車両は複数だが、前文のThe Nalgaeは単数形で車種を表しており、Those 「それら」で受けることはできない。"
+            },
+            {
+              "number": 137,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "A prototype vehicle was on exhibit at the Beijing car show last year.",
+                "B": "Hwan Automotive has won awards for its innovative technology.",
+                "C": "Premium options are available at additional cost.",
+                "D": "Altogether, the expansion is expected to create 5,500 new jobs."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "空所直前の2文で、Nalgae 電気自動車のために新たな組立工場と専用のバッテリー製造コンビナートがカルガリーに建設される旨が述べられており、直後の文では、住民がこの開発を心待ちにしていると述べられている。それらの工場を合わせると新たな雇用が多く生み出されるという内容の(D)を入れると、前後が自然につながる。altogether 「全部で、総計で」、expansion「拡張」。(A) prototype 「プロトタイプ、試作品」、exhibit「展示」。(B) innovative 「革新的な」。(C) premium「高級な、上質の」、at additional cost 「追加料金で」。"
+            },
+            {
+              "number": 138,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "promotion",
+                "B": "investment",
+                "C": "celebration",
+                "D": "performance"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "選択肢は全て名詞。Hwan自動車社が完全電動式自動車を新たに北米で販売すること、カルガリーに組立工場と専用のバッテリー製造コンビナートを建設予定である旨が述べられている。空所を含む文は、「これは、当社のアジア外での過去最大のだ」という意味。この文のThisは北米電気自動車を製造販売するために工場を建設する市場でNalgae investment 「投資」を入れると意味が通る。(A) (C) (D) いずれも文脈に合わない。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P6-139-142",
+          "type": "e-mail",
+          "passage_text": "To: Lucinda Richards <lrichards@mailcrate.co.uk>\nFrom: Film Insiders <digital@filminsiders.com>\nSubject: Virtual screening\nDate: 10 December\n\nThis message is a reminder that you have claimed a free ticket to an exclusive virtual screening of So Then They Walked. The film becomes available to ------- [139] on our streaming platform at 6 P.M. GMT on Thursday, 12 December. You ------- [140] four hours to watch the film. Please make sure the mobile phone number linked to your account is correct so that we can send you an access code. ------- [141].\n\nWe are pleased that you are interested in joining us ------- [142] this event. We are excited to share this movie with you and hope you enjoy it as much as we do!",
+          "questions": [
+            {
+              "number": 139,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "shows",
+                "B": "actors",
+                "C": "benefits",
+                "D": "viewers"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "選択肢は全て名詞の複数形。1~2行目から、映画の限定上映会がインターネット上で行われることになっていて、このEメールはその無料チケットを獲得した人への連絡であると分かる。空所を含む文は、「この映画は当社のストリーミング用プラットフォームで、グリニッジ標準時 12月12日木曜日の午後6時に、に対して利用可能になる」という意味。空所には映画が利用可能になる対象が入るので、(D) viewers 「視聴者」が適切。(B) 1~2行目より、このEメールは映画の上映会に申し込んだ人に送られていると考えられるが、この映画の上映会が俳優のみを対象として実施されるというのは不自然。"
+            },
+            {
+              "number": 140,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "had",
+                "B": "will have",
+                "C": "have had",
+                "D": "will be having"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "動詞 haveの適切な形を選ぶ。〈have+時間+to do)で「···するのに〜かかる [要する]」という意味になる。映画の上映はこれから行われるので、未来を表す (B) will have が適切。空所を含む文が「その映画を鑑賞するのに4時間かかるだろう」という意味になる。(A)過去形、(C)現在完了形。いずれもまだ始まっていないことを表すには不適切。(D) 未来進行形。このhaveは動作でなく状態を表しているので、未来のある時点で進行中の動作を表す未来進行形は不適切。"
+            },
+            {
+              "number": 141,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "You can pick up your files any time before Thursday.",
+                "B": "Call our customer service department to expedite your order.",
+                "C": "You need to enter the code before the screening begins.",
+                "D": "Films are a source of entertainment as well as information."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "空所直前の文で、「こちらからアクセスコードを送れるように、あなたのアカウントに紐付けられた携帯電話番号が正しいことを確認してください」と述べられている。(C)を入れると、the codeが前文のan access codeを指し、映画上映前に携帯電話に送信されたアクセスコードを入力する必要があるという説明になるので、流れとして自然。(A) your filesが映画のデータを指すとしても、木曜日の午後6時にストリーミングが開始される映画の説明として不適切。pick up~「~を受け取る、~を入手する」、any time 「いつでも」。(B) expedite 「~の処理を速める」。"
+            },
+            {
+              "number": 142,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "for",
+                "B": "amid",
+                "C": "upon",
+                "D": "despite"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "選択肢は全て前置詞の働きを持つ語。join ~ for···で「···について〜に加わる」、すなわち「~と一緒に···に参加する」という意味になる。よって、(A) forを入れると「私たちと一緒にこのイベントに参加する」となって意味が通る。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P6-143-146",
+          "type": "letter",
+          "passage_text": "Dear Scarborough residents,\n\nWe want to remind you that the city of Scarborough aims to become an Avian Night Neighborhood. This is a special ------- [143] given to communities that are working to eliminate unnecessary bright lighting.\n\nYou may be wondering why this initiative is ------- [144]. Many birds migrate through this area at night, and bright lighting can interfere with their navigation.\n\nWe can all help by turning off nonessential lights from midnight to 6:00 A.M. ------- [145]. Many shops have bright floodlights illuminating their storefronts even when they are closed. If you must have a light on at night, you should direct it downward and away from trees where birds are likely nesting. ------- [146], use motion-sensor lights that are on only when absolutely needed.\n\nThank you!\n\nDiane Slusky\nCommunications Department\nCity of Scarborough",
+          "questions": [
+            {
+              "number": 143,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "distinct",
+                "B": "distinctive",
+                "C": "distinctively",
+                "D": "distinction"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "選択肢は形容詞 distinct 「はっきりした、明瞭な」と派生語。空所の前には冠詞aと形容詞special 「特別な」があり、後ろには過去分詞のgivenが続いているので、空所の語はそれらに修飾される名詞と考えられる。(D) distinction 「特異性、栄誉」が適切。(A) (B) 形容詞。(C) 副詞。"
+            },
+            {
+              "number": 144,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "important",
+                "B": "familiar",
+                "C": "challenging",
+                "D": "experimental"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "選択肢は全て形容詞。空所を含む文は、「あなたはこの新しい取り組みがなぜのか、不思議に思っているかもしれない」という意味。直後の文で、多くの鳥が夜間にこの地域を飛行するが、まぶしい照明がその妨げになる可能性がある旨が述べられている。(A) important 「重要な」を入れると、不必要な夜間の明かりをなくすことが鳥の生態を守るために重要という意味になり、文脈に合う。(B) (C) (D) いずれも文脈に合わない。"
+            },
+            {
+              "number": 145,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "A trail map is recommended.",
+                "B": "We can supply them if needed.",
+                "C": "This practice applies to businesses too.",
+                "D": "It depends on the particular species."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "空所直前の文で、住民は、深夜0時から午前6時まで不必要な明かりを消すことで鳥の生態を守ることに協力できる旨が述べられている。空所に(C)を入れると、This practice 「この慣行」が深夜0時から午前6時まで不必要な明かりを消すことを指し、店舗なども同様の行いを実施してほしいということになる。さらに空所の後では、閉店中も投光照明がついている店舗が多いことと、夜間も明かりをつけておきたい場合の次善の策(投光照明は下向きにする、木の方に照明を向けない)が述べられているので、自然な流れと言える。practice「慣行」、apply to~ 「~に適用される」、business「企業、店」。(A) trail map 「トレイルマップ(特定の地域を動き回るために作成された地図)」。(B) themが前文のnonessential lightsを指すとすると、不必要な明かりを供給するという内容はつじつまが合わない。if needed 「必要なら」。(D) depend on~ 「~に依存する、~次第である」、particular「特定の」、species「(動植物の)種、種類」。"
+            },
+            {
+              "number": 146,
+              "part": 6,
+              "question": "",
+              "choices": {
+                "A": "Additionally",
+                "B": "Consequently",
+                "C": "Nevertheless",
+                "D": "Interestingly"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "選択肢は全て副詞。「鳥たちの夜のための地域」を目指す上でスカーバラ市住民がどのようなことを実施すべきかが述べられており、空所の直前の文では、夜間も明かりをつける場合は、照明を下向きにして木々から離すよう呼び掛けられている。空所を含む文では、人感センサーライトの使用という別の手段が勧められているので、(A) Additionally 「加えて」が適切。(B) (C) (D) いずれも文脈に合わない。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part": 7,
+      "format": "passages",
+      "description": "読解問題",
+      "passages": [
+        {
+          "passage_id": "P7-147-148",
+          "type": "information",
+          "passage_text": "Name: Madeline Turner\nBest Crown Hair Salon\n11 Beauty Row\nBrisbane\n(07) 5550 7990\nAppointment: 4 August, 11:00 a.m.\nService: Wash, cut, blow-dry\nPlease notify us at least 24 hours in advance if you need to cancel, or you will be subject to a $25 fee.",
+          "questions": [
+            {
+              "number": 147,
+              "part": 7,
+              "question": "What is the purpose of the information?",
+              "choices": {
+                "A": "To remind a customer about an appointment",
+                "B": "To alert patrons to a grand opening",
+                "C": "To notify a stylist of a schedule change",
+                "D": "To advertise the services available at a salon"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "ヘッダー部分より、通知はBest Crown美容院によるものと分かる。には、氏名、予約日時、サービス内容といった顧客の予約に関する情報が書かれている。また、キャンセルの必要があれば、少なくとも24時間前に知らせないと、25ドルの料金がかかることが記されているので、予約について顧客に念押しすることが目的と考えられる。よって、(A)が正解。remind about ~「~に···について念押しする」。"
+            },
+            {
+              "number": 148,
+              "part": 7,
+              "question": "What detail is included?",
+              "choices": {
+                "A": "A price for a haircut",
+                "B": "A business's location",
+                "C": "A store owner's name",
+                "D": "A customer's phone number"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "ヘッダー部分のBest Crown Hair Salon という店名の下に、11 Beauty Row Brisbane と住所が書かれている。よって、(B)が正解。business 「店」、location 「所在地」。(A) 「25ドルの料金」と書かれているのは直前キャンセルの場合に支払う料金であり、ヘアカットの値段ではない。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-149-151",
+          "type": "e-mail",
+          "passage_text": "To: Fabrizio Cardozo <fcardozo@lichtmail.net>\nFrom: Marsha Beecham <mbeecham@greerhomegoods.com>\nDate: June 30\nSubject: RE: Order number 439-628\nAttachment: Instructions\n\nDear Mr. Cardozo,\n\nThank you for contacting us regarding order number 439-628. --- [1] ---. I see that your order was placed on June 23. --- [2] ---. The item you ordered was originally scheduled to ship out on June 25 for delivery to you by June 29. However, due to high demand, there has been a delay in fulfilling the order. --- [3] ---. To apologize for the inconvenience, we would like to offer you a $25 voucher toward a future order. --- [4] ---. Please see the attachment for instructions on how to apply the voucher.\n\nWe thank you for your patience.\n\nSincerely,\nMarsha Beecham, Customer Service Representative\nGreer Home Goods",
+          "questions": [
+            {
+              "number": 149,
+              "part": 7,
+              "question": "Why did Ms. Beecham send the e-mail?",
+              "choices": {
+                "A": "To respond to an inquiry",
+                "B": "To announce a new service",
+                "C": "To complain about a late order",
+                "D": "To ask that a form be completed"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "Eメールの署名より、送信者であるBeechamさんはGreer 家庭用品店の顧客サービス担当者と分かる。件名に RE: Order number 439-628とあり、1行目で、「注文番号 439-628に関して当店にご連絡くださりありがとうございます」と述べている。続く同1~4行目で、6月23日に受注後、6月25日に発送される予定だったが需要が高いために発送が遅れていることを説明している。よって、このEメールは顧客サービス担当者のBeechamさんが客の問い合わせに返答するために送ったものと判断できるので、(A)が正解。respond to ~「~に返答する」、inquiry 「問い合わせ」。"
+            },
+            {
+              "number": 150,
+              "part": 7,
+              "question": "What is the topic of the attached instructions?",
+              "choices": {
+                "A": "How to return an order",
+                "B": "How to request a refund",
+                "C": "How to update an account",
+                "D": "How to apply a credit"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "添付ファイルの名前は、Instructions 「説明書」。 4~5行目で、不便を掛けているおわびとして今後使える引換券を進呈することを伝え、続く同5~6行目で、Please see the attachment for instructions on how to apply the voucher、と述べている。よって、今後の支払いの際に利用できる引換券であるvoucherの利用方法をcredit 「付け、掛け(売り)、クレジット」を用いて表した(D)が正解。ここでのcreditは、店側が客のアカウントに付けた金額を指す。"
+            },
+            {
+              "number": 151,
+              "part": 7,
+              "question": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"The new expected date of arrival is July 5.\"",
+              "choices": {
+                "A": "[1]",
+                "B": "[2]",
+                "C": "[3]",
+                "D": "[4]"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "挿入文では新しい到着予定日が示されているので、元の到着予定日の記述に注目する。2~4行目で、注文品は当初は6月25日に発送されて6月29日までに顧客の元に届く予定だったが、需要が高いために発送が遅れていると述べられている。この直後の(C)[3]に挿入文を入れると、当初の予定日を説明する内容に続けて新しい到着予定日を述べることになり、流れとして適切。おわびとしての引換券について述べた同4~6行目とも自然につながる。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-152-153",
+          "type": "article",
+          "passage_text": "Business Briefs\n\nMEXICO CITY (25 June)—When the restaurant Tomoichi Sushi closed last month, Jordan Cohen made a quick decision. He purchased the recently vacated building in the Polanco neighborhood of Mexico City and decided to turn it into a bagel shop.\n\nMr. Cohen was raised in New York City, where he developed a love for bagels, ring-shaped rolls that are boiled before being baked, resulting in a chewy interior. Bagels are one of the city's most treasured culinary traditions.\n\nThe new shop, Lox On Bagels, opened this week. In addition to bagels and spreads, Lox On Bagels serves an assortment of breakfast sandwiches, specialty coffees, and smoothies.\n\n\"Bagels were the main staple of my childhood breakfast,\" Mr. Cohen says. \"It's my dream to make them a larger part of Mexican cuisine.\"",
+          "questions": [
+            {
+              "number": 152,
+              "part": 7,
+              "question": "According to the article, what is true about Mr. Cohen?",
+              "choices": {
+                "A": "He works in the construction industry.",
+                "B": "He owns many businesses.",
+                "C": "He was trained as a sushi chef.",
+                "D": "He grew up in New York City."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "1行目に、Mr. Cohen was raised in New York Cityとある。よって、was raisedをgrew up 「育った」と言い換えて表している(D)が正解。(A) 3~6行目で、最近空き物件となった建物への言及はあるが、Cohenさんがconstruction industry 「建設業界」で働いているという記述はない。"
+            },
+            {
+              "number": 153,
+              "part": 7,
+              "question": "What is indicated about Lox On Bagels?",
+              "choices": {
+                "A": "It will open at the end of July.",
+                "B": "It has received positive reviews.",
+                "C": "It is in a location that once housed another restaurant.",
+                "D": "It will export bagels to the United States."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "1~3行目に、「先月Tomoichiすし店が閉店したとき、Jordan Cohenは迅速な決定を下した」とあり、続く同3~6行目で、Cohenさんがその空き物件となった建物を購入してベーグル店にすることに決めたことが述べられている。このベーグル店とは1~2行目より、今週開店したLox Onベーグル店を指すと分かるので、このベーグル店は先月まで Tomoichi すし店があった場所にあると判断できる。よって、(C)が正解。location 「場所」、house「(場所・建物が)~にスペースを提供する」。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-154-156",
+          "type": "letter",
+          "passage_text": "Nakaima Industries\n104-1262, Makiku Yoshitsubo\nJoetsu-shi, Niigata\nJapan\n21 November\n\nKenneth Wallcroft\nWallcroft Pen Designs\n2284 Dufferin Street\nMarfa, Texas 79843\nUnited States of America\n\nDear Mr. Wallcroft,\n\nOur board of directors asked me to convey their compliments on your beautifully handcrafted fountain pens. Company President Asa Nakaima, who commissioned the pens to honor our board members, said your work surpassed his expectations.\n\nMost noteworthy was how you inscribed the initials of a different board member on each pen. Consequently, every writing implement is a personalized work of art to be cherished.\n\nMr. Nakaima is also grateful that our company's vice president, Chihiro Hirota, came up with the idea to have you create these gifts, which were distributed at the board's most recent meeting.\n\nBest regards,\nGwen Reger\nGwen Reger, Office Manager\nNakaima Industries",
+          "questions": [
+            {
+              "number": 154,
+              "part": 7,
+              "question": "What is the purpose of the letter?",
+              "choices": {
+                "A": "To praise an employee",
+                "B": "To thank a client for a gift",
+                "C": "To express appreciation for an artistic creation",
+                "D": "To place an order for promotional items"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "手紙は、Nakaima工業社の事務長Regerさんが、Wallcroft ペンデザイン社のWallcroftさんに宛てたもの。本文冒頭の1~2行目に、「当社の取締役会から、貴社の美しい手細工の万年筆に賛辞を伝えるように頼まれた」とある。続く同2~3行目で、Wallcroft ベンデザイン社の仕事ぶりが期待以上だったことに言及し、同5~6行目で、一点一点が大切にしたくなる芸術作品だと述べている。よって、手紙の目的は、Wallcroft ペンデザイン社が作った芸術的な万年筆に対して感謝を表すことであり、その万年筆を artistic creation 「芸術的な創作物」と表した(C)が正解。express 「~を表す、~を示す」、appreciation 「感謝」。"
+            },
+            {
+              "number": 155,
+              "part": 7,
+              "question": "What is mentioned about the pens?",
+              "choices": {
+                "A": "They were manufactured in Japan.",
+                "B": "They were presented during an official dinner.",
+                "C": "Each contains a different color of ink.",
+                "D": "Each includes a unique design feature."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "贈答品のペンについて、4~5行目から、ペンにはそれぞれ各取締役のイニシャルが刻まれていることが分かり、続く同5~6行目に、「一点一点の筆記用具が、大切にしたくなる、名入りの芸術作品となっている」と述べられている。よって、それぞれのペンが各取締役のイニシャルが刻み込まれた一点物であることをunique design featureと表した(D)が正解。feature「特徴」。"
+            },
+            {
+              "number": 156,
+              "part": 7,
+              "question": "What is suggested about Ms. Hirota?",
+              "choices": {
+                "A": "She gift wrapped the pens.",
+                "B": "She recommended Mr. Wallcroft's services.",
+                "C": "She is in charge of scheduling board meetings.",
+                "D": "She signed a contract with Mr. Wallcroft."
+              },
+              "correct_answer": "B",
+              "explanation_ja": "Hirotaさんとは、1行目より、Nakaima工業社の副社長と分かる。同1~2行目に、our company's vice president, Chihiro Hirota, came up with the idea to have you create these gifts とあり、このyouは手紙の受取手であるMr. Wallcroftが所属する Wallcroft ペンデザイン社を指す。この内容を、She recommended Mr. Wallcroft's services と表した(B)が正解。recommend 「~を推薦する、~を推奨する」。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-157-158",
+          "type": "text-message chain",
+          "passage_text": "Alan Ropp [1:06 P.M.]\nWhere are you? Weren't we supposed to meet at 1 o'clock to get decorations for the office party?\n\nCamille Saenz [1:07 P.M.]\nI'm outside Glinda's Books, the shop next to Parker Fashions.\n\nAlan Ropp [1:08 P.M.]\nOh, OK. I'm in the art supply store. Should I leave and try to find you?\n\nCamille Saenz [1:09 P.M.]\nNo, don't worry. I know exactly where the art supply store is. I'm walking over now.\n\nAlan Ropp [1:10 P.M.]\nGood. They have a roll of bright yellow paper here that we could use to make a banner. It would look very dramatic!",
+          "questions": [
+            {
+              "number": 157,
+              "part": 7,
+              "question": "Where most likely are Mr. Ropp and Ms. Saenz?",
+              "choices": {
+                "A": "In a theater",
+                "B": "In an art museum",
+                "C": "In a shopping center",
+                "D": "In an office building"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Roppさんの発言から、2人が飾りを買うために1時に会うことになっていたがまだ会えていないことが分かる。Saenzさんは「私はParkerファッション店の隣にあるGlinda's 書店の外にいる」と伝え、Roppさんは 「私は美術用品店の中にいる」と述べている。よって、2人は小売店舗が複数ある場所にいると判断できるので、(C)が正解。"
+            },
+            {
+              "number": 158,
+              "part": 7,
+              "question": "At 1:09 P.M., what does Ms. Saenz most likely mean when she writes, \"No, don't worry\"?",
+              "choices": {
+                "A": "She prefers to walk to the office.",
+                "B": "She has already made a brightly colored banner.",
+                "C": "Mr. Ropp will be reimbursed for any decorations he buys.",
+                "D": "Mr. Ropp should stay where he is."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "SaenzさんがGlinda's 書店の外にいると自分の居場所を教えたのに対し、Roppさんは自分は美術用品店の中にいると伝え、「ここを出てあなたを見つけるようにした方がよいか」と尋ねている。それに対して、Saenzさんは No, don't worry. 「いいえ、ご心配なく」と応答している。続けて、「私は美術用品店の場所が正確に分かる。今歩いて向かっている」と述べていることから、下線部のSaenzさんの発言は、Roppさんに今いる場所にとどまって自分を待っていてほしいと伝えているものと判断できる。よって、(D)が正解。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-159-160",
+          "type": "brochure",
+          "passage_text": "Certified Laundry Services\n\nSome health-care facilities believe managing their linen inventory on their premises is practical. However, the costs of handling large volumes of laundry can be high. Allow Certified Laundry Services to supply your sanitized textiles so that you can focus on your core business of patient care. We can schedule weekly or by-request laundry pickup with next-day delivery.\n\nContact us at 863-555-0119 to arrange a free consultation. We will create a detailed report listing the advantages of using our service, including lowering operating costs. We can compare the actual price-per-pound savings of allowing us to manage your laundry with doing your laundry in-house.",
+          "questions": [
+            {
+              "number": 159,
+              "part": 7,
+              "question": "For whom is the brochure most likely intended?",
+              "choices": {
+                "A": "Hotels",
+                "B": "Hospitals",
+                "C": "Beauty salons",
+                "D": "Manufacturing companies"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "冒頭の1~3行目で、一部の医療施設では施設構内でリネン製品を管理することが実用的だと考えていると述べ、大量の洗濯物を扱う費用は高額になり得ると続けている。そして、同3~4行目で 「Certified 洗濯サービス社に消毒済みの布製品の供給を任せてください」と売り込み、そのメリットとして「皆さんが本業である患者のケアに集中できる」と述べている。これらから、患者のケアを行う医療施設に向けて、自社の洗濯サービスを宣伝しているパンフレットだと判断できる。よって、(B)が正解。be intended for~ 「~のために作られている、~を対象としている」。"
+            },
+            {
+              "number": 160,
+              "part": 7,
+              "question": "What is indicated about the report?",
+              "choices": {
+                "A": "It will include client reviews.",
+                "B": "It will present new products.",
+                "C": "It will describe the region served.",
+                "D": "It will provide a cost-savings analysis."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "報告書については、1~2行目にWe will create a detailed reportとある。続く同2~3行目で、この報告書について「運営費の低減を含め、当社のサービスを使う利点を列挙」と説明されている。さらに続けて同3~4行目には、この会社を利用する場合と施設内で洗濯する場合の重量当たりの節約額を比較できるとある。よって、報告書ではこの会社のサービスを使う場合の費用を、そうでない場合と比較して見ることができると分かり、これらをcost-savings analysis 「費用節約の分析」と表した(D)が正解。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-161-163",
+          "type": "press release",
+          "passage_text": "FOR IMMEDIATE RELEASE\nContact: Hiari Mensah, h.mensah@sandarr.com\nSandarr Announces Exciting New Addition to Its Lineup\n\nLOS ANGELES (May 9)—Anyone who has attended a meeting, presentation, or live music concert has most likely seen a Sandarr product in use. As an award-winning designer and producer of microphones and headsets, Sandarr is known for its quality.\n\nSandarr is pleased to introduce the XTT, a microphone that offers studio-quality sound yet is affordable for the general consumer. For those who work remotely or operate a home-based business, it is essential to have high-quality sound during audio and video conferences so as to be heard clearly by colleagues or clients. Created exclusively for this type of application, the XTT is perfectly suited to all home office environments.\n\nBased on years of research at Sandarr labs, the XTT has been designed to enhance the audio signal quality. The XTT is easily connected to a laptop or desktop computer. The microphone is mounted on a sturdy stand to prevent wobbling.\n\nFor further information and pricing, contact Hiari Mensah at h.mensah@sandarr.com or visit www.sandarr.com.",
+          "questions": [
+            {
+              "number": 161,
+              "part": 7,
+              "question": "What kind of company is Sandarr?",
+              "choices": {
+                "A": "A professional recording studio",
+                "B": "A designer of business software",
+                "C": "An event management company",
+                "D": "A manufacturer of audio equipment"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "冒頭の1~2行目で、Sandarr社の製品は会議やプレゼン、音楽コンサートでよく使用されていることを挙げ、続く同2~4行目にAs an award-winning designer and producer of microphones and headsets, Sandarr is known for its quality.とある。よって、producerをmanufacturer、microphones and headsetsをaudio equipment と表した(D)が正解。"
+            },
+            {
+              "number": 162,
+              "part": 7,
+              "question": "According to the press release, who are the intended users of the XTT?",
+              "choices": {
+                "A": "Researchers who record outdoors",
+                "B": "Singers who perform live on stage",
+                "C": "Announcers who work at radio stations",
+                "D": "Workers who join meetings from home"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "XTTについては、1~2行目で、「スタジオ品質の音を提供しつつも一般消費者にとって手頃な価格のマイク」と説明されている。続く同2~4行目で、遠隔で勤務する人や在宅ビジネスを行う人にとって、オーディオ・ビデオ会議で高い音質を確保することが必要だと述べ、同4~6行目には、「この種の利用に特化して作られているため、XTTはあらゆるホームオフィス環境に完璧に適合する」とある。これらから、XTTというマイクは仕事で自宅から会議に参加する人に向けた製品だと判断できるので、(D)が正解。intended 「意図された、狙った」。"
+            },
+            {
+              "number": 163,
+              "part": 7,
+              "question": "The word \"mounted\" in paragraph 3, line 3, is closest in meaning to",
+              "choices": {
+                "A": "climbed",
+                "B": "installed",
+                "C": "reached",
+                "D": "tested"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "1~2行目で、XTTがオーディオ信号の品質を高めるように設計されていること、同2~3行目で、ノートパソコンやデスクトップコンピューターに簡単に接続できることが述べられている。続く同3行目の該当の語を含む文は、「ぐらつきを防ぐために、マイクは頑丈なスタンドに････いる」という意味であり、前文に続いてXTTの特長が書かれていると考えられる。(B) installed 「据え付けられて」が正解。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-164-167",
+          "type": "letter",
+          "passage_text": "Lonterna Services\nwww.lonterna.ca\n\n14 January\n\nAudra Bain\nOwner, Volta Ten\n130 Quillen Street, Suite 265\nToronto, Ontario M5X 1E3\n\nDear Ms. Bain,\n\nI am pleased to introduce myself as president of Lonterna Services, a Toronto-based social media marketing firm. For the last two years, we have been identified by Vanguard Monthly as a leader in social media publicity. Although Lonterna Services was established just four years ago, we have consistently outperformed regional firms that have been in business for over ten years. I am confident that we can help you achieve your marketing goals.\n\nAs you know, timing is crucial in your industry, and success often depends on disseminating product information to the public as quickly as possible. Catalogues and flyers may be inexpensive, but they can take weeks to reach potential customers. With a reliable social media team, you can ensure that news about your product will be seen by a large number of people within hours.\n\nOur clients range from fashion retailers to music distributors, but a handful of our team members have deep knowledge of the beverage industry. Their experience ensures that we can start planning a media campaign for you from day one without needing to learn the basics of your business. Please call or e-mail me and let me tell you about the exciting things we can do for you. My direct line is 416-555-0129, and my e-mail address is loh@lonterna.ca.\n\nSincerely,\nTrent Loh\nTrent Loh, President",
+          "questions": [
+            {
+              "number": 164,
+              "part": 7,
+              "question": "What most likely does Mr. Loh want Ms. Bain to do?",
+              "choices": {
+                "A": "Subscribe to Vanguard Monthly",
+                "B": "Hire his company as a contractor",
+                "C": "Publish an article about his company",
+                "D": "Apply for a marketing job at his company"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "署名と1~2行目より、Lohさんとは手紙の差出人でLonterna サービス社の社長と分かり、宛先部分より、BainさんとはVolta Ten社のオーナーと分かる。Lohさんは、2~5行目で自社の躍進に触れ、同5~6行目で「貴社がマーケティングの目標を達成するために当社が手伝える」と述べている。では、製品情報を広める手法について述べ、では、すぐにVolta Ten社向けのキャンペーンの計画を始められると述べて自分に連絡するよう連絡先を書いている。これらから、LohさんはBainさんに、マーケティング請負業者として自社を売り込んでいると判断できるので、(B)が正解。contractor「請負業者」。"
+            },
+            {
+              "number": 165,
+              "part": 7,
+              "question": "How long has Lonterna Services been in business?",
+              "choices": {
+                "A": "For one year",
+                "B": "For two years",
+                "C": "For four years",
+                "D": "For ten years"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "3~4行目に、Lonterna Services was established just four years agoとあり、この会社の設立は4年前と分かる。よって、(C)が正解。"
+            },
+            {
+              "number": 166,
+              "part": 7,
+              "question": "According to the letter, why is social media marketing so effective?",
+              "choices": {
+                "A": "It reaches the largest number of potential customers.",
+                "B": "It delivers information faster than other methods.",
+                "C": "It can be easily managed by traditional marketing agencies.",
+                "D": "It is less expensive than other methods."
+              },
+              "correct_answer": "B",
+              "explanation_ja": "1行目でtiming is crucialと述べ、続けて、できるだけ素早く製品情報を広めることの重要性を説いている。同2~3行目では、カタログやちらしだと伝達に時間がかかることを述べ、同4~5行目では、ソーシャルメディア・チームなら数時間以内に宣伝できると述べている。これらから、ソーシャルメディアでの広告が効果的なのは、製品情報の伝達速度が速いためと分かるので、(B)が正解。effective 「効果的な」。"
+            },
+            {
+              "number": 167,
+              "part": 7,
+              "question": "What kind of business most likely is Volta Ten?",
+              "choices": {
+                "A": "A fashion retailer",
+                "B": "A music distributor",
+                "C": "A magazine publisher",
+                "D": "A beverage producer"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "Lonterna サービス社のスタッフについて、1~2行目で、「数名のチームメンバーは飲料業界に関する深い知識がある」と述べ、同2~4行目で、そのメンバーの経験によってVolta Ten社の事業の基本を学ぶ必要なくすぐに同社向けのキャンペーンを計画できると続けている。よって、(D)が正解。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-168-171",
+          "type": "text-message chain",
+          "passage_text": "Marcus Angelo (6:19 P.M.)\nHi, Geraldo and Claudette. Could one of you bring the box of fabric samples to my apartment on your way home tonight? I forgot it.\n\nGeraldo Soria (6:20 P.M.)\nI will. I live around the corner from you. The samples for the HRE Sportswear line?\n\nMarcus Angelo (6:21 P.M.)\nYes. I think I left the box in my office. I'd like to go directly to the client's location tomorrow morning without having to go to the office. It is out of my way.\n\nGeraldo Soria (6:24 P.M.)\nI am in your office now. I don't see a box.\n\nClaudette Lymer (6:27 P.M.)\nIt is in the conference room. I took the samples to show during my video call with the cloth mill's management team.\n\nMarcus Angelo (6:28 P.M.)\nMake sure the label reads \"HRE Sportswear.\"\n\nGeraldo Soria (6:30 P.M.)\nGot it! You should see me in about 30 minutes.",
+          "questions": [
+            {
+              "number": 168,
+              "part": 7,
+              "question": "In what type of business do the writers most likely work?",
+              "choices": {
+                "A": "Packaging",
+                "B": "Videoconferencing equipment sales",
+                "C": "Clothing",
+                "D": "Sporting event planning"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Angeloさんが生地サンプルの箱を自宅に持ってきてもらえないか尋ねると、Soriaさんは、「HREスポーツウエアシリーズのサンプルか」と確認している。また、Lymerさんは、織物工場の管理チームにサンプルを見せたと発言している。これらから、書き手たちは衣料品を扱う仕事をしていると考えられるので、(C)が正解。"
+            },
+            {
+              "number": 169,
+              "part": 7,
+              "question": "What can be concluded about Mr. Angelo?",
+              "choices": {
+                "A": "He is on vacation.",
+                "B": "He is in a meeting.",
+                "C": "He has left the office for the day.",
+                "D": "He traveled out of town for business."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Angeloさんが、生地サンプルの箱を自宅に持ってきてもらえないかと尋ね、それを忘れてしまったと発言している。「執務室にその箱を置き忘れてしまったのだと思う」とも述べているので、Angeloさんはその日はすでにオフィスを退出したと判断できる。よって、(C)が正解。"
+            },
+            {
+              "number": 170,
+              "part": 7,
+              "question": "Why did Mr. Soria have trouble finding the box?",
+              "choices": {
+                "A": "Because Mr. Angelo took it home",
+                "B": "Because Ms. Lymer had moved it to a new location",
+                "C": "Because the clients have it",
+                "D": "Because it was sent to the cloth mill managers"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "Soriaさんが、Angeloさんの執務室に箱が見当たらないと述べたのに対し、Lymerさんが、「それは会議室にある」と箱がある場所を伝え、テレビ電話で見せるために持ち出したと述べている。よって、(B)が正解。have trouble doing 「~するのに苦労する」。location 「場所」。"
+            },
+            {
+              "number": 171,
+              "part": 7,
+              "question": "At 6:30 P.M., what does Mr. Soria most likely mean when he writes, \"You should see me in about 30 minutes\"?",
+              "choices": {
+                "A": "He will return to the office to see Ms. Lymer.",
+                "B": "He will arrive at the client meeting after Ms. Lymer.",
+                "C": "He plans to place a video call to Mr. Angelo.",
+                "D": "He expects to arrive at Mr. Angelo's apartment soon."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "生地サンプルの箱を Angeloさんの自宅まで持ってくるよう頼まれ、自分が持っていくと伝えたSoriaさんは、その箱を見つけ、下線部で「あなたは30分ほどで私に会えるはずだ」と発言している。このYouは Angeloさんを指し、Soriaさんは間もなくAngeloさんの自宅に着くことを伝えていると判断できるので、(D)が正解。expect to do 「~する見込みである」。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-172-175",
+          "type": "e-mail",
+          "passage_text": "To: Esme MacGregor <emacgregor@hamiltonrealestate.com>\nFrom: Stockton Office Solutions <sales@stocktonofficesolutions.com>\nDate: March 27\nSubject: Exciting news\n\nDear Member of the Stockton Office Solutions Family:\n\nDo the responsibilities of your employees require them to sit for long hours at a desk? Do they sometimes feel neck strain, and are their muscles tired and sore at the end of the day? Research shows that being too sedentary can potentially increase the risk of developing health problems. There's one very simple remedy, and that's more movement. --- [1] ---.\n\nNow there is a great solution: the Stockton Stand-and-Sit Desk. The easily adjustable height of our desk allows workers to alternate between standing and sitting throughout the day without interrupting daily tasks. --- [2] ---. Now they can move more while never losing productivity. In addition, the Stand-and-Sit Desk also helps improve energy and concentration, which can further enhance productivity. --- [3] ---.\n\nTo upgrade your office work spaces, visit our store today to see three different models of Stand-and-Sit Desks. --- [4] ---. Because your firm is a regular customer, we are pleased to offer you 25 percent off your purchase of these desks when you order a minimum of five. Visit our online store today at stocktonofficesolutions.com for all your office furniture needs!",
+          "questions": [
+            {
+              "number": 172,
+              "part": 7,
+              "question": "What is the purpose of the e-mail?",
+              "choices": {
+                "A": "To promote a new product",
+                "B": "To offer an employee discount",
+                "C": "To request customer feedback",
+                "D": "To introduce a new furniture department"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "Eメールの送信者はStockton オフィス・ソリューションズ社で、件名にExciting newsとある。長時間仕事で座りっぱなしでいることは健康上の問題を引き起こす危険性があり、その改善法はもっとたくさん動くことだと述べている。続く行目で、「今や、素晴らしい解決策がある。それはStockton立ち・座り兼用デスクだ」と切り出し、その後、仕事中に体を動かせるという特長を挙げている。店で立ち・座り兼用デスクを見てみるよう促し、常連客への割引の案内をしている。以上より、Eメールの目的はこの新製品の販売促進をすることだと考えられるので、(A)が正解。promote「~の販売を促進する」。"
+            },
+            {
+              "number": 173,
+              "part": 7,
+              "question": "What is NOT mentioned as a benefit of the Stand-and-Sit desk?",
+              "choices": {
+                "A": "Improved health",
+                "B": "Improved group work",
+                "C": "Better concentration",
+                "D": "Increased productivity"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "(A)については、座りっぱなしでいることは健康上の問題を引き起こす危険性を高める可能性があるがその改善法はもっとたくさん動くことだとあり、解決策として立ったり座ったりを容易にする立ち・座り兼用デスクが紹介されている。また、(C)と(D)については、「さらに、立ち・座り兼用デスクは活力や集中力を向上する助けにもなり、そのおかげで生産性をいっそう高めることができる」とある。グループ作業の改善に関する言及はないので、(B)が正解。"
+            },
+            {
+              "number": 174,
+              "part": 7,
+              "question": "What is suggested about Stockton Office Solutions?",
+              "choices": {
+                "A": "It has just opened a new store.",
+                "B": "It is currently recruiting sales staff.",
+                "C": "It provides free design consultations.",
+                "D": "It offers discounts to repeat customers."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "このEメールはStockton オフィス・ソリューションズ社が顧客に向けて送信しているものであり、Because your firm is a regular customer, we are pleased to offer you 25 percent off your purchase of these desks when you order a minimum of five.とあるので、常連客に割引を提供していると分かる。よって、(D)が正解。regular customerを (D) では repeat customer と表している。"
+            },
+            {
+              "number": 175,
+              "part": 7,
+              "question": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"However, being physically active is not easy when you're in front of a computer all day.\"",
+              "choices": {
+                "A": "[1]",
+                "B": "[2]",
+                "C": "[3]",
+                "D": "[4]"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "挿入文は、コンピューターに向かっている際に活発に体を動かすのは難しいということを述べたもの。反意を表すHowever で始まっているので、体を動かすことを勧める内容に続くと考えられる。従業員が長時間座って仕事をし、一日の終わりに筋肉が疲れたり痛んだりするか問い掛けている。座りっぱなしでいることが健康上の問題につながり得るという研究について述べ、「とても簡単な改善法が一つあり、それはもっとたくさん動くことだ」と述べている。この直後の(A)[1]に挿入文を入れると、体を動かすことは重要だが、一日中コンピューターの前にいると、活発に体を動かすのは簡単ではない、という自然な流れになる。physically「身体的に、肉体的に」。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-176-180",
+          "type": "Web page and e-mail",
+          "passage_text": "[Web page: Judith Kembel Designs + Email from Eric Wardza]",
+          "questions": [
+            {
+              "number": 176,
+              "part": 7,
+              "question": "What does Ms. Kembel mention about herself?",
+              "choices": {
+                "A": "She uses the latest design software.",
+                "B": "She specializes in a particular type of book.",
+                "C": "She teaches design classes occasionally.",
+                "D": "She secures most assignments through an agent."
+              },
+              "correct_answer": "B",
+              "explanation_ja": "ウェブページの1行目より、Kembelさんとはウェブページを運営している人物。自分がイラストレーターだと述べた後、「私はいろいろな技能を持っており、主としてミステリー小説の表紙を飾る絵で知られている」と説明している。よって、この内容をspecialize in~ 「~を専門にする、~を得意とする」とa particular type of book「特定の種類の本」を用いて表した(B)が正解。"
+            },
+            {
+              "number": 177,
+              "part": 7,
+              "question": "What is true about Mr. Wardza's book?",
+              "choices": {
+                "A": "It is the first part of a series.",
+                "B": "It has received positive reviews.",
+                "C": "It has been published previously.",
+                "D": "It is intended for children."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Wardzaさんとは、Eメールの送信者。「私は、数年前に出版した本の表紙をデザインしてくれるアーティストを探している」とあり、装丁を刷新して新版を発売したいと述べている。これらから、Wardzaさんの本は以前に出版されているものだと分かるので、(C)が正解。"
+            },
+            {
+              "number": 178,
+              "part": 7,
+              "question": "Why does Mr. Wardza mention a statistic?",
+              "choices": {
+                "A": "To estimate his book's revenue potential",
+                "B": "To offer a reason for wanting to hire Ms. Kembel",
+                "C": "To show why he prefers one publisher over another",
+                "D": "To propose a new study topic"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "WardzaさんとはEメールの送信者で、このEメールはKembelさんに宛てたもの。件名に Commission inquiryとあり、本の表紙をデザインするアーティストを探していると述べ、費用や時間の都合を知らせてほしいと依頼しているので、イラストレーターであるKembelさんに仕事の打診をしていると分かる。統計値については、「表紙で本を判断することはできないと人は言うが、私は80パーセントの人々がまさにそうしていることを示す研究論文を読んだ」と述べ、実際には8割の人が表紙で本を判断していると表紙の重要性を示唆している。よって、統計値に言及しているのは装丁を刷新したいからであり、その仕事をKembelさんに依頼するためだと考えられるので、(B)が正解。statistic「統計値、統計資料」。"
+            },
+            {
+              "number": 179,
+              "part": 7,
+              "question": "In the e-mail, the word \"capture\" in paragraph 1, line 4, is closest in meaning to",
+              "choices": {
+                "A": "gain",
+                "B": "propose",
+                "C": "summarize",
+                "D": "represent"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "Eメールを確認する。Wardzaさんは本の表紙を刷新するためにアーティストを探していることと、人が本を判断する際には表紙が重要な要素になるという情報を述べている。続く該当の語を含む文は、「本の新しい表紙は、私の本が新たな読者助けとなるかもしれない」という意味。つまりこの文では、刷新された表紙が新たな読者を得る助けになるだろうと、前文に続き仕事を依頼する理由を述べていると考えられる。よって、gain 「~を得る」が正解。"
+            },
+            {
+              "number": 180,
+              "part": 7,
+              "question": "What point of information does Mr. Wardza fail to include in his message?",
+              "choices": {
+                "A": "Point 1",
+                "B": "Point 2",
+                "C": "Point 3",
+                "D": "Point 4"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Kembelさんに仕事を依頼する際にEメールに入れるべき情報がウェブページに4点記されている。Wardzaさんが書いたEメールを確認すると、(A)項目1の企画と好みのスタイルの説明には、本の新版の新しい装丁という企画説明と述べている自分の好むスタイルについて考えがあって意見提供できることが当てはまる。(B)項目2のわくわくさせるイラストやデザイン要素については、Kembelさんの以前の作品を挙げて、「色鮮やかな動物のキャラクターたちがいる空想的な光景を思い描いている」と述べている点が当てはまる。(D)項目4の共同で行うプロセスへの同意には、「最終デザインを共同制作する際に意見を提供することができる」と述べていることが当てはまる。しかし、Kembelさんの契約要件を精査し、条件のページに載せた料金と支払条件を理解していることを示すという(C)項目3については、Please let me know the costと尋ねていることもあり、必要とされる情報を含んでいるとは言えないので、(C)が正解。fail to do 「~しない、〜し損なう」。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-181-185",
+          "type": "article and e-mail",
+          "passage_text": "[Article: Popular Show to Resume Filming + Email about Xiao-Ming Hu's availability]",
+          "questions": [
+            {
+              "number": 181,
+              "part": 7,
+              "question": "What is the purpose of the article?",
+              "choices": {
+                "A": "To provide an update about a television show",
+                "B": "To introduce a new streaming platform",
+                "C": "To profile the founder of a family business",
+                "D": "To review a popular film series"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "記事を確認する。テレビのヒットシリーズ「最高の息子」が第3シーズンに入るがファンは待たされるだろう、と書かれている。ドラマの視聴数の急上昇がRoscou社に次シーズン制作の資金提供を促したこと、出演者のスケジュール調整やそれによる脚本の書き直しの検討などについて触れている。そして、シーズン3の公開日の見通しが語られている。以上より、記事はあるテレビドラマについて最新情報を提供するのが目的と分かるので、(A)が正解。"
+            },
+            {
+              "number": 182,
+              "part": 7,
+              "question": "What most likely is Ms. Landry's profession?",
+              "choices": {
+                "A": "Scriptwriter",
+                "B": "Talent agent",
+                "C": "Set designer",
+                "D": "Camera operator"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "Landryさんとは、Eメールの受信者。送信者はFern Tree制作会社の制作部長のColtonさん。件名にXiao-Ming Hu's availability とあり、Huさんが「最高の息子」の第3シーズンでGuo Tzengの役をもう一度演じる都合がつくことに安堵している、と述べている。また、Huさんが12月下旬にマニトバ州チャーチルでの撮影に対応できるか知らせてほしいと述べている。これらの内容のEメールを受け取るLandryさんは、俳優Huさんの出演契約やスケジュールの管理をしている代理人だと考えられるので、(B)が正解。profession「職業」。"
+            },
+            {
+              "number": 183,
+              "part": 7,
+              "question": "When does Ms. Cotton expect filming to be completed?",
+              "choices": {
+                "A": "In April",
+                "B": "In June",
+                "C": "In August",
+                "D": "In December"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "Cottonさんとは、Eメールの送信者。Huさんが12月下旬の冬の屋外シーンの撮影に対応できるか尋ね、このシーンの撮影について、「予定されている最後のもの(シーン)」と述べているので、Cottonさんは12月に撮影が完了すると考えていると判断できる。よって、(D)が正解。"
+            },
+            {
+              "number": 184,
+              "part": 7,
+              "question": "What is most likely true about Fern Tree Productions?",
+              "choices": {
+                "A": "It is owned by Mr. Zhou.",
+                "B": "It specializes in documentaries.",
+                "C": "It received funding from Roscou.",
+                "D": "It has reduced its operating budget."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Eメールの内容から、署名にあるFern Tree制作会社は「最高の息子」の制作会社と考えられ、「この9月と10月に「最高の息子」の第3シーズンの撮影予定を組むことができた」とある。 記事では、「最高の息子」の視聴数が急上昇し、Roscou社の最高経営幹部が追加シーズンへの資金提供を認めたといういきさつが記されている。これらから、Fern Tree制作会社が第3シーズンの制作に入るにあたり、Roscou社から資金提供を受けたと考えられるので、(C)が正解。"
+            },
+            {
+              "number": 185,
+              "part": 7,
+              "question": "What can be concluded about Mr. Hu?",
+              "choices": {
+                "A": "He enjoys winter sports.",
+                "B": "He owns a home in Churchill.",
+                "C": "He is unavailable in September.",
+                "D": "He plays a leading role in Best Son."
+              },
+              "correct_answer": "D",
+              "explanation_ja": "Eメールの件名にXiao-Ming Hu's availabilityとHuさんの名前があり、HuさんがGuo Tzengの役をもう一度演じる都合がつくことに安堵したとある。Huさんが再演するというGuo Tzengについては、「最高の息子」について説明している記事に、「架空のTzeng財閥の創業者 Guo Tzengの生涯を中心としたドラマ」とあり、Guo Tzengは「最高の息子」での主役だと分かる。よって、(D)が正解。leading 「主役の」。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-186-190",
+          "type": "agenda, notice, and text-message chain",
+          "passage_text": "[Dovmart Executive Meeting Agenda + Employee Notice + Text message chain]",
+          "questions": [
+            {
+              "number": 186,
+              "part": 7,
+              "question": "According to the agenda, what aspect of Dovmart products concerns customers?",
+              "choices": {
+                "A": "Their prices",
+                "B": "Their quality",
+                "C": "Their ingredients",
+                "D": "Their availability"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "議題を確認する。「Dovmart社は食料雑貨をはじめとする商品を顧客の手元に届ける際の遅延を懸念している」とあり、顧客が苦情を述べていることが記されている。よって、Dovmart社の商品の安定的な供給について顧客を心配させていると分かるので、(D)が正解。aspect「側面」、concern 「~を心配させる、~を不安にさせる」。"
+            },
+            {
+              "number": 187,
+              "part": 7,
+              "question": "Whose proposal did company executives share with employees on May 10?",
+              "choices": {
+                "A": "Mr. Toye's",
+                "B": "Ms. Moreano's",
+                "C": "Mr. Gaburo's",
+                "D": "Mr. Yamada's"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "5月10日という日付はお知らせの冒頭にあり、その見出しには Attention, Dovmart Employees とあるので、このお知らせはDovmart社の従業員に宛てたものと分かる。Dovmart社サプライチェーンの従業員に対して有資格の長距離輸送トラックの運転手になるように研修するプログラムを提供することが書かれている。これは、Dovmart Executive Meeting Agenda と題された議題にある、「提案2: 配送運転手になるように従業員に研修を行う」に該当し、この提案はMoreanoさんによって出されていることが分かる。よって、同社役員会はMoreanoさんの提案を採択し、5月10日のお知らせで従業員に共有したと判断できるので、(B)が正解。"
+            },
+            {
+              "number": 188,
+              "part": 7,
+              "question": "What does the notice indicate about employees who complete the program?",
+              "choices": {
+                "A": "They will have opportunities to work overtime.",
+                "B": "They will need to take courses every year.",
+                "C": "They will earn more money.",
+                "D": "They will work overseas."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "お知らせを確認する。プログラムとは、従業員を有資格の長距離輸送トラックの運転手になるように研修するためのもの。長距離トラックの運転手になることの利点が述べられており、箇条書き3点目にEarn a substantially higher salary とある。よって、それを earn more money と言い換えた(C)が正解。"
+            },
+            {
+              "number": 189,
+              "part": 7,
+              "question": "What does the notice instruct interested employees to do?",
+              "choices": {
+                "A": "Sign up for a test",
+                "B": "Consult a schedule",
+                "C": "Visit the company's Web site",
+                "D": "Submit preferences for routes"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "お知らせを確認する。長距離輸送トラックの運転手になるためのプログラムの提供、運転手になることの利点、運転手の主な業務内容が書かれている。To learn more, log on to the Dovmart internal Web site and follow the program link.とあり、興味を持った従業員がさらに情報を得るためには、社内ウェブサイトにアクセスするように指示している。よって、(C)が正解。instruct~to do「~に···するように指示する」。"
+            },
+            {
+              "number": 190,
+              "part": 7,
+              "question": "What is most likely true about Mr. Radovich?",
+              "choices": {
+                "A": "He already has a commercial driver's license.",
+                "B": "He enrolled in a training program before May 15.",
+                "C": "He will begin a new job in Madison soon.",
+                "D": "He hired Ms. Ziff as a supply-chain associate."
+              },
+              "correct_answer": "B",
+              "explanation_ja": "Radovichさんとは、テキストメッセージのやりとりに名前のある人物。研修プログラムがほぼ終わり、商業用運転免許証の取得が待ち切れないと述べており、I even received a bonus when I joined!と発言している。このbonusについては、お知らせに、Enroll before May 15 to receive a bonus、と書かれている。これらから、特別手当を受け取ったRadovichさんは5月15日より前に研修プログラムに登録したと判断できるので、(B)が正解。enroll in ~ 「~に登録する、~に申し込む」。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-191-195",
+          "type": "report, e-mail, and advertisement",
+          "passage_text": "[Brea Autolot Sales Report + Email from Anna Watkins + Makefield Auto Advertisement]",
+          "questions": [
+            {
+              "number": 191,
+              "part": 7,
+              "question": "What does the report suggest Brea Autolot will do in quarter 2?",
+              "choices": {
+                "A": "Open a second location",
+                "B": "Sell more blue model TX-400s",
+                "C": "Improve staff training",
+                "D": "Stop selling the bronze model TX-400"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "報告書を確認する。ヘッダーにBrea Autolot店と記されており、「第2四半期の見通し」とある。Blue is the only color Brea Autolot expects to increase in sales in the second quarter.とあるので、同店が第2四半期に青色をより多く売り上げることを示唆していると言える。よって、(B)が正解。"
+            },
+            {
+              "number": 192,
+              "part": 7,
+              "question": "What can be concluded about the color of the TX-400 that Ms. Watkins purchased?",
+              "choices": {
+                "A": "It is expected to be Makefield Auto's best-selling color TX-400 in quarter 2.",
+                "B": "That color is no longer available from the manufacturer.",
+                "C": "In quarter 1, 9 percent of Brea Autolot's sales of TX-400s were that color.",
+                "D": "The manufacturer usually sells 10,000 units in that color."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Watkinsさんとは、Eメールの送信者。Watkinsさんは車を購入したことが分かり、Makefield Auto had the model TX-400 in the silver color I wanted とあるので、Watkins さんが購入したTX-400は銀色だと分かる。Brea Autolot店による報告書の表は、第1四半期のTX-400モデルの外装色別の売り上げの割合を示しており、銀色の売り上げは9パーセントとある。よって、(C)が正解。"
+            },
+            {
+              "number": 193,
+              "part": 7,
+              "question": "What is a reason Ms. Watkins gives for purchasing a car from Makefield Auto?",
+              "choices": {
+                "A": "The extra features",
+                "B": "The excellent sales help",
+                "C": "The wide variety of colors",
+                "D": "The home-delivery service"
+              },
+              "correct_answer": "A",
+              "explanation_ja": "Watkinsさんが送信したEメールで、「そちらの販売代理店(Brea Autolot店)には、TX-400 モデルが多数あったが、私が求めていた追加機能全てが付いたものは一つもなかった」と述べ、続けて「Makefield Auto店にはそれらの機能が付いた私の希望する銀色のTX-400モデルがあった」と述べている。よって、(A)が正解。"
+            },
+            {
+              "number": 194,
+              "part": 7,
+              "question": "What can be concluded about Ms. Watkins' father?",
+              "choices": {
+                "A": "He received 100 bonus points.",
+                "B": "He recently bought a car from Brea Autolot.",
+                "C": "He owns a green model TX-400.",
+                "D": "He transferred his vehicle ownership to Ms. Watkins."
+              },
+              "correct_answer": "A",
+              "explanation_ja": "Watkinsさんの父親については、Eメールで、「私の父は Makefield Auto店リワードプログラムの会員で、私をその販売代理店に紹介した」と述べられている。Makefield Auto店による広告に、リワードプログラムについて書かれており、「誰かを当販売代理店に紹介するたびに、ボーナスとして100ポイントを獲得できる」とある。これらから、WatkinsさんをMakefield Auto店に紹介したWatkinsさんの父親は、100ボーナスポイントを受け取ったと判断できるので、(A)が正解。"
+            },
+            {
+              "number": 195,
+              "part": 7,
+              "question": "According to the advertisement, what is new in this year's model TX-400?",
+              "choices": {
+                "A": "The superior fuel efficiency",
+                "B": "The built-in exterior cameras",
+                "C": "The touch screens for passengers",
+                "D": "The pedestrian-alert safety system"
+              },
+              "correct_answer": "C",
+              "explanation_ja": "広告を確認する。見出しから、TX-400 モデルについて書かれたものと分かる。今年の8人乗りモデルの長所が述べられ、特長が列挙された中に、Rear-seat media system for the first time includes touch screens for second-row passengers. とある。乗客用のタッチスクリーンが初めて導入されたことが分かるので、(C)が正解。"
+            }
+          ]
+        },
+        {
+          "passage_id": "P7-196-200",
+          "type": "e-mails and Web page",
+          "passage_text": "[Email from Eun-Mi Yoon + TTWS Web page + Email from Sarah Abboud]",
+          "questions": [
+            {
+              "number": 196,
+              "part": 7,
+              "question": "What does the first e-mail suggest about Ms. Yoon?",
+              "choices": {
+                "A": "She formerly worked with Ms. Abboud.",
+                "B": "She recently changed jobs.",
+                "C": "She is going to Japan in June.",
+                "D": "She has never attended a TTWS event."
+              },
+              "correct_answer": "A",
+              "explanation_ja": "1通目のEメールを確認する。ヘッダーより、YoonさんとはこのEメールの送信者で、受信者はAbboudさん。1行目に、 hope you are settled into your new job. We miss you around the office. とあることから、Abboud さんが新しい仕事に就いたこと、YoonさんのオフィスからAbboudさんがいなくなったことが分かる。よって、Yoonさんは以前Abboudさんと一緒に働いていたと判断できるので、(A)が正解。formerly 「以前は」。"
+            },
+            {
+              "number": 197,
+              "part": 7,
+              "question": "What does the Web page indicate about the lecture series?",
+              "choices": {
+                "A": "It is presented online only.",
+                "B": "It took place for the first time last year.",
+                "C": "Its speakers lead guided tours.",
+                "D": "Its most popular speaker is Mr. Watanabe."
+              },
+              "correct_answer": "A",
+              "explanation_ja": "ウェブページを確認する。Tickets for the virtual lectures are £25 each or £95 for all four.とある。virtualは「仮想現実の、インターネット上の」という語なので、講義シリーズはオンラインで行われることが分かる。また、チケット保有者にはリンクがEメールで送られるとあることからも、講義にはリンク先にアクセスして出席すると考えられる。一方、対面式の講義に関する記述はない。よって、(A)が正解。"
+            },
+            {
+              "number": 198,
+              "part": 7,
+              "question": "What is true about Ms. Abboud?",
+              "choices": {
+                "A": "She will lead a workshop at an engineering conference.",
+                "B": "She is a top executive at her company.",
+                "C": "She paid £25 for a lecture ticket.",
+                "D": "She arrived fifteen minutes late to an event."
+              },
+              "correct_answer": "C",
+              "explanation_ja": "Abboudさんとは、1通目のEメールの受信者で、2通目のEメールの送信者。TTWSのオンライン講義への参加を勧められたAbboud さんは、Perezさんの講義に出席したと分かる。また、ゆくゆくはTTWSに入会するだろうと述べているので、今回出席した際にはまだTTWSの会員でなかったと分かる。一般(非会員)のチケット代についてはウェブページに、Tickets for the virtual lectures are £25 each or £95 for all four.とある。3点目の講義のチケットは売り切れているので、4つの講義分の支払いをしたとは考えにくい。よってAbboudさんは、Perezさんの講義のチケットに25ポンド支払ったと判断できるので、(C)が正解。"
+            },
+            {
+              "number": 199,
+              "part": 7,
+              "question": "What is the topic of the lecture attended by Ms. Yoon and Ms. Abboud?",
+              "choices": {
+                "A": "Clothes and textiles",
+                "B": "Sculpture and statues",
+                "C": "French food",
+                "D": "Japanese islands"
+              },
+              "correct_answer": "B",
+              "explanation_ja": "AbboudさんがYoonさんに送った2通目のEメールから、2人はPerezさんの講義に出席したことが分かる。講義の講師とテーマについてはウェブページに列挙されており、2点目に、Carolina Perez, art historian, explores sculpture through Mexico's most important statues、とある。Perezさんの講義のテーマは彫刻と像と分かるので、(B)が正解。"
+            },
+            {
+              "number": 200,
+              "part": 7,
+              "question": "In the second e-mail, what does Ms. Abboud suggest that she and Ms. Yoon do?",
+              "choices": {
+                "A": "Discuss a question from the TTWS blog",
+                "B": "Book rooms in the same hotel",
+                "C": "Join a professional organization",
+                "D": "Visit some sites that they learned about"
+              },
+              "correct_answer": "D",
+              "explanation_ja": "AbboudさんがYoonさんに送った2通目のEメールを確認する。We must plan a trip to see some of those sites Ms. Perez talked about.とあり、Abboudさんは2人がPerezさんの講義で学んだ遺跡の幾つかを訪問することを提案しているので、(D)が正解。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -9,16 +9,19 @@ const DATASET_LABELS = {
 }
 
 export default function ListPage({ datasetId, questions, onSelect, reviewed, onBack }) {
+  const [filterWrongOnly, setFilterWrongOnly] = useState(false)
   const [filterUnreviewed, setFilterUnreviewed] = useState(false)
   const [activePart, setActivePart] = useState(null)
 
   const { title, sub } = DATASET_LABELS[datasetId] ?? { title: '復習リスト', sub: 'Reading' }
+  const showWrongFilter = datasetId !== 'book12-test1'
 
   function handlePartClick(part) {
     setActivePart(prev => prev === part ? null : part)
   }
 
   const displayQuestions = questions.map((q, i) => ({ q, i }))
+    .filter(({ q }) => !filterWrongOnly || q.your_answer !== q.correct_answer)
     .filter(({ q }) => !filterUnreviewed || !reviewed.has(q.number))
     .filter(({ q }) => activePart === null || q.part === activePart)
 
@@ -31,13 +34,25 @@ export default function ListPage({ datasetId, questions, onSelect, reviewed, onB
             <div className="header-title">{title}</div>
             <div className="header-sub">{sub}</div>
           </div>
+        </div>
+
+        <div className="filter-row">
+          {showWrongFilter && (
+            <button
+              className={`filter-chip${filterWrongOnly ? ' filter-chip-active' : ''}`}
+              onClick={() => setFilterWrongOnly(v => !v)}
+            >
+              間違いのみ
+            </button>
+          )}
           <button
-            className={`filter-btn${filterUnreviewed ? ' filter-btn-active' : ''}`}
+            className={`filter-chip${filterUnreviewed ? ' filter-chip-active' : ''}`}
             onClick={() => setFilterUnreviewed(v => !v)}
           >
-            {filterUnreviewed ? 'すべて' : '未復習のみ'}
+            未復習のみ
           </button>
         </div>
+
         <ScoreBar questions={questions} activePart={activePart} onPartClick={handlePartClick} />
       </div>
 
@@ -63,7 +78,7 @@ export default function ListPage({ datasetId, questions, onSelect, reviewed, onB
           )
         })}
         {displayQuestions.length === 0 && (
-          <div className="filter-empty">未復習の問題はありません</div>
+          <div className="filter-empty">該当する問題はありません</div>
         )}
       </div>
     </div>

@@ -1,41 +1,53 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { supabase } from './utils/supabase'
+import { fetchQuizAnswers, fetchReviewed, toggleReviewedDb, upsertQuizAnswersBatch, upsertQuizAnswer } from './utils/db'
 import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
 import ListPage from './pages/ListPage'
 import DetailPage from './pages/DetailPage'
 import QuizPage from './pages/QuizPage'
-import { loadQuestions, loadPassageUnits } from './utils/dataLoader'
-
-function loadReviewed(datasetId) {
-  try {
-    const saved = localStorage.getItem(`reviewed_${datasetId}`)
-    return saved ? new Set(JSON.parse(saved)) : new Set()
-  } catch {
-    return new Set()
-  }
-}
-
-function saveReviewed(datasetId, set) {
-  localStorage.setItem(`reviewed_${datasetId}`, JSON.stringify([...set]))
-}
+import { loadQuestions, loadAllQuestions } from './utils/dataLoader'
 
 export default function App() {
+  const [session, setSession] = useState(undefined) // undefined = loading
   const [view, setView] = useState('home')
   const [activeDataset, setActiveDataset] = useState(null)
   const [questions, setQuestions] = useState([])
-  const [units, setUnits] = useState([])
+  const [quizQuestions, setQuizQuestions] = useState([])
   const [currentIdx, setCurrentIdx] = useState(0)
   const [reviewed, setReviewed] = useState(new Set())
 
-  function goToList(datasetId) {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => setSession(session))
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
+      setSession(session)
+    })
+    return () => subscription.unsubscribe()
+  }, [])
+
+  async function goToList(datasetId) {
+    const [qs, rev] = await Promise.all([
+      loadQuestionsWithDb(datasetId),
+      fetchReviewed(datasetId),
+    ])
     setActiveDataset(datasetId)
-    setQuestions(loadQuestions(datasetId))
-    setReviewed(loadReviewed(datasetId))
+    setQuestions(qs)
+    setReviewed(rev)
     setView('list')
+  }
+
+  async function loadQuestionsWithDb(datasetId) {
+    try {
+      const answersMap = await fetchQuizAnswers(datasetId)
+      return loadQuestions(datasetId, answersMap)
+    } catch {
+      return loadQuestions(datasetId)
+    }
   }
 
   function goToQuiz(datasetId) {
     setActiveDataset(datasetId)
-    setUnits(loadPassageUnits(datasetId))
+    setQuizQuestions(loadAllQuestions(datasetId))
     setView('quiz')
   }
 
@@ -61,23 +73,50 @@ export default function App() {
     window.scrollTo(0, 0)
   }
 
-  function toggleReviewed(qNumber) {
-    setReviewed(prev => {
-      const next = new Set(prev)
-      next.has(qNumber) ? next.delete(qNumber) : next.add(qNumber)
-      saveReviewed(activeDataset, next)
-      return next
-    })
+  async function toggleReviewed(qNumber) {
+    const next = new Set(reviewed)
+    const nowReviewed = !next.has(qNumber)
+    nowReviewed ? next.add(qNumber) : next.delete(qNumber)
+    setReviewed(next)
+    try {
+      await toggleReviewedDb(activeDataset, qNumber, nowReviewed)
+    } catch (e) {
+      console.error('reviewed sync error', e)
+    }
   }
 
-  function handleSelectMode(mode, datasetId) {
-    mode === 'list' ? goToList(datasetId) : goToQuiz(datasetId)
+  async function saveQuizAnswersToDb(datasetId, answersMap) {
+    try {
+      await upsertQuizAnswersBatch(datasetId, answersMap)
+    } catch (e) {
+      console.error('quiz answers sync error', e)
+    }
   }
+
+  async function saveOneAnswerToDb(datasetId, questionNumber, answer) {
+    try {
+      await upsertQuizAnswer(datasetId, questionNumber, answer)
+    } catch (e) {
+      console.error('answer sync error', e)
+    }
+  }
+
+  if (session === undefined) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+        <div style={{ color: 'var(--sub)', fontSize: '14px' }}>読み込み中...</div>
+      </div>
+    )
+  }
+
+  if (!session) return <LoginPage />
 
   return (
     <>
       {view === 'home' && (
-        <HomePage onSelectMode={handleSelectMode} />
+        <HomePage onSelectMode={(mode, datasetId) =>
+          mode === 'list' ? goToList(datasetId) : goToQuiz(datasetId)
+        } />
       )}
       {view === 'list' && (
         <ListPage
@@ -101,8 +140,11 @@ export default function App() {
       {view === 'quiz' && (
         <QuizPage
           datasetId={activeDataset}
-          units={units}
+          questions={quizQuestions}
           onBack={goHome}
+          onGoToReview={() => goToList(activeDataset)}
+          onSaveAnswer={saveOneAnswerToDb}
+          onSaveAnswersBatch={saveQuizAnswersToDb}
         />
       )}
     </>

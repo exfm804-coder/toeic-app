@@ -90,7 +90,7 @@ function SelectScreen({ questions, datasetId, label, onStart, onBack }) {
 }
 
 // ---- Single Question View ----
-function QuestionView({ question: q, currentIdx, total, selectedAnswer, onSelect, onSkip }) {
+function QuestionView({ question: q, currentIdx, total, selectedAnswer, onSelect, onSkip, onPrev }) {
   if (!q) return null
   const qHtml = q.question?.replace(/-------/g, '<span class="blank">___</span>') ?? null
   const isLast = currentIdx === total - 1
@@ -129,11 +129,13 @@ function QuestionView({ question: q, currentIdx, total, selectedAnswer, onSelect
           <div className="passage-inner">{q.passage_text}</div>
         </div>
       )}
-      {!isLast && (
-        <div style={{ textAlign: 'center', padding: '4px 16px 8px' }}>
-          <button className="skip-btn" onClick={onSkip}>スキップ →</button>
-        </div>
-      )}
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 16px 8px' }}>
+        {currentIdx > 0
+          ? <button className="skip-btn" onClick={onPrev}>← 前へ</button>
+          : <span />
+        }
+        {!isLast && <button className="skip-btn" onClick={onSkip}>スキップ →</button>}
+      </div>
     </div>
   )
 }
@@ -194,6 +196,13 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
     const nextIdx = currentIdx + 1
     if (nextIdx < questions.length) {
       setCurrentIdx(nextIdx)
+      window.scrollTo(0, 0)
+    }
+  }
+
+  function handlePrev() {
+    if (currentIdx > 0) {
+      setCurrentIdx(prev => prev - 1)
       window.scrollTo(0, 0)
     }
   }
@@ -283,6 +292,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
           selectedAnswer={answers[questions[currentIdx]?.number]}
           onSelect={handleSelect}
           onSkip={handleSkip}
+          onPrev={handlePrev}
         />
       )}
 

@@ -46,6 +46,8 @@ export default function DetailPage({ questions, currentIdx, onBack, onNavigate, 
             }
           </div>
 
+          {q.passage_text && <PassageBlock text={q.passage_text} />}
+
           <div className="choices-block">
             {['A', 'B', 'C', 'D'].map(letter => (
               <ChoiceRow
@@ -74,7 +76,6 @@ export default function DetailPage({ questions, currentIdx, onBack, onNavigate, 
           keywords={q.keywords}
         />
 
-        {q.passage_text && <PassageBlock text={q.passage_text} />}
       </div>
 
       <div className="reviewed-bar">

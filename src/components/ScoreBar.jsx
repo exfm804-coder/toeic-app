@@ -1,7 +1,11 @@
 export default function ScoreBar({ questions, activePart, onPartClick }) {
   const byPart = { 5: 0, 6: 0, 7: 0 }
   const totals = { 5: 30, 6: 16, 7: 54 }
-  questions.forEach(q => { byPart[q.part]++ })
+  let wrongCount = 0
+  questions.forEach(q => {
+    byPart[q.part]++
+    if (q.your_answer !== undefined && q.your_answer !== q.correct_answer) wrongCount++
+  })
   const total = questions.length
 
   return (
@@ -11,7 +15,7 @@ export default function ScoreBar({ questions, activePart, onPartClick }) {
         onClick={() => onPartClick(null)}
       >
         <div className="score-label">間違い</div>
-        <div className="score-val">{total}<span className="score-denom"> 問</span></div>
+        <div className="score-val">{wrongCount}<span className="score-denom">/{total}</span></div>
       </div>
       <div className="score-divider" />
       {[5, 6, 7].map((part, i) => (

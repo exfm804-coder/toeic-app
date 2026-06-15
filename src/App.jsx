@@ -15,6 +15,7 @@ export default function App() {
   const [questions, setQuestions] = useState([])
   const [quizQuestions, setQuizQuestions] = useState([])
   const [currentIdx, setCurrentIdx] = useState(0)
+  const [detailQuestions, setDetailQuestions] = useState([])
   const [reviewed, setReviewed] = useState(new Set())
 
   useEffect(() => {
@@ -56,7 +57,8 @@ export default function App() {
     setActiveDataset(null)
   }
 
-  function showDetail(idx) {
+  function showDetail(filteredList, idx) {
+    setDetailQuestions(filteredList)
     setCurrentIdx(idx)
     setView('detail')
     window.scrollTo(0, 0)
@@ -68,7 +70,7 @@ export default function App() {
 
   function navigate(dir) {
     const newIdx = currentIdx + dir
-    if (newIdx < 0 || newIdx >= questions.length) return
+    if (newIdx < 0 || newIdx >= detailQuestions.length) return
     setCurrentIdx(newIdx)
     window.scrollTo(0, 0)
   }
@@ -129,7 +131,7 @@ export default function App() {
       )}
       {view === 'detail' && (
         <DetailPage
-          questions={questions}
+          questions={detailQuestions}
           currentIdx={currentIdx}
           onBack={showList}
           onNavigate={navigate}

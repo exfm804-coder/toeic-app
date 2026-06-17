@@ -20,10 +20,14 @@ export default function ListPage({ datasetId, questions, onSelect, reviewed, onB
     setActivePart(prev => prev === part ? null : part)
   }
 
-  const displayQuestions = questions.map((q, i) => ({ q, i }))
+  const displayQuestions = questions
+    .map((q, i) => ({ q, i }))
     .filter(({ q }) => !filterWrongOnly || q.your_answer !== q.correct_answer)
     .filter(({ q }) => !filterUnreviewed || !reviewed.has(q.number))
     .filter(({ q }) => activePart === null || q.part === activePart)
+    .map((item, displayIdx) => ({ ...item, displayIdx }))
+
+  const displayList = displayQuestions.map(({ q }) => q)
 
   return (
     <div>
@@ -66,11 +70,11 @@ export default function ListPage({ datasetId, questions, onSelect, reviewed, onB
                 <span>Part {part}</span>
                 <span className="part-count">{items.length} 問</span>
               </div>
-              {items.map(({ q, i }) => (
+              {items.map(({ q, displayIdx }) => (
                 <QuestionCard
                   key={q.number}
                   question={q}
-                  onClick={() => onSelect(i)}
+                  onClick={() => onSelect(displayList, displayIdx)}
                   isReviewed={reviewed.has(q.number)}
                 />
               ))}

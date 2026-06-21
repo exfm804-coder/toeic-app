@@ -9,8 +9,8 @@ const DATASET_LABELS = {
 }
 
 export default function ListPage({ datasetId, questions, onSelect, reviewed, onBack }) {
-  const [filterWrongOnly, setFilterWrongOnly] = useState(false)
-  const [filterUnreviewed, setFilterUnreviewed] = useState(false)
+  const [filterWrongOnly, setFilterWrongOnly] = useState(true)
+  const [filterUnreviewed, setFilterUnreviewed] = useState(true)
   const [activePart, setActivePart] = useState(null)
 
   const { title, sub } = DATASET_LABELS[datasetId] ?? { title: '復習リスト', sub: 'Reading' }

@@ -3,6 +3,7 @@ import { saveQuizAnswers } from '../utils/dataLoader'
 
 const DATASET_LABELS = {
   'book12-test1': { title: '一問一答', sub: '問題集12 · TEST1 · Reading' },
+  'book12-test2': { title: '一問一答', sub: '問題集12 · TEST2 · Reading' },
   'book11-test1': { title: '一問一答', sub: '問題集11 · TEST1 · Reading' },
   'book11-test2': { title: '一問一答', sub: '問題集11 · TEST2 · Reading' },
 }
@@ -141,7 +142,7 @@ function QuestionView({ question: q, currentIdx, total, selectedAnswer, onSelect
 }
 
 // ---- Answer Sheet Screen ----
-function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch }) {
+function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch, onSaveAttempt }) {
   const savedProgress = loadProgress(datasetId, partKey)
   const [showResumeDialog, setShowResumeDialog] = useState(!!savedProgress)
   const [showBackDialog, setShowBackDialog] = useState(false)
@@ -149,6 +150,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
   const [currentIdx, setCurrentIdx] = useState(0)
   const [elapsedMs, setElapsedMs] = useState(0)
   const [graded, setGraded] = useState(false)
+  const [savedAttempt, setSavedAttempt] = useState(null)
   const startTimeRef = useRef(null)
   const initialElapsedRef = useRef(0)
 
@@ -207,12 +209,17 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
     }
   }
 
-  function handleGrade() {
+  async function handleGrade() {
     clearProgress(datasetId, partKey)
     setGraded(true)
     const existing = JSON.parse(localStorage.getItem(`quiz_answers_${datasetId}`) || '{}')
     saveQuizAnswers(datasetId, { ...existing, ...answers })
     onSaveAnswersBatch?.(datasetId, answers)
+
+    let correct = 0
+    questions.forEach(q => { if (answers[q.number] === q.correct_answer) correct++ })
+    const attempt = await onSaveAttempt?.(datasetId, partKey, partLabel, answers, correct, questions.length)
+    setSavedAttempt(attempt ?? null)
   }
 
   function handleBack() {
@@ -272,7 +279,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
           </div>
           <div className="quiz-score-label">{pct}% 正解</div>
           {wrongCount > 0 && onGoToReview && (
-            <button className="quiz-back-btn" onClick={onGoToReview}>
+            <button className="quiz-back-btn" onClick={() => onGoToReview(savedAttempt)}>
               復習モードへ（{wrongCount}問）
             </button>
           )}
@@ -334,7 +341,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
 }
 
 // ---- Main ----
-export default function QuizPage({ datasetId, questions, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch }) {
+export default function QuizPage({ datasetId, questions, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch, onSaveAttempt }) {
   const [view, setView] = useState('select')
   const [partKey, setPartKey] = useState(null)
   const [partLabel, setPartLabel] = useState('')
@@ -376,6 +383,7 @@ export default function QuizPage({ datasetId, questions, onBack, onGoToReview, o
       onGoToReview={onGoToReview}
       onSaveAnswer={onSaveAnswer}
       onSaveAnswersBatch={onSaveAnswersBatch}
+      onSaveAttempt={onSaveAttempt}
     />
   )
 }

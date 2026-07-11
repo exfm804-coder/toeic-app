@@ -1,20 +1,22 @@
 import { useState } from 'react'
 import ScoreBar from '../components/ScoreBar'
 import QuestionCard from '../components/QuestionCard'
+import { PREBUILT_WRONG_ANSWER_DATASETS } from '../utils/dataLoader'
 
 const DATASET_LABELS = {
   'book12-test1': { title: 'TEST 1 復習リスト', sub: '問題集12 · Reading · 間違い・未解答' },
+  'book12-test2': { title: 'TEST 2 復習リスト', sub: '問題集12 · Reading · 間違い・未解答' },
   'book11-test1': { title: 'TEST 1 復習リスト', sub: '問題集11 · Reading' },
   'book11-test2': { title: 'TEST 2 復習リスト', sub: '問題集11 · Reading' },
 }
 
-export default function ListPage({ datasetId, questions, onSelect, reviewed, onBack }) {
+export default function ListPage({ datasetId, questions, onSelect, reviewed, onBack, initialPart = null }) {
   const [filterWrongOnly, setFilterWrongOnly] = useState(true)
   const [filterUnreviewed, setFilterUnreviewed] = useState(true)
-  const [activePart, setActivePart] = useState(null)
+  const [activePart, setActivePart] = useState(initialPart)
 
   const { title, sub } = DATASET_LABELS[datasetId] ?? { title: '復習リスト', sub: 'Reading' }
-  const showWrongFilter = datasetId !== 'book12-test1'
+  const showWrongFilter = !PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)
 
   function handlePartClick(part) {
     setActivePart(prev => prev === part ? null : part)

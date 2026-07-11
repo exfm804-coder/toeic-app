@@ -9,6 +9,9 @@ const FILE_MAP = {
   'book11-test2': '/toeic11_test2_reading_questions.json',
 }
 
+// 自分の実際の受験結果（間違い・未解答のみ）をあらかじめ収録しているデータセット
+export const PREBUILT_WRONG_ANSWER_DATASETS = new Set(Object.keys(userAnswers))
+
 function getRawData(datasetId) {
   const filename = FILE_MAP[datasetId]
   if (!filename) return null
@@ -54,11 +57,12 @@ export function loadQuestions(datasetId, externalAnswers = null) {
   const rawData = getRawData(datasetId)
   const questions = extractQuestions(rawData)
 
-  if (datasetId === 'book12-test1') {
-    const wrongNumbers = new Set(Object.keys(userAnswers).map(Number))
+  if (PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)) {
+    const answers = userAnswers[datasetId]
+    const wrongNumbers = new Set(Object.keys(answers).map(Number))
     return questions
       .filter(q => wrongNumbers.has(q.number))
-      .map(q => ({ ...q, your_answer: userAnswers[String(q.number)] ?? null }))
+      .map(q => ({ ...q, your_answer: answers[String(q.number)] ?? null }))
   }
 
   // externalAnswers はSupabaseから取得したMap、なければlocalStorageにフォールバック

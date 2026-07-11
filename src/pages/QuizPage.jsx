@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { saveQuizAnswers } from '../utils/dataLoader'
+import { saveQuizAnswers, PREBUILT_WRONG_ANSWER_DATASETS } from '../utils/dataLoader'
 
 const DATASET_LABELS = {
   'book12-test1': { title: '一問一答', sub: '問題集12 · TEST1 · Reading' },
@@ -238,6 +238,8 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
   }
   const wrongCount = totalCount - correctCount
   const pct = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0
+  // 問題集12は復習モードが実際の受験結果に固定されているため、この練習の結果とは連動しない
+  const canGoToReview = !PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)
 
   return (
     <div>
@@ -272,7 +274,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
             <div className="quiz-score-denom">/ {totalCount}</div>
           </div>
           <div className="quiz-score-label">{pct}% 正解</div>
-          {wrongCount > 0 && onGoToReview && (
+          {canGoToReview && wrongCount > 0 && onGoToReview && (
             <button className="quiz-back-btn" onClick={onGoToReview}>
               復習モードへ（{wrongCount}問）
             </button>

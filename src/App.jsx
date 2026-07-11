@@ -12,7 +12,7 @@ import ScoreDetailPage from './pages/ScoreDetailPage'
 import ListPage from './pages/ListPage'
 import DetailPage from './pages/DetailPage'
 import QuizPage from './pages/QuizPage'
-import { loadQuestions, loadAllQuestions, mergeAttemptAnswers, PREBUILT_WRONG_ANSWER_DATASETS } from './utils/dataLoader'
+import { loadQuestions, loadAllQuestions, mergeAttemptAnswers } from './utils/dataLoader'
 
 function formatDate(iso) {
   return new Date(iso).toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
@@ -56,15 +56,11 @@ export default function App() {
     await loadDataset(datasetId)
     setActiveAttempt(null)
     setAttemptQuestions([])
-    if (PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)) {
+    try {
+      setAttempts(await fetchQuizAttempts(datasetId))
+    } catch (e) {
+      console.error('fetch attempts error', e)
       setAttempts([])
-    } else {
-      try {
-        setAttempts(await fetchQuizAttempts(datasetId))
-      } catch (e) {
-        console.error('fetch attempts error', e)
-        setAttempts([])
-      }
     }
     setView('results')
   }
@@ -90,6 +86,19 @@ export default function App() {
     } catch (e) {
       console.error('fetch attempt error', e)
     }
+  }
+
+  // 採点直後の「復習モードへ」: 直前に保存できた attempt があればそれをそのまま表示する
+  // （quiz_answers の累積状態ではなく、今解いた回そのものを見せるため）
+  function goToScoreDetailForNewAttempt(datasetId, attempt) {
+    if (!attempt) {
+      goToResultsFromQuiz(datasetId)
+      return
+    }
+    setActiveDataset(datasetId)
+    setAttemptQuestions(mergeAttemptAnswers(datasetId, attempt.answers))
+    setActiveAttempt(attempt)
+    setView('scoreDetail')
   }
 
   function goToListFromScore(part) {
@@ -174,9 +183,10 @@ export default function App() {
 
   async function saveAttemptToDb(datasetId, partKey, partLabel, answersMap, correctCount, totalCount) {
     try {
-      await insertQuizAttempt(datasetId, partKey, partLabel, answersMap, correctCount, totalCount)
+      return await insertQuizAttempt(datasetId, partKey, partLabel, answersMap, correctCount, totalCount)
     } catch (e) {
       console.error('attempt save error', e)
+      return null
     }
   }
 
@@ -242,7 +252,7 @@ export default function App() {
           datasetId={activeDataset}
           questions={quizQuestions}
           onBack={goHome}
-          onGoToReview={() => goToResultsFromQuiz(activeDataset)}
+          onGoToReview={(attempt) => goToScoreDetailForNewAttempt(activeDataset, attempt)}
           onSaveAnswer={saveOneAnswerToDb}
           onSaveAnswersBatch={saveQuizAnswersToDb}
           onSaveAttempt={saveAttemptToDb}

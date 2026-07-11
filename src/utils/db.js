@@ -47,7 +47,7 @@ export async function upsertQuizAnswersBatch(datasetId, answersMap) {
 
 export async function insertQuizAttempt(datasetId, partKey, partLabel, answersMap, correctCount, totalCount) {
   const { data: { user } } = await supabase.auth.getUser()
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('quiz_attempts')
     .insert({
       user_id: user.id,
@@ -58,7 +58,10 @@ export async function insertQuizAttempt(datasetId, partKey, partLabel, answersMa
       correct_count: correctCount,
       total_count: totalCount,
     })
+    .select('id, part_key, part_label, answers, correct_count, total_count, completed_at')
+    .single()
   if (error) throw error
+  return data
 }
 
 export async function fetchQuizAttempts(datasetId) {

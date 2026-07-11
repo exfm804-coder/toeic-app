@@ -1,4 +1,4 @@
-import { getScoreSummary } from '../utils/dataLoader'
+import { getScoreSummary, PREBUILT_WRONG_ANSWER_DATASETS } from '../utils/dataLoader'
 
 const DATASET_LABELS = {
   'book12-test1': { title: 'TEST 1', book: '問題集12' },
@@ -7,10 +7,19 @@ const DATASET_LABELS = {
   'book11-test2': { title: 'TEST 2', book: '問題集11' },
 }
 
-export default function ResultsListPage({ datasetId, questions, onSelect, onBack }) {
+const PART_KEY_LABELS = { all: '全問', '5': 'Part 5', '6': 'Part 6', '7': 'Part 7' }
+
+function formatDate(iso) {
+  const d = new Date(iso)
+  return d.toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+}
+
+export default function ResultsListPage({ datasetId, questions, attempts, onSelectLive, onSelectAttempt, onBack }) {
   const { title, book } = DATASET_LABELS[datasetId] ?? { title: '', book: '' }
   const { totalCorrect, totalCount } = getScoreSummary(datasetId, questions)
   const pct = totalCount > 0 ? Math.round((totalCorrect / totalCount) * 100) : 0
+  const hasAnswers = questions.length > 0
+  const liveLabel = PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId) ? '実際の受験結果' : '現在の解答'
 
   return (
     <div>
@@ -25,17 +34,37 @@ export default function ResultsListPage({ datasetId, questions, onSelect, onBack
       </div>
 
       <div className="results-list">
-        <button className="results-row" onClick={onSelect}>
-          <div className="results-row-main">
-            <div className="results-row-title">{book} リーディング</div>
-          </div>
-          <div className="results-row-score">
-            <span className="results-row-pct">{pct}%</span>
-            <span className="results-row-frac">{totalCorrect}/{totalCount}</span>
-          </div>
-          <span className="results-row-arrow">›</span>
-        </button>
-        <div className="results-list-empty">これ以上表示できるものがありません。</div>
+        {hasAnswers && (
+          <button className="results-row" onClick={onSelectLive}>
+            <div className="results-row-main">
+              <div className="results-row-title">{book} リーディング</div>
+              <div className="results-row-date">{liveLabel}</div>
+            </div>
+            <div className="results-row-score">
+              <span className="results-row-pct">{pct}%</span>
+              <span className="results-row-frac">{totalCorrect}/{totalCount}</span>
+            </div>
+            <span className="results-row-arrow">›</span>
+          </button>
+        )}
+
+        {attempts.map(a => (
+          <button key={a.id} className="results-row" onClick={() => onSelectAttempt(a)}>
+            <div className="results-row-main">
+              <div className="results-row-title">{book} {PART_KEY_LABELS[a.part_key] ?? a.part_key} リーディング</div>
+              <div className="results-row-date">{formatDate(a.completed_at)}</div>
+            </div>
+            <div className="results-row-score">
+              <span className="results-row-pct">{a.total_count > 0 ? Math.round((a.correct_count / a.total_count) * 100) : 0}%</span>
+              <span className="results-row-frac">{a.correct_count}/{a.total_count}</span>
+            </div>
+            <span className="results-row-arrow">›</span>
+          </button>
+        ))}
+
+        {!hasAnswers && attempts.length === 0 && (
+          <div className="results-list-empty">まだ記録がありません。</div>
+        )}
       </div>
     </div>
   )

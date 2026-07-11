@@ -43,6 +43,44 @@ export async function upsertQuizAnswersBatch(datasetId, answersMap) {
   if (error) throw error
 }
 
+// ---- Quiz Attempts (採点確定時の履歴スナップショット) ----
+
+export async function insertQuizAttempt(datasetId, partKey, partLabel, answersMap, correctCount, totalCount) {
+  const { data: { user } } = await supabase.auth.getUser()
+  const { error } = await supabase
+    .from('quiz_attempts')
+    .insert({
+      user_id: user.id,
+      dataset_id: datasetId,
+      part_key: String(partKey),
+      part_label: partLabel,
+      answers: answersMap,
+      correct_count: correctCount,
+      total_count: totalCount,
+    })
+  if (error) throw error
+}
+
+export async function fetchQuizAttempts(datasetId) {
+  const { data, error } = await supabase
+    .from('quiz_attempts')
+    .select('id, part_key, part_label, correct_count, total_count, completed_at')
+    .eq('dataset_id', datasetId)
+    .order('completed_at', { ascending: false })
+  if (error) throw error
+  return data
+}
+
+export async function fetchQuizAttemptById(attemptId) {
+  const { data, error } = await supabase
+    .from('quiz_attempts')
+    .select('id, part_key, part_label, answers, correct_count, total_count, completed_at')
+    .eq('id', attemptId)
+    .single()
+  if (error) throw error
+  return data
+}
+
 // ---- Reviewed ----
 
 export async function fetchReviewed(datasetId) {

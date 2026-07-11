@@ -139,3 +139,11 @@ export function getScoreSummary(datasetId, questions) {
   const totalCount = parts[5].total + parts[6].total + parts[7].total
   return { parts, totalCorrect, totalCount }
 }
+
+// quiz_attempts の answers スナップショット（{questionNumber: answer}）を全問データにマージする
+export function mergeAttemptAnswers(datasetId, answersMap) {
+  return loadAllQuestions(datasetId).map(q => ({
+    ...q,
+    your_answer: answersMap[String(q.number)] ?? answersMap[q.number] ?? null,
+  }))
+}

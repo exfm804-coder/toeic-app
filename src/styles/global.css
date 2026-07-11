@@ -824,6 +824,7 @@ body {
 .results-row:active { background: #eef1f8; }
 .results-row-main { flex: 1; min-width: 0; }
 .results-row-title { font-size: 14px; font-weight: 700; color: var(--navy); }
+.results-row-date { font-size: 11px; color: var(--sub); margin-top: 3px; }
 .results-row-score {
   display: flex;
   flex-direction: column;

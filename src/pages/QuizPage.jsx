@@ -142,7 +142,7 @@ function QuestionView({ question: q, currentIdx, total, selectedAnswer, onSelect
 }
 
 // ---- Answer Sheet Screen ----
-function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch }) {
+function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch, onSaveAttempt }) {
   const savedProgress = loadProgress(datasetId, partKey)
   const [showResumeDialog, setShowResumeDialog] = useState(!!savedProgress)
   const [showBackDialog, setShowBackDialog] = useState(false)
@@ -214,6 +214,10 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
     const existing = JSON.parse(localStorage.getItem(`quiz_answers_${datasetId}`) || '{}')
     saveQuizAnswers(datasetId, { ...existing, ...answers })
     onSaveAnswersBatch?.(datasetId, answers)
+
+    let correct = 0
+    questions.forEach(q => { if (answers[q.number] === q.correct_answer) correct++ })
+    onSaveAttempt?.(datasetId, partKey, partLabel, answers, correct, questions.length)
   }
 
   function handleBack() {
@@ -337,7 +341,7 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
 }
 
 // ---- Main ----
-export default function QuizPage({ datasetId, questions, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch }) {
+export default function QuizPage({ datasetId, questions, onBack, onGoToReview, onSaveAnswer, onSaveAnswersBatch, onSaveAttempt }) {
   const [view, setView] = useState('select')
   const [partKey, setPartKey] = useState(null)
   const [partLabel, setPartLabel] = useState('')
@@ -379,6 +383,7 @@ export default function QuizPage({ datasetId, questions, onBack, onGoToReview, o
       onGoToReview={onGoToReview}
       onSaveAnswer={onSaveAnswer}
       onSaveAnswersBatch={onSaveAnswersBatch}
+      onSaveAttempt={onSaveAttempt}
     />
   )
 }

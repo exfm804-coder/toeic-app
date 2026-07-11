@@ -8,12 +8,16 @@ const DATASET_LABELS = {
   'book11-test2': { title: 'TEST 2', book: '問題集11' },
 }
 
-export default function ScoreDetailPage({ datasetId, questions, onSelectPart, onBack }) {
+export default function ScoreDetailPage({ datasetId, questions, onSelectPart, onBack, partKeyFilter = 'all', dateLabel = null }) {
   const { title, book } = DATASET_LABELS[datasetId] ?? { title: '', book: '' }
-  const { parts, totalCorrect, totalCount } = getScoreSummary(datasetId, questions)
+  const { parts } = getScoreSummary(datasetId, questions)
+
+  const visibleParts = partKeyFilter === 'all' ? [5, 6, 7] : [Number(partKeyFilter)]
+  const totalCorrect = visibleParts.reduce((sum, part) => sum + parts[part].correct, 0)
+  const totalCount = visibleParts.reduce((sum, part) => sum + parts[part].total, 0)
   const overallPct = totalCount > 0 ? Math.round((totalCorrect / totalCount) * 100) : 0
 
-  const radarValues = [5, 6, 7].map(part => ({
+  const radarValues = visibleParts.map(part => ({
     label: `Part ${part}`,
     value: parts[part].total > 0 ? (parts[part].correct / parts[part].total) * 100 : 0,
   }))
@@ -25,7 +29,7 @@ export default function ScoreDetailPage({ datasetId, questions, onSelectPart, on
           <button className="back-btn" onClick={onBack}>‹</button>
           <div>
             <div className="header-title">{title}</div>
-            <div className="header-sub">{book} · Reading スコア詳細</div>
+            <div className="header-sub">{book} · Reading スコア詳細{dateLabel ? ` · ${dateLabel}` : ''}</div>
           </div>
         </div>
       </div>
@@ -38,12 +42,14 @@ export default function ScoreDetailPage({ datasetId, questions, onSelectPart, on
         </div>
       </div>
 
-      <div className="score-detail-radar-card">
-        <RadarChart values={radarValues} />
-      </div>
+      {visibleParts.length > 1 && (
+        <div className="score-detail-radar-card">
+          <RadarChart values={radarValues} />
+        </div>
+      )}
 
       <div className="score-detail-parts">
-        {[5, 6, 7].map(part => {
+        {visibleParts.map(part => {
           const p = parts[part]
           const pct = p.total > 0 ? Math.round((p.correct / p.total) * 100) : 0
           return (

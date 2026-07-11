@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './utils/supabase'
-import { fetchQuizAnswers, fetchReviewed, toggleReviewedDb, upsertQuizAnswersBatch, upsertQuizAnswer } from './utils/db'
+import {
+  fetchQuizAnswers, fetchReviewed, toggleReviewedDb,
+  upsertQuizAnswersBatch, upsertQuizAnswer,
+  insertQuizAttempt, fetchQuizAttempts, fetchQuizAttemptById,
+} from './utils/db'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import ResultsListPage from './pages/ResultsListPage'
@@ -8,7 +12,11 @@ import ScoreDetailPage from './pages/ScoreDetailPage'
 import ListPage from './pages/ListPage'
 import DetailPage from './pages/DetailPage'
 import QuizPage from './pages/QuizPage'
-import { loadQuestions, loadAllQuestions } from './utils/dataLoader'
+import { loadQuestions, loadAllQuestions, mergeAttemptAnswers, PREBUILT_WRONG_ANSWER_DATASETS } from './utils/dataLoader'
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+}
 
 export default function App() {
   const [session, setSession] = useState(undefined) // undefined = loading
@@ -20,6 +28,11 @@ export default function App() {
   const [detailQuestions, setDetailQuestions] = useState([])
   const [reviewed, setReviewed] = useState(new Set())
   const [initialPart, setInitialPart] = useState(null)
+  const [attempts, setAttempts] = useState([])
+  const [activeAttempt, setActiveAttempt] = useState(null)
+  const [attemptQuestions, setAttemptQuestions] = useState([])
+
+  const displayQuestions = activeAttempt ? attemptQuestions : questions
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => setSession(session))
@@ -41,16 +54,42 @@ export default function App() {
 
   async function goToResults(datasetId) {
     await loadDataset(datasetId)
+    setActiveAttempt(null)
+    setAttemptQuestions([])
+    if (PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)) {
+      setAttempts([])
+    } else {
+      try {
+        setAttempts(await fetchQuizAttempts(datasetId))
+      } catch (e) {
+        console.error('fetch attempts error', e)
+        setAttempts([])
+      }
+    }
     setView('results')
   }
 
   async function goToResultsFromQuiz(datasetId) {
     await loadDataset(datasetId)
+    setActiveAttempt(null)
+    setAttemptQuestions([])
     setView('scoreDetail')
   }
 
-  function goToScoreDetail() {
+  function goToScoreDetailLive() {
+    setActiveAttempt(null)
     setView('scoreDetail')
+  }
+
+  async function goToScoreDetailAttempt(attemptSummary) {
+    try {
+      const full = await fetchQuizAttemptById(attemptSummary.id)
+      setAttemptQuestions(mergeAttemptAnswers(activeDataset, full.answers))
+      setActiveAttempt(full)
+      setView('scoreDetail')
+    } catch (e) {
+      console.error('fetch attempt error', e)
+    }
   }
 
   function goToListFromScore(part) {
@@ -77,6 +116,9 @@ export default function App() {
     setView('home')
     setActiveDataset(null)
     setInitialPart(null)
+    setAttempts([])
+    setActiveAttempt(null)
+    setAttemptQuestions([])
   }
 
   function showDetail(filteredList, idx) {
@@ -125,6 +167,14 @@ export default function App() {
     }
   }
 
+  async function saveAttemptToDb(datasetId, partKey, partLabel, answersMap, correctCount, totalCount) {
+    try {
+      await insertQuizAttempt(datasetId, partKey, partLabel, answersMap, correctCount, totalCount)
+    } catch (e) {
+      console.error('attempt save error', e)
+    }
+  }
+
   if (session === undefined) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -146,14 +196,18 @@ export default function App() {
         <ResultsListPage
           datasetId={activeDataset}
           questions={questions}
-          onSelect={goToScoreDetail}
+          attempts={attempts}
+          onSelectLive={goToScoreDetailLive}
+          onSelectAttempt={goToScoreDetailAttempt}
           onBack={goHome}
         />
       )}
       {view === 'scoreDetail' && (
         <ScoreDetailPage
           datasetId={activeDataset}
-          questions={questions}
+          questions={displayQuestions}
+          partKeyFilter={activeAttempt ? activeAttempt.part_key : 'all'}
+          dateLabel={activeAttempt ? formatDate(activeAttempt.completed_at) : null}
           onSelectPart={goToListFromScore}
           onBack={() => setView('results')}
         />
@@ -161,7 +215,7 @@ export default function App() {
       {view === 'list' && (
         <ListPage
           datasetId={activeDataset}
-          questions={questions}
+          questions={displayQuestions}
           onSelect={showDetail}
           reviewed={reviewed}
           onBack={() => setView('scoreDetail')}
@@ -186,6 +240,7 @@ export default function App() {
           onGoToReview={() => goToResultsFromQuiz(activeDataset)}
           onSaveAnswer={saveOneAnswerToDb}
           onSaveAnswersBatch={saveQuizAnswersToDb}
+          onSaveAttempt={saveAttemptToDb}
         />
       )}
     </>

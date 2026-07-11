@@ -3,6 +3,7 @@ import { saveQuizAnswers } from '../utils/dataLoader'
 
 const DATASET_LABELS = {
   'book12-test1': { title: '一問一答', sub: '問題集12 · TEST1 · Reading' },
+  'book12-test2': { title: '一問一答', sub: '問題集12 · TEST2 · Reading' },
   'book11-test1': { title: '一問一答', sub: '問題集11 · TEST1 · Reading' },
   'book11-test2': { title: '一問一答', sub: '問題集11 · TEST2 · Reading' },
 }

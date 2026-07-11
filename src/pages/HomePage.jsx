@@ -16,8 +16,8 @@ const BOOKS = [
       {
         label: 'TEST 2',
         modes: [
-          { mode: 'quiz', label: '一問一答モード', datasetId: 'book12-test2', productReady: false, requiresQuiz: false },
-          { mode: 'list', label: '復習モード',     datasetId: 'book12-test2', productReady: false, requiresQuiz: false },
+          { mode: 'quiz', label: '一問一答モード', datasetId: 'book12-test2', productReady: true, requiresQuiz: false },
+          { mode: 'list', label: '復習モード',     datasetId: 'book12-test2', productReady: true, requiresQuiz: true  },
         ],
       },
     ],

@@ -4,6 +4,7 @@ import QuestionCard from '../components/QuestionCard'
 
 const DATASET_LABELS = {
   'book12-test1': { title: 'TEST 1 復習リスト', sub: '問題集12 · Reading · 間違い・未解答' },
+  'book12-test2': { title: 'TEST 2 復習リスト', sub: '問題集12 · Reading' },
   'book11-test1': { title: 'TEST 1 復習リスト', sub: '問題集11 · Reading' },
   'book11-test2': { title: 'TEST 2 復習リスト', sub: '問題集11 · Reading' },
 }

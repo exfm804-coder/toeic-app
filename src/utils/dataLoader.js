@@ -4,6 +4,7 @@ const jsonModules = import.meta.glob('/toeic*.json', { eager: true })
 
 const FILE_MAP = {
   'book12-test1': '/toeic_test1_reading_all.json',
+  'book12-test2': '/toeic_test2_reading_all.json',
   'book11-test1': '/toeic11_test1_reading_questions.json',
   'book11-test2': '/toeic11_test2_reading_questions.json',
 }

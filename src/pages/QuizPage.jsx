@@ -215,9 +215,12 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
     saveQuizAnswers(datasetId, { ...existing, ...answers })
     onSaveAnswersBatch?.(datasetId, answers)
 
-    let correct = 0
-    questions.forEach(q => { if (answers[q.number] === q.correct_answer) correct++ })
-    onSaveAttempt?.(datasetId, partKey, partLabel, answers, correct, questions.length)
+    // 問題集12は復習モードが実際の受験結果に固定されており履歴を表示しないため、保存自体しない
+    if (!PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)) {
+      let correct = 0
+      questions.forEach(q => { if (answers[q.number] === q.correct_answer) correct++ })
+      onSaveAttempt?.(datasetId, partKey, partLabel, answers, correct, questions.length)
+    }
   }
 
   function handleBack() {

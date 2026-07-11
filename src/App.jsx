@@ -100,7 +100,12 @@ export default function App() {
   async function loadQuestionsWithDb(datasetId) {
     try {
       const answersMap = await fetchQuizAnswers(datasetId)
-      return loadQuestions(datasetId, answersMap)
+      // Supabase 側にまだ同期されていない（≒空）場合は、進行中の解答が消えて見えないよう
+      // localStorage の値にフォールバックさせる（loadQuestions に null を渡すと内部でそちらを見る）
+      if (answersMap && Object.keys(answersMap).length > 0) {
+        return loadQuestions(datasetId, answersMap)
+      }
+      return loadQuestions(datasetId)
     } catch {
       return loadQuestions(datasetId)
     }

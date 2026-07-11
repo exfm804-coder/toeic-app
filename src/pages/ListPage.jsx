@@ -10,10 +10,10 @@ const DATASET_LABELS = {
   'book11-test2': { title: 'TEST 2 復習リスト', sub: '問題集11 · Reading' },
 }
 
-export default function ListPage({ datasetId, questions, onSelect, reviewed, onBack }) {
+export default function ListPage({ datasetId, questions, onSelect, reviewed, onBack, initialPart = null }) {
   const [filterWrongOnly, setFilterWrongOnly] = useState(true)
   const [filterUnreviewed, setFilterUnreviewed] = useState(true)
-  const [activePart, setActivePart] = useState(null)
+  const [activePart, setActivePart] = useState(initialPart)
 
   const { title, sub } = DATASET_LABELS[datasetId] ?? { title: '復習リスト', sub: 'Reading' }
   const showWrongFilter = !PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)

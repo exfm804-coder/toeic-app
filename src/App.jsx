@@ -3,6 +3,8 @@ import { supabase } from './utils/supabase'
 import { fetchQuizAnswers, fetchReviewed, toggleReviewedDb, upsertQuizAnswersBatch, upsertQuizAnswer } from './utils/db'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import ResultsListPage from './pages/ResultsListPage'
+import ScoreDetailPage from './pages/ScoreDetailPage'
 import ListPage from './pages/ListPage'
 import DetailPage from './pages/DetailPage'
 import QuizPage from './pages/QuizPage'
@@ -17,6 +19,7 @@ export default function App() {
   const [currentIdx, setCurrentIdx] = useState(0)
   const [detailQuestions, setDetailQuestions] = useState([])
   const [reviewed, setReviewed] = useState(new Set())
+  const [initialPart, setInitialPart] = useState(null)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => setSession(session))
@@ -26,7 +29,7 @@ export default function App() {
     return () => subscription.unsubscribe()
   }, [])
 
-  async function goToList(datasetId) {
+  async function loadDataset(datasetId) {
     const [qs, rev] = await Promise.all([
       loadQuestionsWithDb(datasetId),
       fetchReviewed(datasetId),
@@ -34,6 +37,24 @@ export default function App() {
     setActiveDataset(datasetId)
     setQuestions(qs)
     setReviewed(rev)
+  }
+
+  async function goToResults(datasetId) {
+    await loadDataset(datasetId)
+    setView('results')
+  }
+
+  async function goToResultsFromQuiz(datasetId) {
+    await loadDataset(datasetId)
+    setView('scoreDetail')
+  }
+
+  function goToScoreDetail() {
+    setView('scoreDetail')
+  }
+
+  function goToListFromScore(part) {
+    setInitialPart(part)
     setView('list')
   }
 
@@ -55,6 +76,7 @@ export default function App() {
   function goHome() {
     setView('home')
     setActiveDataset(null)
+    setInitialPart(null)
   }
 
   function showDetail(filteredList, idx) {
@@ -117,8 +139,24 @@ export default function App() {
     <>
       {view === 'home' && (
         <HomePage onSelectMode={(mode, datasetId) =>
-          mode === 'list' ? goToList(datasetId) : goToQuiz(datasetId)
+          mode === 'list' ? goToResults(datasetId) : goToQuiz(datasetId)
         } />
+      )}
+      {view === 'results' && (
+        <ResultsListPage
+          datasetId={activeDataset}
+          questions={questions}
+          onSelect={goToScoreDetail}
+          onBack={goHome}
+        />
+      )}
+      {view === 'scoreDetail' && (
+        <ScoreDetailPage
+          datasetId={activeDataset}
+          questions={questions}
+          onSelectPart={goToListFromScore}
+          onBack={() => setView('results')}
+        />
       )}
       {view === 'list' && (
         <ListPage
@@ -126,7 +164,8 @@ export default function App() {
           questions={questions}
           onSelect={showDetail}
           reviewed={reviewed}
-          onBack={goHome}
+          onBack={() => setView('scoreDetail')}
+          initialPart={initialPart}
         />
       )}
       {view === 'detail' && (
@@ -144,7 +183,7 @@ export default function App() {
           datasetId={activeDataset}
           questions={quizQuestions}
           onBack={goHome}
-          onGoToReview={() => goToList(activeDataset)}
+          onGoToReview={() => goToResultsFromQuiz(activeDataset)}
           onSaveAnswer={saveOneAnswerToDb}
           onSaveAnswersBatch={saveQuizAnswersToDb}
         />

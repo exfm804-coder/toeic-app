@@ -111,3 +111,31 @@ export function loadPassageUnits(datasetId) {
 export function isDataAvailable(datasetId) {
   return !!getRawData(datasetId)
 }
+
+const PART_TOTALS = { 5: 30, 6: 16, 7: 54 }
+
+// questions は loadQuestions() の戻り値（book12系=間違い・未解答のみ、book11系=解答済み全問）を想定
+export function getScoreSummary(datasetId, questions) {
+  const parts = {
+    5: { correct: 0, total: PART_TOTALS[5] },
+    6: { correct: 0, total: PART_TOTALS[6] },
+    7: { correct: 0, total: PART_TOTALS[7] },
+  }
+
+  if (PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)) {
+    const wrongByPart = { 5: 0, 6: 0, 7: 0 }
+    questions.forEach(q => { if (wrongByPart[q.part] !== undefined) wrongByPart[q.part]++ })
+    ;[5, 6, 7].forEach(part => {
+      parts[part].correct = parts[part].total - wrongByPart[part]
+    })
+  } else {
+    questions.forEach(q => {
+      if (!parts[q.part]) return
+      if (q.your_answer && q.your_answer === q.correct_answer) parts[q.part].correct++
+    })
+  }
+
+  const totalCorrect = parts[5].correct + parts[6].correct + parts[7].correct
+  const totalCount = parts[5].total + parts[6].total + parts[7].total
+  return { parts, totalCorrect, totalCount }
+}

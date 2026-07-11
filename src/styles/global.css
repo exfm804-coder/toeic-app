@@ -805,6 +805,87 @@ body {
 }
 .login-btn:disabled { opacity: 0.5; cursor: default; }
 
+/* ===== RESULTS LIST ===== */
+.results-list { padding-bottom: 40px; }
+.results-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background: var(--card);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s;
+}
+.results-row:active { background: #eef1f8; }
+.results-row-main { flex: 1; min-width: 0; }
+.results-row-title { font-size: 14px; font-weight: 700; color: var(--navy); }
+.results-row-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 8px;
+}
+.results-row-pct { font-size: 20px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+.results-row-frac { font-size: 12px; color: var(--sub); margin-top: 1px; }
+.results-row-arrow { font-size: 20px; color: #c0c8d8; flex-shrink: 0; }
+.results-list-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--sub);
+  font-size: 13px;
+}
+
+/* ===== SCORE DETAIL ===== */
+.score-detail-hero {
+  background: var(--navy);
+  color: white;
+  padding: 20px 16px 24px;
+  text-align: center;
+}
+.score-detail-hero-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.score-detail-hero-val { font-size: 30px; font-weight: 800; margin-top: 4px; }
+.score-detail-hero-pct { font-size: 15px; font-weight: 600; opacity: 0.75; margin-left: 6px; }
+.score-detail-radar-card {
+  background: var(--card);
+  margin: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  padding: 20px 8px;
+}
+.score-detail-parts { padding: 0 0 40px; }
+.score-detail-part-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px;
+  background: var(--card);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s;
+}
+.score-detail-part-row:active { background: #eef1f8; }
+.score-detail-part-label { font-size: 14px; font-weight: 700; color: var(--text); flex: 1; }
+.score-detail-part-pct { font-size: 16px; font-weight: 800; color: var(--blue-acc); }
+.score-detail-part-frac { font-size: 13px; color: var(--sub); min-width: 48px; text-align: right; }
+.score-detail-part-arrow { font-size: 20px; color: #c0c8d8; }
+
 .quiz-back-btn {
   margin-top: 8px;
   width: 100%;

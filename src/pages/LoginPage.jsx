@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { isAuthRetryableFetchError } from '@supabase/supabase-js'
 import { supabase } from '../utils/supabase'
 
 export default function LoginPage() {
@@ -13,7 +14,13 @@ export default function LoginPage() {
     setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     setLoading(false)
-    if (error) setError(error.message)
+    if (error) {
+      if (isAuthRetryableFetchError(error)) {
+        setError('サーバーに接続できませんでした。しばらくしてから再度お試しください。')
+      } else {
+        setError(error.message)
+      }
+    }
   }
 
   return (

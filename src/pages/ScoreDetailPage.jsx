@@ -8,9 +8,9 @@ const DATASET_LABELS = {
   'book11-test2': { title: 'TEST 2', book: '問題集11' },
 }
 
-export default function ScoreDetailPage({ datasetId, questions, onSelectPart, onBack, partKeyFilter = 'all', dateLabel = null }) {
+export default function ScoreDetailPage({ datasetId, questions, onSelectPart, onBack, partKeyFilter = 'all', dateLabel = null, isAttempt = false }) {
   const { title, book } = DATASET_LABELS[datasetId] ?? { title: '', book: '' }
-  const { parts } = getScoreSummary(datasetId, questions)
+  const { parts } = getScoreSummary(datasetId, questions, isAttempt)
 
   const visibleParts = partKeyFilter === 'all' ? [5, 6, 7] : [Number(partKeyFilter)]
   const totalCorrect = visibleParts.reduce((sum, part) => sum + parts[part].correct, 0)

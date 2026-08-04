@@ -114,15 +114,17 @@ export function isDataAvailable(datasetId) {
 
 const PART_TOTALS = { 5: 30, 6: 16, 7: 54 }
 
-// questions は loadQuestions() の戻り値（book12系=間違い・未解答のみ、book11系=解答済み全問）を想定
-export function getScoreSummary(datasetId, questions) {
+// questions は loadQuestions() の戻り値（book12系=間違い・未解答のみ、book11系=解答済み全問）を想定。
+// isAttempt=true のときは mergeAttemptAnswers() の戻り値（全問データにyour_answerを付与したもの）を想定し、
+// book12系でも your_answer と correct_answer を比較して採点する（実際に受けたクイズの結果を正しく反映するため）。
+export function getScoreSummary(datasetId, questions, isAttempt = false) {
   const parts = {
     5: { correct: 0, total: PART_TOTALS[5] },
     6: { correct: 0, total: PART_TOTALS[6] },
     7: { correct: 0, total: PART_TOTALS[7] },
   }
 
-  if (PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId)) {
+  if (PREBUILT_WRONG_ANSWER_DATASETS.has(datasetId) && !isAttempt) {
     const wrongByPart = { 5: 0, 6: 0, 7: 0 }
     questions.forEach(q => { if (wrongByPart[q.part] !== undefined) wrongByPart[q.part]++ })
     ;[5, 6, 7].forEach(part => {

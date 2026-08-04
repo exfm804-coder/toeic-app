@@ -223,6 +223,7 @@ export default function App() {
           questions={displayQuestions}
           partKeyFilter={activeAttempt ? activeAttempt.part_key : 'all'}
           dateLabel={activeAttempt ? formatDate(activeAttempt.completed_at) : null}
+          isAttempt={!!activeAttempt}
           onSelectPart={goToListFromScore}
           onBack={() => setView('results')}
         />

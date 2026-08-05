@@ -181,9 +181,9 @@ export default function App() {
     }
   }
 
-  async function saveAttemptToDb(datasetId, partKey, partLabel, answersMap, correctCount, totalCount) {
+  async function saveAttemptToDb(datasetId, partKey, partLabel, answersMap, correctCount, totalCount, durationSeconds) {
     try {
-      return await insertQuizAttempt(datasetId, partKey, partLabel, answersMap, correctCount, totalCount)
+      return await insertQuizAttempt(datasetId, partKey, partLabel, answersMap, correctCount, totalCount, durationSeconds)
     } catch (e) {
       console.error('attempt save error', e)
       return null
@@ -223,6 +223,7 @@ export default function App() {
           questions={displayQuestions}
           partKeyFilter={activeAttempt ? activeAttempt.part_key : 'all'}
           dateLabel={activeAttempt ? formatDate(activeAttempt.completed_at) : null}
+          durationSeconds={activeAttempt ? activeAttempt.duration_seconds : null}
           isAttempt={!!activeAttempt}
           onSelectPart={goToListFromScore}
           onBack={() => setView('results')}

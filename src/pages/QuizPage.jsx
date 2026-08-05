@@ -218,7 +218,8 @@ function AnswerSheet({ questions, partKey, partLabel, partRange, datasetId, onBa
 
     let correct = 0
     questions.forEach(q => { if (answers[q.number] === q.correct_answer) correct++ })
-    const attempt = await onSaveAttempt?.(datasetId, partKey, partLabel, answers, correct, questions.length)
+    const durationSeconds = Math.floor(getElapsed() / 1000)
+    const attempt = await onSaveAttempt?.(datasetId, partKey, partLabel, answers, correct, questions.length, durationSeconds)
     setSavedAttempt(attempt ?? null)
   }
 

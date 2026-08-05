@@ -856,6 +856,7 @@ body {
 }
 .score-detail-hero-val { font-size: 30px; font-weight: 800; margin-top: 4px; }
 .score-detail-hero-pct { font-size: 15px; font-weight: 600; opacity: 0.75; margin-left: 6px; }
+.score-detail-hero-time { font-size: 13px; opacity: 0.75; margin-top: 8px; }
 .score-detail-radar-card {
   background: var(--card);
   margin: 14px 16px;

@@ -14,6 +14,16 @@ function formatDate(iso) {
   return d.toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
 }
 
+function formatDuration(seconds) {
+  const s = Math.round(seconds)
+  const h = Math.floor(s / 3600)
+  const m = Math.floor((s % 3600) / 60)
+  const sec = s % 60
+  if (h > 0) return `${h}時間${m}分${sec}秒`
+  if (m > 0) return `${m}分${sec}秒`
+  return `${sec}秒`
+}
+
 export default function ResultsListPage({ datasetId, questions, attempts, onSelectLive, onSelectAttempt, onBack }) {
   const { title, book } = DATASET_LABELS[datasetId] ?? { title: '', book: '' }
   const { totalCorrect, totalCount } = getScoreSummary(datasetId, questions)
@@ -52,7 +62,10 @@ export default function ResultsListPage({ datasetId, questions, attempts, onSele
           <button key={a.id} className="results-row" onClick={() => onSelectAttempt(a)}>
             <div className="results-row-main">
               <div className="results-row-title">{book} {PART_KEY_LABELS[a.part_key] ?? a.part_key} リーディング</div>
-              <div className="results-row-date">{formatDate(a.completed_at)}</div>
+              <div className="results-row-date">
+                {formatDate(a.completed_at)}
+                {typeof a.duration_seconds === 'number' && ` · ${formatDuration(a.duration_seconds)}`}
+              </div>
             </div>
             <div className="results-row-score">
               <span className="results-row-pct">{a.total_count > 0 ? Math.round((a.correct_count / a.total_count) * 100) : 0}%</span>

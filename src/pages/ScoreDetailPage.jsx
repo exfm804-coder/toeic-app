@@ -8,7 +8,17 @@ const DATASET_LABELS = {
   'book11-test2': { title: 'TEST 2', book: '問題集11' },
 }
 
-export default function ScoreDetailPage({ datasetId, questions, onSelectPart, onBack, partKeyFilter = 'all', dateLabel = null, isAttempt = false }) {
+function formatDuration(seconds) {
+  const s = Math.round(seconds)
+  const h = Math.floor(s / 3600)
+  const m = Math.floor((s % 3600) / 60)
+  const sec = s % 60
+  if (h > 0) return `${h}時間${m}分${sec}秒`
+  if (m > 0) return `${m}分${sec}秒`
+  return `${sec}秒`
+}
+
+export default function ScoreDetailPage({ datasetId, questions, onSelectPart, onBack, partKeyFilter = 'all', dateLabel = null, durationSeconds = null, isAttempt = false }) {
   const { title, book } = DATASET_LABELS[datasetId] ?? { title: '', book: '' }
   const { parts } = getScoreSummary(datasetId, questions, isAttempt)
 
@@ -40,6 +50,9 @@ export default function ScoreDetailPage({ datasetId, questions, onSelectPart, on
           {totalCorrect} / {totalCount}
           <span className="score-detail-hero-pct">（{overallPct}%）</span>
         </div>
+        {isAttempt && typeof durationSeconds === 'number' && (
+          <div className="score-detail-hero-time">所要時間 {formatDuration(durationSeconds)}</div>
+        )}
       </div>
 
       {visibleParts.length > 1 && (

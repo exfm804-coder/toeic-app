@@ -14,6 +14,7 @@ export default function ScoreBar({ questions, activePart, onPartClick }) {
     }
   })
   const total = questions.length
+  const isPartial = answeredCount > 0 && answeredCount < total
 
   return (
     <div className="score-bar">
@@ -21,23 +22,32 @@ export default function ScoreBar({ questions, activePart, onPartClick }) {
         className={`score-item score-item-btn${activePart === null ? ' score-item-active' : ''}`}
         onClick={() => onPartClick(null)}
       >
-        <div className="score-label">間違い</div>
+        <div className="score-label">
+          間違い
+          {isPartial && <span className="score-progress-dot" title="回答途中" />}
+        </div>
         <div className="score-val">{answeredCount === 0 ? '-' : wrongCount}<span className="score-denom">/{total}</span></div>
       </div>
       <div className="score-divider" />
-      {[5, 6, 7].map((part, i) => (
-        <>
-          <div
-            key={part}
-            className={`score-item score-item-btn${activePart === part ? ' score-item-active' : ''}`}
-            onClick={() => onPartClick(part)}
-          >
-            <div className="score-label">Part {part}</div>
-            <div className="score-val">{answeredByPart[part] === 0 ? '-' : wrongByPart[part]}<span className="score-denom">/{totals[part]}</span></div>
-          </div>
-          {i < 2 && <div key={`div-${part}`} className="score-divider" />}
-        </>
-      ))}
+      {[5, 6, 7].map((part, i) => {
+        const partIsPartial = answeredByPart[part] > 0 && answeredByPart[part] < totals[part]
+        return (
+          <>
+            <div
+              key={part}
+              className={`score-item score-item-btn${activePart === part ? ' score-item-active' : ''}`}
+              onClick={() => onPartClick(part)}
+            >
+              <div className="score-label">
+                Part {part}
+                {partIsPartial && <span className="score-progress-dot" title="回答途中" />}
+              </div>
+              <div className="score-val">{answeredByPart[part] === 0 ? '-' : wrongByPart[part]}<span className="score-denom">/{totals[part]}</span></div>
+            </div>
+            {i < 2 && <div key={`div-${part}`} className="score-divider" />}
+          </>
+        )
+      })}
     </div>
   )
 }

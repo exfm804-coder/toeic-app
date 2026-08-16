@@ -51,6 +51,15 @@ body {
 .score-item-btn { cursor: pointer; border-radius: 8px; transition: background 0.1s; }
 .score-item-btn:active { background: rgba(255,255,255,0.1); }
 .score-item-active { background: rgba(255,255,255,0.18); }
+.score-progress-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--wrong);
+  margin-left: 4px;
+  vertical-align: middle;
+}
 
 /* ===== PART SECTIONS ===== */
 .part-section { margin-bottom: 8px; }

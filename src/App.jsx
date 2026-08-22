@@ -90,7 +90,7 @@ export default function App() {
 
   // 採点直後の「復習モードへ」: 直前に保存できた attempt があればそれをそのまま表示する
   // （quiz_answers の累積状態ではなく、今解いた回そのものを見せるため）
-  function goToScoreDetailForNewAttempt(datasetId, attempt) {
+  async function goToScoreDetailForNewAttempt(datasetId, attempt) {
     if (!attempt) {
       goToResultsFromQuiz(datasetId)
       return
@@ -98,6 +98,12 @@ export default function App() {
     setActiveDataset(datasetId)
     setAttemptQuestions(mergeAttemptAnswers(datasetId, attempt.answers))
     setActiveAttempt(attempt)
+    try {
+      setReviewed(await fetchReviewed(datasetId))
+    } catch (e) {
+      console.error('fetch reviewed error', e)
+      setReviewed(new Set())
+    }
     setView('scoreDetail')
   }
 
@@ -120,9 +126,15 @@ export default function App() {
     }
   }
 
-  function goToQuiz(datasetId) {
+  async function goToQuiz(datasetId) {
     setActiveDataset(datasetId)
     setQuizQuestions(loadAllQuestions(datasetId))
+    try {
+      setReviewed(await fetchReviewed(datasetId))
+    } catch (e) {
+      console.error('fetch reviewed error', e)
+      setReviewed(new Set())
+    }
     setView('quiz')
   }
 

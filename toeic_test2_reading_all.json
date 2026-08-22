@@ -624,8 +624,8 @@
                 "C": "protective",
                 "D": "clean"
               },
-              "correct_answer": "B",
-              "explanation_ja": "空所の前までは、劇場に入ってから各日のワークショップで行う活動を朝から時系列で説明している。よって、一日の最後に行うことについて述べている(B)を入れると、流れとして自然。end ~ by doing「…することで~を終える」、auditorium「観客席、講堂」。(A)(C)(D)各日に行う内容について説明している文脈で、子ども向けの講座や近隣の飲食店、ワークショップの講師を紹介するのは、流れとして不自然。"
+              "correct_answer": "A",
+              "explanation_ja": "選択肢は全て形容詞の働きを持つ語。空所を含む文は「-------履き物や衣服を着用してください」という意味。次の文で、「そうすることで、皆さんは舞台上を自由に動き回ることができるだろう」とあるので、空所に(A) comfortable「快適な」を入れると、次の文にあるDoing soがdressing in comfortable footwear and clothingを表すことになり、文脈に合う。(B)(C)(D)いずれも、自由に動き回ることができるようになることとはつながらず、文脈に合わない。"
             },
             {
               "number": 146,
@@ -637,8 +637,8 @@
                 "C": "There are several restaurants near the theater.",
                 "D": "Sarah Gallos is one of our most popular teachers."
               },
-              "correct_answer": "A",
-              "explanation_ja": "選択肢は全て形容詞の働きを持つ語。空所を含む文は「-------履き物や衣服を着用してください」という意味。次の文で、「そうすることで、皆さんは舞台上を自由に動き回ることができるだろう」とあるので、空所に(A) comfortable「快適な」を入れると、次の文にあるDoing soがdressing in comfortable footwear and clothingを表すことになり、文脈に合う。(B)(C)(D)いずれも、自由に動き回ることができるようになることとはつながらず、文脈に合わない。"
+              "correct_answer": "B",
+              "explanation_ja": "空所の前までは、劇場に入ってから各日のワークショップで行う活動を朝から時系列で説明している。よって、一日の最後に行うことについて述べている(B)を入れると、流れとして自然。end ~ by doing「…することで~を終える」、auditorium「観客席、講堂」。(A)(C)(D)各日に行う内容について説明している文脈で、子ども向けの講座や近隣の飲食店、ワークショップの講師を紹介するのは、流れとして不自然。"
             }
           ]
         }

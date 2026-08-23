@@ -249,6 +249,7 @@ export default function App() {
           reviewed={reviewed}
           onBack={() => setView('scoreDetail')}
           initialPart={initialPart}
+          isAttempt={!!activeAttempt}
         />
       )}
       {view === 'detail' && (

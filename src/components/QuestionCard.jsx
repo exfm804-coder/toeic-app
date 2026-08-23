@@ -4,7 +4,7 @@ export default function QuestionCard({ question: q, onClick, isReviewed }) {
     ? raw.replace(/-------/g, '_____').substring(0, 50) + (raw.length > 50 ? '…' : '')
     : `選択肢: (A)${q.choices.A}  (B)${q.choices.B}  (C)${q.choices.C}  (D)${q.choices.D}`.substring(0, 50) + '…'
 
-  const hasYourAnswer = q.your_answer !== undefined && q.your_answer !== null
+  const hasYourAnswer = q.your_answer !== undefined
 
   return (
     <div className={`q-card${isReviewed ? ' q-card-reviewed' : ''}`} onClick={onClick}>

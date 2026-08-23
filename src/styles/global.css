@@ -472,6 +472,19 @@ body {
   padding: 8px;
   font-size: 11px;
   color: var(--sub);
+  position: relative;
+}
+.quiz-progress::before {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 50%;
+  height: 60%;
+  transform: translateY(-50%);
+  background: rgba(42, 109, 217, 0.35);
+  border-radius: 999px;
+  z-index: -1;
 }
 .quiz-q-block {
   background: var(--card);

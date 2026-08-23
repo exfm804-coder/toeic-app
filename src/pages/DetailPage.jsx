@@ -31,14 +31,6 @@ export default function DetailPage({ questions, currentIdx, onBack, onNavigate, 
 
       <div className="detail-scroll">
         <div className="detail-q-block">
-          <div className="detail-q-header">
-            <span className="detail-q-num">{q.number}</span>
-            <span className="detail-part-badge">Part {q.part}</span>
-            {q.passage_type && (
-              <span className="detail-passage-type">{q.passage_type}</span>
-            )}
-          </div>
-
           <div className="detail-q-text">
             {qHtml
               ? <span dangerouslySetInnerHTML={{ __html: qHtml }} />
